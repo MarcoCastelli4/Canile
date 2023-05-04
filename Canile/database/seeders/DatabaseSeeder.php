@@ -60,12 +60,12 @@ class DatabaseSeeder extends Seeder
         }
       }*/
 
-
+      /*
       //una vaccinazione per ogni cane
       foreach(Vaccination::all() as $v){
         foreach(Dog::all() as $dog){
           $dog->vaccination()->attach($v,['data'=>Carbon::today()->subDays(rand(0, 365))]);
         }
-      }  
+      }  */
 }
 }

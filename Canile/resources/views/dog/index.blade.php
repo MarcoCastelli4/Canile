@@ -35,6 +35,11 @@ I cani
 @endsection
 
 @section('corpo')
+<div class="row">
+    <div class="col-xs-6">   
+        <a href="{{ route('dog.create') }}" class="btn btn-success">Create new dog</a> <!--btn:bottone, btn-success: bottone verde-->
+    </div>
+</div>
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-striped table-hover table-responsive" style="width:100%">
@@ -69,17 +74,15 @@ I cani
                                 <td>{{$dog->taglia}}</td>
                                 <td>{{$dog->colore}}</td>
                                 <td>{{$dog['lunghezza pelo']}}</td>
-                                <td>{{$dog->età}}</td>
+                                <td>{{$dog['data nascita']}}</td>
                                 <td>{{$dog->sesso}}</td>
                                 <td>
                                     <a class="btn btn-primary" href="#">
-                                        <span class="glyphicon glyphicon-pencil">
-                                        </span> Edit</a>
+                                    <i class="bi-pencil-square"></i> Edit</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-danger" href="#">
-                                        <span class="glyphicon glyphicon-trash">
-                                        </span> Delete</a>
+                            <a class="btn btn-danger" 
+                                href="{{ route('dog.destroy.confirm', ['id' => $dog->id]) }}"><i class="bi-trash3"></i> Delete</a>
                                 </td>
                             </tr>
                             @endforeach

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('lunghezza pelo');
             $table->string('taglia');
             $table->string('sesso');
-            $table->integer('età')->unsigned();
+            $table->date('data nascita');
 
            
         });
