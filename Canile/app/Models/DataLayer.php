@@ -25,8 +25,8 @@ class DataLayer {
         $dog->delete();
     }
 
-   // aggiungere un cane
-   public function addDog($nome,$razza,$colore,$lunghezzapelo,$taglia,$sesso,$datanascita, $vaccinations) {
+   // aggiungere un cane senza nessuna vaccinazione
+   public function addDog($nome,$razza,$colore,$lunghezzapelo,$taglia,$sesso,$datanascita) {
     $dog = new Dog;
     $dog->nome = $nome;
     $dog->razza = $razza;
@@ -36,9 +36,6 @@ class DataLayer {
     $dog->sesso = $sesso;
     $dog['data nascita']=$datanascita;
     $dog->save();
-    foreach($vaccinations as $v) {
-        $dog->vaccination()->attach($v);
-    }
     }
 
     public function getAllVaccinations() {

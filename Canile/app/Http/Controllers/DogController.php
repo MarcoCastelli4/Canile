@@ -55,7 +55,7 @@ class DogController extends Controller
         $dl = new DataLayer();
         $dl->addDog($request->input('nome'), $request->input('razza'), $request->input('colore'),
         $request->input('lunghezzapelo'), $request->input('taglia'), $request->input('sesso'),
-        $request->input('datanascita'), $request->input('vaccinations'));
+        $request->input('datanascita'));
 
         return Redirect::to(route('dog.index'));
     }

@@ -77,7 +77,7 @@ I cani
                                 <td>{{$dog['data nascita']}}</td>
                                 <td>{{$dog->sesso}}</td>
                                 <td>
-                                    <a class="btn btn-primary" href="#">
+                                    <a class="btn btn-primary"  href="{{ route('dog.edit', ['dog' => $dog ->id]) }}">
                                     <i class="bi-pencil-square"></i> Edit</a>
                                 </td>
                                 <td>

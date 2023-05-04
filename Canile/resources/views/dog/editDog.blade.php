@@ -46,18 +46,27 @@ style.css
         @method('PUT')
     @endif
         @csrf
-        <div class="form-group">
+            <div class="form-group">
             @if(!isset($dog->id))
                 <label for="nome"> Nome</label>
                 <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome"> 
             @else
                 <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome" value="{{$dog->name}}"> 
             @endif
+            </div>
+            
+            <div class="form-group">
             <br/>
             <label for="razza"> Razza</label>
             <input class="form-control" type="text" id="razza" name="razza" placeholder="Razza"> 
-
+            </div>
             <br/>
+
+            <div class="form-group">
+            <label for="razza"> Colore</label>
+            <input class="form-control" type="text" id="colore" name="colore" placeholder="Colore"> 
+            <br/>
+            </div>
 
             <div class="form-group">
             <label for="lunghezzapelo">Lunghezza pelo</label>
@@ -80,54 +89,54 @@ style.css
             </div>
 
             <br/>
+            Sesso
+            <br/>
+            <div class="form-group">
             <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maschio" value="maschio">
+            <input class="form-check-input" type="radio" name="sesso" id="maschio" value="maschio">
             <label class="form-check-label" for="maschio">Maschio</label>
             </div>
             <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femmina" value="femmina">
+            <input class="form-check-input" type="radio" name="sesso" id="femmina" value="femmina">
             <label class="form-check-label" for="femmina">Femmina</label>
             </div>
-
-            <br>
-
-            <!--
-            <div class="form-group">
-            <label class="active" for="datanascita">Data nascita</label>
-            <input type="date" id="dateStandard" name="dateStandard" placeholder="Data nascita" >
             </div>
--->
-            
 
+            <br/>
 
-<!-- SISTEMARE DATEPICKER NON VA -->
-
-<!-- https://formden.com/blog/date-picker-->
-<div class="container">
-   <div class="row">
-      <div class='col-sm-6'>
-         <div class="form-group">
-            <div class='input-group date' id='datetimepicker5'>
-               <input type='text' class="form-control" />
-               <span class="input-group-addon">
-               <span class="glyphicon glyphicon-calendar"></span>
-               </span>
-            </div>
-         </div>
+        <div class="form-group"> <!-- Date input -->
+        <label class="control-label" for="datanascita">Data di nascita</label>
+        <input class="form-control" id="datanascita" name="datanascita" placeholder="YYY/MM/DD" type="text"/>
       </div>
-      <script type="text/javascript">
-         $(function () {
-             $('#datetimepicker5').datetimepicker({
-                 defaultDate: "11/1/2013",
-                 disabledDates: [
-                     moment("12/25/2013"),
-                     new Date(2013, 11 - 1, 21),
-                     "11/22/2013 00:53"
-                 ]
-             });
-         });
-      </script>
-   </div>
-</div>
 
+      <br/>
+      <a href="{{ route('dog.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Cancel</a>
+            @if(isset($dog->id))
+            <input class="btn btn-primary" id="mySubmit" type="submit" value="Update" class="hidden"/>
+            @else
+            <input class="btn btn-primary" id="mySubmit" type="submit" value="Create" class="hidden"/>
+            @endif
+      <form>
+</div>
+    <!-- Per il datepicker -->
+      <!-- Include jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+    <script>
+    $(document).ready(function(){
+        var date_input=$('input[name="datanascita"]'); //our date input has the name "datanascita"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'yyyy/mm/dd',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            endDate: "today", 
+        })
+    })
+</script>
 @endsection
