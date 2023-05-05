@@ -66,17 +66,18 @@ class DogController extends Controller
         $dl = new DataLayer();
         $dogs_list = $dl->listDogs();
         $dog = $dl->findDogById($id);
-        $vaccinations = $dl->getAllVaccinatios();
+       // $vaccinations = $dl->getAllVaccinatios();
 
-        return view('dog.editDog')->with('dogList', $dogs_list)->with('dog', $dog)->with('vaccinations',$vaccinations);
+        return view('dog.editDog')->with('dogList', $dogs_list)->with('dog', $dog);//->with('vaccinations',$vaccinations);
     }
 
     public function update(Request $request, $id)
     {
         $dl = new DataLayer();
-        $dl->editBook($id,  $dl->addDog($request->input('nome'), $request->input('razza'), $request->input('colore'),
+        $dl->editDog($id,  $request->input('nome'), $request->input('razza'), $request->input('colore'),
         $request->input('lunghezzapelo'), $request->input('taglia'), $request->input('sesso'),
-        $request->input('datanascita'), $request->input('vaccinations')));
+        $request->input('datanascita'));
         return Redirect::to(route('dog.index'));
+
     }
 }

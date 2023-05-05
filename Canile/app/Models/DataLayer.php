@@ -42,7 +42,7 @@ class DataLayer {
        return Vaccination::orderBy('malattia','asc')->get();
     }   
 
-    public function editDog($id, $nome,$razza,$colore,$lunghezzapelo,$taglia,$sesso,$datanascita, $vaccinations) {
+    public function editDog($id, $nome,$razza,$colore,$lunghezzapelo,$taglia,$sesso,$datanascita) {
         $dog = Dog::find($id);
         $dog->nome = $nome;
         $dog->razza = $razza;
@@ -54,15 +54,17 @@ class DataLayer {
         $dog->save();
 
         // Cancel the previous list of vaccinations
+        
         $prevVaccination = $dog->vaccination;
         foreach($prevVaccination as $prev) {
             $dog->vaccination()->detach($prev->id);
         }
 
-        // Update the list of categories
+        // Update the list of vaccination --> preferisco modificarla quando inseriamo una nuova vaccinaizone
+        /*
         foreach($vaccinations as $v) {
             $dog->vaccination()->attach($v);
-        }
+        }*/
         // massive update (only with fillable property enabled on Book): 
         // Book::find($id)->update(['title' => $title, 'author_id' => $author_id]);
     }

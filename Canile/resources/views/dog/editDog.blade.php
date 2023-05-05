@@ -29,7 +29,11 @@ style.css
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
         <li class="breadcrumb-item " aria-current="page"><a href="{{route('dog.index')}}">I cani</a></li>
+        @if(!isset($dog->id))
         <li class="breadcrumb-item active" aria-current="page">Add</a></li>
+        @else
+        <li class="breadcrumb-item active" aria-current="page">Edit</a></li>
+        @endif
        
     </ol>
 </nav>
@@ -41,36 +45,51 @@ style.css
     @if(!isset($dog->id))
         <form method="post" action="{{route('dog.store')}}">
             <!--NB ogni volta che uso la form metto @csrf uso per motivi di sicurezza -->
-    @else    
+    @else   
         <form method="post" action="{{route('dog.update',['dog' => $dog->id]) }}">
+        <div class="alert alert-warning" role="alert">
+        Stai modificando il cane con id: <strong>"{{$dog->id}}"</strong>  e nome: <strong>"{{$dog->nome}}"</strong> 
+        </div>
         @method('PUT')
     @endif
         @csrf
             <div class="form-group">
-            @if(!isset($dog->id))
                 <label for="nome"> Nome</label>
+                @if(!isset($dog->id))
                 <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome"> 
             @else
-                <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome" value="{{$dog->name}}"> 
+                <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome" value="{{$dog->nome}}"> 
             @endif
             </div>
             
             <div class="form-group">
             <br/>
             <label for="razza"> Razza</label>
+            @if(!isset($dog->id))
             <input class="form-control" type="text" id="razza" name="razza" placeholder="Razza"> 
+            @else
+            <input class="form-control" type="text" id="razza" name="razza" placeholder="Razza" value="{{$dog->razza}}"> 
+            @endif
             </div>
             <br/>
 
             <div class="form-group">
-            <label for="razza"> Colore</label>
+            <label for="colore"> Colore</label>
+            @if(!isset($dog->id))
             <input class="form-control" type="text" id="colore" name="colore" placeholder="Colore"> 
+            @else
+            <input class="form-control" type="text" id="colore" name="colore" placeholder="Colore" value="{{$dog->colore}}"> 
+            @endif
             <br/>
             </div>
 
             <div class="form-group">
             <label for="lunghezzapelo">Lunghezza pelo</label>
+            @if(!isset($dog->id))
             <select class="form-control" id="lunghezzapelo" name="lunghezzapelo" placeholder="Lunghezza pelo">
+            @else
+            <select class="form-control" id="lunghezzapelo" name="lunghezzapelo" placeholder="Lunghezza pelo" value="{{$dog['lunghezza pelo']}}">
+            @endif
             <option>Corto</option>
             <option>Medio</option>
             <option>Lungo</option>
@@ -81,7 +100,11 @@ style.css
 
             <div class="form-group">
             <label for="taglia">Taglia</label>
+            @if(!isset($dog->id))
             <select class="form-control" id="taglia" name="taglia" placeholder="Taglia">
+            @else
+            <select class="form-control" id="taglia" name="taglia" placeholder="Taglia" value="{{$dog->taglia}}">
+            @endif
             <option>Piccola</option>
             <option>Media</option>
             <option>Grande</option>
@@ -106,7 +129,11 @@ style.css
 
         <div class="form-group"> <!-- Date input -->
         <label class="control-label" for="datanascita">Data di nascita</label>
+        @if(!isset($dog->id))
         <input class="form-control" id="datanascita" name="datanascita" placeholder="YYY/MM/DD" type="text"/>
+        @else
+        <input class="form-control" id="datanascita" name="datanascita" placeholder="YYY/MM/DD" type="text" value="{{$dog['data nascita']}}"/>
+        @endif
       </div>
 
       <br/>
