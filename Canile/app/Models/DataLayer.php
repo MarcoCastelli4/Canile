@@ -5,7 +5,6 @@ namespace App\Models;
 
 class DataLayer {
     public function listDogs(){
-
         //restituisco la lista di tutti i cani ordinati prima per cognome e poi per nome
        return Dog::orderBy('nome','asc')->orderBy('razza','asc')->get();
 
@@ -41,6 +40,7 @@ class DataLayer {
     public function getAllVaccinations() {
        return Vaccination::orderBy('malattia','asc')->get();
     }   
+
 
     public function editDog($id, $nome,$razza,$colore,$lunghezzapelo,$taglia,$sesso,$datanascita) {
         $dog = Dog::find($id);

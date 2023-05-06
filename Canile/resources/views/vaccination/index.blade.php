@@ -27,28 +27,26 @@ I cani
 
 @section('breadcrumb')
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">I cani</li>
-  </ol>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+        <li class="breadcrumb-item " aria-current="page"><a href="{{route('dog.index')}}">Dogs</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Medical and other information</a></li>
+    </ol>
 </nav>
 @endsection
 
 @section('corpo')
 <div class="row">
+  <!-- 
     <div class="col-xs-6">   
   
-        <a href="{{ route('dog.create') }}" class="btn btn-success">  <i class="bi bi-plus-square"></i> Create new dog</a> <!--btn:bottone, btn-success: bottone verde-->
-      </div>
+        <a href="{{ route('dog.create') }}" class="btn btn-success">  <i class="bi bi-plus-square"></i> Create new dog</a> 
+      </div> 
+    -->
 </div>
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-striped table-hover table-responsive" style="width:100%">
-                        <col width='10%'>
-                        <col width='10%'>
-                        <col width='10%'>
-                        <col width='10%'>
-                        <col width='10%'>
                         <col width='10%'>
                         <col width='10%'>
                         <col width='10%'>
@@ -59,11 +57,10 @@ I cani
                             <tr>
                                 <th>Nome</th>
                                 <th>Razza</th>
-                                <th>Taglia</th>
-                                <th>Colore</th>
-                                <th>Pelo</th>
-                                <th>Età</th>
+                                <th>Data di nascita</th>
                                 <th>Sesso</th>
+                                <th>Vaccinazioni</th>
+                                <!--<th>Documentazione</th>-->
                             </tr>
                         </thead>
                        
@@ -72,11 +69,17 @@ I cani
                             <tr>
                                 <td>{{$dog->nome}}</td>
                                 <td>{{$dog->razza}}</td>
-                                <td>{{$dog->taglia}}</td>
-                                <td>{{$dog->colore}}</td>
-                                <td>{{$dog['lunghezza pelo']}}</td>
                                 <td>{{$dog['data nascita']}}</td>
                                 <td>{{$dog->sesso}}</td>
+                               
+                                <td>
+                                @foreach ($dog->vaccination as $v)
+                                {{ $v->malattia }}
+                                 {{$v->pivot->data}}
+                                 @endforeach
+                                </td>
+                    
+                                <!--
                                 <td>
                                     <a class="btn btn-primary"  href="{{ route('dog.edit', ['dog' => $dog ->id]) }}">
                                     <i class="bi-pencil-square"></i> Edit</a>
@@ -84,7 +87,7 @@ I cani
                                 <td>
                             <a class="btn btn-danger" 
                                 href="{{ route('dog.destroy.confirm', ['id' => $dog->id]) }}"><i class="bi-trash3"></i> Delete</a>
-                                </td>
+                                </td>-->
                             </tr>
                             @endforeach
                        

@@ -17,7 +17,7 @@ Canile
                     <a class="nav-link" aria-current="page" href="#">Adozioni</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Salute dei cani</a>
+                    <a class="nav-link" aria-current="page" href="{{route('vaccination.index')}}">Salute dei cani</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="#">Recensioni</a>

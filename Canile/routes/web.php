@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\DogController;
+use App\Http\Controllers\VaccinationController;
 
 
 Route::get('/',[FrontController::class,'getHome'])->name('home');
@@ -12,8 +13,7 @@ Route::get('/dog',[DogController::class,'index'])->name('dog.index');
 Route::get('/dog/{id}/destroy', [DogController::class, 'destroy'])->name('dog.destroy');
 Route::get('/dog/{id}/destroy/confirm', [DogController::class, 'confirmDestroy'])->name('dog.destroy.confirm');
 
-/*
-Route::get('/book',[BookController::class,'index'])->name('book.index');
-Route::get('/author',[AuthorController::class,'index'])->name('author.index');*/
+// rotte per le vaccinazioni
+Route::get('/vaccination',[VaccinationController::class,'index'])->name('vaccination.index');
 
 
