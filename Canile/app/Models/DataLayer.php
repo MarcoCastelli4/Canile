@@ -14,6 +14,10 @@ class DataLayer {
         return Dog::find($id);
     }
 
+    public function findVaccinationById($id) {
+        return Vaccination::find($id);
+    }
+
     // cancellare un cane
     public function deleteDog($id) {
         $dog = Dog::find($id);
@@ -67,5 +71,12 @@ class DataLayer {
         }*/
         // massive update (only with fillable property enabled on Book): 
         // Book::find($id)->update(['title' => $title, 'author_id' => $author_id]);
+    }
+
+    public function addDogVaccination($dog_id,$vaccination_id,$data) {
+       $vaccination=Vaccination::find($vaccination_id);
+       $dog = Dog::find($dog_id);
+       $dog->vaccination()->attach($vaccination,$data);
+
     }
 }

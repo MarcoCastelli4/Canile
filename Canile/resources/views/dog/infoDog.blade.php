@@ -49,36 +49,32 @@ I cani
                     <table class="table table-striped table-hover table-responsive" style="width:100%">
                         <col width='10%'>
                         <col width='10%'>
-                        <col width='10%'>
-                        <col width='10%'>
-                        <col width='10%'>
                         
                         <thead>
                             <tr>
                                 <th>Nome</th>
-                                <th>Razza</th>
-                                <th>Data di nascita</th>
-                                <th>Sesso</th>
                                 <th>Vaccinazioni</th>
+                                <th>Fotografie</th>
+                                <th>Documentazione</th>
                                 <!--<th>Documentazione</th>-->
                             </tr>
                         </thead>
                        
                         <tbody>
-                        @foreach($dog_list as $dog)
                             <tr>
-                                <td>{{$dog->nome}}</td>
-                                <td>{{$dog->razza}}</td>
-                                <td>{{$dog['data nascita']}}</td>
-                                <td>{{$dog->sesso}}</td>
-                               
+                                <td>{{$dog->nome}}</td> 
                                 <td>
                                 @foreach ($dog->vaccination as $v)
                                 {{ $v->malattia }}
                                  {{$v->pivot->data}}
+                                 <br/>
                                  @endforeach
                                 </td>
-                    
+                                <td></td>
+                                <td>
+                                  <!--credo fara lezione per gestire pdf o img nel database-->
+                                <a href="C:\Users\Marco Castelli\Desktop\Documenti\ricevutaPesca.pdf" download="prova.pdf">Download</a>
+                                </td>
                                 <!--
                                 <td>
                                     <a class="btn btn-primary"  href="{{ route('dog.edit', ['dog' => $dog ->id]) }}">
@@ -89,7 +85,7 @@ I cani
                                 href="{{ route('dog.destroy.confirm', ['id' => $dog->id]) }}"><i class="bi-trash3"></i> Delete</a>
                                 </td>-->
                             </tr>
-                            @endforeach
+                          
                        
                         </tbody>
                     </table>

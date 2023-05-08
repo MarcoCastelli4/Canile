@@ -12,8 +12,10 @@ Route::resource('dog', DogController::class);
 Route::get('/dog',[DogController::class,'index'])->name('dog.index');
 Route::get('/dog/{id}/destroy', [DogController::class, 'destroy'])->name('dog.destroy');
 Route::get('/dog/{id}/destroy/confirm', [DogController::class, 'confirmDestroy'])->name('dog.destroy.confirm');
+Route::get('/dog/{id}/info', [DogController::class, 'info'])->name('dog.info');
 
 // rotte per le vaccinazioni
-Route::get('/vaccination',[VaccinationController::class,'index'])->name('vaccination.index');
-
+Route::get('/dog/{id}/vaccination',[DogController::class,'insertVaccination'])->name('dog.vaccination');
+Route::post('/dog/{id}/addVaccination',[DogController::class,'addVaccination'])->name('dog.addVaccination');
+Route::get('/dog/{id}/addVaccination',[DogController::class,'addVaccination'])->name('dog.addVaccination');
 

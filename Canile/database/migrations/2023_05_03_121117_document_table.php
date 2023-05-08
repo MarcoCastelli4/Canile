@@ -17,7 +17,7 @@ return new class extends Migration
         {
             $table->increments('id');   //intero autoincrementale
             $table->string('titolo');
-            $table->string('file');
+            $table->string('path');
         });
     }
 

@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-color" aria-label="Thirteenth navbar example">
@@ -62,3 +63,5 @@
 
 
 </html>
+
+@yield('script')

@@ -51,11 +51,11 @@ class DogController extends Controller
 
     public function store(Request $request)
     {
-        //$nome,$razza,$colore,$lunghezzapelo,$taglia,$sesso,$datanascita, $vaccinations
         $dl = new DataLayer();
         $dl->addDog($request->input('nome'), $request->input('razza'), $request->input('colore'),
         $request->input('lunghezzapelo'), $request->input('taglia'), $request->input('sesso'),
         $request->input('datanascita'));
+
 
         return Redirect::to(route('dog.index'));
     }
@@ -80,4 +80,37 @@ class DogController extends Controller
         return Redirect::to(route('dog.index'));
 
     }
+
+    public function info($id)
+    {
+        $dl=new DataLayer();
+        
+        $vaccinations=$dl->getAllVaccinations();
+        $dog=$dl->findDogById($id);
+
+        return view('dog.infoDog')->with("vaccination_list",$vaccinations)->with("dog",$dog);
+    
+    }
+
+    /**Per la view che mi permette di inserire una vaccinazione per il cane in data */
+    public function insertVaccination($id)
+    {
+        $dl=new DataLayer();
+        $vaccinations=$dl->getAllVaccinations();
+        $dog=$dl->findDogById($id);
+        return view('dog.vaccination')->with("vaccination_list",$vaccinations)->with("dog",$dog);
+    }
+
+    public function addVaccination(Request $request, $id)
+    {
+        $dl = new DataLayer();
+        // i dati che arrivano dal form sono vuoti
+        $vaccination= $dl->findVaccinationByName($request->input('malattia'));
+        echo $vaccination;
+        
+        //$dl->addDogVaccination($request->input('id'), $request->input('vaccination_id'), $request->input('dataVaccinazione'));
+        //return Redirect::to(route('dog.index'));
+    }
+
+   
 }

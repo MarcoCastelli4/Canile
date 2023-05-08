@@ -17,7 +17,7 @@ I cani
                     <a class="nav-link" aria-current="page" href="#">Adozioni</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('vaccination.index')}}">Salute dei cani</a>
+                    <a class="nav-link" aria-current="page" href="">Salute dei cani</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="#">Recensioni</a>
@@ -35,6 +35,7 @@ I cani
 @endsection
 
 @section('corpo')
+
 <div class="row">
     <div class="col-xs-6">   
   
@@ -84,6 +85,13 @@ I cani
                                 <td>
                             <a class="btn btn-danger" 
                                 href="{{ route('dog.destroy.confirm', ['id' => $dog->id]) }}"><i class="bi-trash3"></i> Delete</a>
+                            </td>
+                                <td>
+                            <a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> More</a>
+                                </td>
+
+                                <td>
+                            <a class="btn btn-success" href="{{ route('dog.vaccination', ['id' => $dog->id]) }}"><i class="bi bi-virus"></i> Vaccination</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -94,5 +102,7 @@ I cani
                 </div>
             </div>
             
+
 @endsection
+
 
