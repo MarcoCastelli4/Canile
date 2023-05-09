@@ -39,7 +39,7 @@ I cani
 
 @section('corpo')
         <form method="post" action="{{route('dog.addVaccination',['id' => $dog->id])}}">
-            <!--NB ogni volta che uso la form metto @csrf uso per motivi di sicurezza -->
+            
             @csrf
             <div class="form-group">
                 <label for="nome"> Nome</label>
@@ -50,7 +50,7 @@ I cani
             <label for="vaccination_id">Malattia</label>
             <select class="form-control" id="vaccination_id" name="vaccination_id" placeholder="vaccination_id">
             @foreach ($vaccination_list as $v)
-            <option>{{$v->malattia}}</option>
+            <option value="{{$v->id}}">{{$v->malattia}}</option> <!-- mostro malattia ma invio l'id !-->
             @endforeach
             </select>
             </div>

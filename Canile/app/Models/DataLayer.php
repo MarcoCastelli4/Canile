@@ -74,9 +74,10 @@ class DataLayer {
     }
 
     public function addDogVaccination($dog_id,$vaccination_id,$data) {
+       
        $vaccination=Vaccination::find($vaccination_id);
        $dog = Dog::find($dog_id);
-       $dog->vaccination()->attach($vaccination,$data);
-
+       $dog->vaccination()->attach($vaccination,['data'=>$data]);
+        
     }
 }

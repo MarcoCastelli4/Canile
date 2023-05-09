@@ -101,15 +101,15 @@ class DogController extends Controller
         return view('dog.vaccination')->with("vaccination_list",$vaccinations)->with("dog",$dog);
     }
 
-    public function addVaccination(Request $request, $id)
+    public function addVaccination(Request $request, $dog_id)
     {
         $dl = new DataLayer();
-        // i dati che arrivano dal form sono vuoti
-        $vaccination= $dl->findVaccinationByName($request->input('malattia'));
-        echo $vaccination;
-        
-        //$dl->addDogVaccination($request->input('id'), $request->input('vaccination_id'), $request->input('dataVaccinazione'));
-        //return Redirect::to(route('dog.index'));
+        $dl->addDogVaccination($dog_id, $request->input('vaccination_id'), $request->input('dataVaccinazione'));
+
+        $vaccinations=$dl->getAllVaccinations();
+        $dog=$dl->findDogById($dog_id);
+       
+        return view('dog.vaccination')->with("vaccination_list",$vaccinations)->with("dog",$dog);
     }
 
    
