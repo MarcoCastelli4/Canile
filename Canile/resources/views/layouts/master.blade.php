@@ -31,7 +31,7 @@
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
-              <a class="navbar-brand col-lg-3 me-0" href="index.html">&nbsp;</a>
+              <a class="navbar-brand col-lg-3 me-0" href="{{route('home')}}">&nbsp;</a>
               <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
                 <ul class="navbar-nav col-lg-6">
                 @yield('left_navbar')

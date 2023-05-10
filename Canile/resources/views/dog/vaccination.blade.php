@@ -38,7 +38,7 @@ I cani
 @endsection
 
 @section('corpo')
-        <form method="post" action="{{route('dog.addVaccination',['id' => $dog->id])}}">
+        <form method="post" action="{{route('dog.vaccination',['id' => $dog->id])}}">
             
             @csrf
             <div class="form-group">

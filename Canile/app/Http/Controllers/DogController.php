@@ -109,6 +109,7 @@ class DogController extends Controller
         $vaccinations=$dl->getAllVaccinations();
         $dog=$dl->findDogById($dog_id);
        
+        // sarebbe bello mettere popup hai inserito vaccinazione
         return view('dog.vaccination')->with("vaccination_list",$vaccinations)->with("dog",$dog);
     }
 
