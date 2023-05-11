@@ -18,6 +18,10 @@ return new class extends Migration
             $table->increments('id');   //intero autoincrementale
             $table->string('titolo');
             $table->string('contenuto');
+            $table->bigInteger('user_id')->unsigned()->default(1);
+        });
+        Schema::table('review', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

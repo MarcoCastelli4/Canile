@@ -28,7 +28,7 @@ I cani
 <?php 
 $dog_available=0;
 foreach($dog_list as $dog){
-  if ($dog->adottato==0){
+  if (($dog->user_id==1)){
     $dog_available=$dog_available+1;
   } 
 }
@@ -67,7 +67,7 @@ foreach($dog_list as $dog){
                         <tbody>
                         @foreach($dog_list as $dog)
                             <tr>
-                                @if ($dog->adottato==0)
+                                @if (($dog->user_id==1))
                                 <td>{{$dog->nome}}</td>
                                 <td>{{$dog->razza}}</td>
                                 <td>{{$dog->taglia}}</td>

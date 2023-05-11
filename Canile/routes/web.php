@@ -17,7 +17,7 @@ Route::get('/dog/{id}/destroy/confirm', [DogController::class, 'confirmDestroy']
 Route::get('/dog/{id}/info', [DogController::class, 'info'])->name('dog.info');
 
 // rotte per le vaccinazioni
-Route::get('/dog/{id}/vaccination',[DogController::class,'insertVaccination'])->name('dog.vaccination');
+Route::get('/dog/{id}/vaccination',[DogController::class,'vaccination'])->name('dog.vaccination');
 Route::post('/dog/{id}/vaccination',[DogController::class,'addVaccination'])->name('dog.vaccination');
 
 

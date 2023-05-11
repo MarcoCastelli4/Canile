@@ -23,10 +23,15 @@ return new class extends Migration
             $table->string('taglia');
             $table->string('sesso');
             $table->date('data nascita');
-            $table->boolean('adottato')->default(FALSE);
-
-           
+            $table->bigInteger('user_id')->unsigned()->default(1);
         });
+
+        
+        Schema::table('dog', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
+
+        });
+
     }
 
     /**

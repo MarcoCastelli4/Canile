@@ -93,7 +93,7 @@ class DogController extends Controller
     }
 
     /**Per la view che mi permette di inserire una vaccinazione per il cane in data */
-    public function insertVaccination($id)
+    public function vaccination($id)
     {
         $dl=new DataLayer();
         $vaccinations=$dl->getAllVaccinations();

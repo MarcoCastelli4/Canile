@@ -73,6 +73,7 @@ class DataLayer {
         // Book::find($id)->update(['title' => $title, 'author_id' => $author_id]);
     }
 
+    // Aggiunge vaccinazione per cane
     public function addDogVaccination($dog_id,$vaccination_id,$data) {
        
        $vaccination=Vaccination::find($vaccination_id);
@@ -80,4 +81,10 @@ class DataLayer {
        $dog->vaccination()->attach($vaccination,['data'=>$data]);
         
     }
+
+    //Aggiunge adozione cane - utente
+    public function addDogAdoption($dog_id,$user_id,$data) {
+       // TODO!
+         
+     }
 }

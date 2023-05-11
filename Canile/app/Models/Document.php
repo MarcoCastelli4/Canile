@@ -10,7 +10,7 @@ class Document extends Model
     use HasFactory;
 
     protected $table='document';
-    protected $fillable=['titolo','path'];
+    protected $fillable=['titolo','path','dog_id'];
 
     public $timestamps=false;
 

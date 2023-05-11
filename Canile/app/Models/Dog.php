@@ -10,7 +10,7 @@ class Dog extends Model
     use HasFactory;
 
     protected $table='dog';
-    protected $fillable=['nome','razza','colore','lunghezza pelo','taglia','sesso','data nascita','adottato'];
+    protected $fillable=['nome','razza','colore','lunghezza pelo','taglia','sesso','data nascita','user_id'];
 
     public $timestamps=false;
 

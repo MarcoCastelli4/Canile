@@ -19,14 +19,10 @@ class UserController extends Controller
     public function addAdoption($id)
     {
 
-        $dl=new DataLayer();
-        
-        $dog=$dl->findDogById($id);
-        print "Cane adottato";
+        $dl=new DataLayer(); 
+        $dogs=$dl->listDogs();
 
-
-        // inserimento nel db ...
-        return  view('user.adoption')->with("dog",$dog);
-        
+         // inserimento nel db ...
+        return view('dog.index')->with("dog_list",$dogs); 
     }
 }
