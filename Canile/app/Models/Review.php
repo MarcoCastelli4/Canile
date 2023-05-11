@@ -15,10 +15,8 @@ class Review extends Model
 
     public $timestamps=false;
 
-
-    /*
     #un recensione ha un solo utente
     public function user(){
-        return $this->hasOne(User::class,'review_id','id');
-    }*/
+        return $this->belongsTo(User::class,'user_id','id');
+    }
 }

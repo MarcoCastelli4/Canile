@@ -10,7 +10,7 @@ class Vaccination extends Model
     use HasFactory;
 
     protected $table='vaccination';
-    protected $fillable=['malattia'];
+    protected $fillable=['malattia','validità'];
 
     public $timestamps=false;
 

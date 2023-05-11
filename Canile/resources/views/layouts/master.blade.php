@@ -34,7 +34,21 @@
               <a class="navbar-brand col-lg-3 me-0" href="{{route('home')}}">&nbsp;</a>
               <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
                 <ul class="navbar-nav col-lg-6">
-                @yield('left_navbar')
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{route('home')}}">Home Page</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{route('dog.index')}}">Tutti i cani</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Adozioni</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Salute dei cani</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Recensioni</a>
+                  </li>
                 </ul>
               </div>
             </div>

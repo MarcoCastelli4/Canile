@@ -6,26 +6,6 @@ Cancellare il cane dal "{{ $dog->name }}" dal database?
 
 @section('stile', 'style.css')
 
-@section('left_navbar')
-<li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('home')}}">Home Page</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('dog.index')}}">Tutti i cani</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Adozioni</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Salute dei cani</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Recensioni</a>
-                  </li>
-                  
-@endsection
-
-
 @section('breadcrumb')
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">

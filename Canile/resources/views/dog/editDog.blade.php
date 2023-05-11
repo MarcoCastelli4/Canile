@@ -5,25 +5,6 @@
 style.css
 @endsection
 
-@section('left_navbar')
-<li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('home')}}">Home Page</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('dog.index')}}">Tutti i cani</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Adozioni</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Salute dei cani</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Recensioni</a>
-                  </li>
-                  
-@endsection
-
 @section('breadcrumb')
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -139,9 +120,11 @@ style.css
       <br/>
       <a href="{{ route('dog.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Cancel</a>
             @if(isset($dog->id))
-            <input class="btn btn-primary" id="mySubmit" type="submit" value="Update" class="hidden"/>
+            <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Update</label>
+            <input id="mySubmit" type="submit" value="Update" class="hidden"/>
             @else
-            <input class="btn btn-primary" id="mySubmit" type="submit" value="Create" class="hidden"/>
+            <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Create</label>
+            <input  id="mySubmit" type="submit" value="Create" class="hidden"/>
             @endif
       <form>
 </div>

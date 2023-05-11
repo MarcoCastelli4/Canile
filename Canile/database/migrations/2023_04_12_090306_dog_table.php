@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('taglia');
             $table->string('sesso');
             $table->date('data nascita');
+            $table->boolean('adottato')->default(FALSE);
 
            
         });

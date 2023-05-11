@@ -10,7 +10,7 @@ class Dog extends Model
     use HasFactory;
 
     protected $table='dog';
-    protected $fillable=['nome','razza','colore','lunghezza pelo','taglia','sesso','data nascita'];
+    protected $fillable=['nome','razza','colore','lunghezza pelo','taglia','sesso','data nascita','adottato'];
 
     public $timestamps=false;
 
@@ -32,10 +32,9 @@ class Dog extends Model
         return $this-> hasMany(Document::class,'dog_id','id');
             
     }
-
-    #un autore ha un solo indirizzo
-    public function address(){
-        return $this->hasOne(Address::class,'author_id','id');
+    #un cane ha un solo utente
+    public function user(){
+        return $this->belongsTo(User::class,'user_id','id');
     }
 
 }

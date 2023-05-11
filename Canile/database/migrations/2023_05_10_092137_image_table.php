@@ -13,12 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vaccination',function(blueprint $table) //per creare una nuova tabella Schema::
-        {
-            $table->increments('id');   //intero autoincrementale
-            $table->string('malattia');
-            $table->integer('validità'); //validità in mesi del vaccino
-        });
+        //
     }
 
     /**

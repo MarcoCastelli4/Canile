@@ -6,25 +6,6 @@ I cani
 
 @section('stile','style.css') 
 
-@section('left_navbar')
-<li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('home')}}">Home Page</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('dog.index')}}">Tutti i cani</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Adozioni</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="">Salute dei cani</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Recensioni</a>
-                  </li>
-                  
-@endsection
-
 @section('breadcrumb')
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
@@ -42,6 +23,21 @@ I cani
         <a href="{{ route('dog.create') }}" class="btn btn-success">  <i class="bi bi-plus-square"></i> Create new dog</a> <!--btn:bottone, btn-success: bottone verde-->
       </div>
 </div>
+
+<!-- Se la lista dei cani è vuota oppure non ci sono più cani disponibili -->
+<?php 
+$dog_available=0;
+foreach($dog_list as $dog){
+  if ($dog->adottato==0){
+    $dog_available=$dog_available+1;
+  } 
+}
+  ?>
+@if ($dog_list->isEmpty() or $dog_available==0)
+<div class="alert alert-warning" role="alert">
+<strong>No dog are available in database! </strong>Please create new dog with the button above!
+</div>
+  @else
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-striped table-hover table-responsive" style="width:100%">
@@ -71,6 +67,7 @@ I cani
                         <tbody>
                         @foreach($dog_list as $dog)
                             <tr>
+                                @if ($dog->adottato==0)
                                 <td>{{$dog->nome}}</td>
                                 <td>{{$dog->razza}}</td>
                                 <td>{{$dog->taglia}}</td>
@@ -93,9 +90,13 @@ I cani
                                 <td>
                             <a class="btn btn-success" href="{{ route('dog.vaccination', ['id' => $dog->id]) }}"><i class="bi bi-virus"></i> Vaccination</a>
                                 </td>
+                              <td>
+                             <a class="btn adoptionBtn" href="{{ route('user.adoption', ['id' => $dog->id]) }}"><span><img src="../img/adopt.png" width="48" height="48" /></span></a>
+                              </td>
                             </tr>
+                            @endif
                             @endforeach
-                       
+                          @endif
                         </tbody>
                     </table>
                     
@@ -104,5 +105,3 @@ I cani
             
 
 @endsection
-
-
