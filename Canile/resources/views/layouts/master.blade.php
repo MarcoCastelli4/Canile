@@ -30,25 +30,33 @@
             <div class="container-fluid">
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
+                
               </button>
               <a class="navbar-brand col-lg-3 me-0" href="{{route('home')}}">&nbsp;</a>
               <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
                 <ul class="navbar-nav col-lg-6">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('home')}}">Home Page</a>
+                <li class="nav-item n">
+                    <a class="nav-link l" aria-current="page" href="{{route('home')}}">Home Page</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('dog.index')}}">Tutti i cani</a>
+                  <li class="nav-item n">
+                    <a class="nav-link l" aria-current="page" href="{{route('dog.index')}}">Tutti i cani</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Adozioni</a>
+                  <li class="nav-item n">
+                    <a class="nav-link l" aria-current="page" href="#">Adozioni</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Salute dei cani</a>
+                  <li class="nav-item n">
+                    <a class="nav-link l" aria-current="page" href="#">Salute dei cani</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Recensioni</a>
+                  <li class="nav-item n">
+                    <a class="nav-link l" aria-current="page" href="#">Recensioni</a>
                   </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right btnLogin">
+                    @if($logged)
+                    <li><i>Welcome {{$loggedName}}</i><br/><a class="btn btn-outline-dark" href="{{route('user.logout')}}">Logout</a></li>
+                    @else
+                    <li><a class="btn btn-outline-dark" href="{{route('user.login')}}">Login</a></li>
+                    @endif
                 </ul>
               </div>
             </div>

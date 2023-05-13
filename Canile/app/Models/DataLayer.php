@@ -87,4 +87,22 @@ class DataLayer {
        // TODO!
          
      }
+
+     public function validUser($email,$password){
+        print($email);
+         //prendo l'utente con la mail specificata
+        $users = User::where('email',$email)->get(['password']);
+        print($users);
+        if(count($users) == 0)
+        {
+            return false;
+        }
+        //ha inserito psw corretta?
+        return (md5($password) == ($users[0]->password));
+     }
+ 
+     public function getUserName($email){
+         $users=User::where('email',$email)->get();
+         return $users[0]->name;
+     }
 }

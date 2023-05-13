@@ -12,7 +12,7 @@ class DogController extends Controller
         $dl=new DataLayer();
         // ottengo la lista
         $dogs=$dl->listDogs();
-        return view('dog.index')->with("dog_list",$dogs);
+        return view('dog.dogs')->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with("dog_list",$dogs);
         
     }
 

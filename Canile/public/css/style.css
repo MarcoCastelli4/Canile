@@ -1,68 +1,62 @@
-/**********************/
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23-feb-2020, 12.24.39
+    Author     : devis
+*/
+
 .navbar-color{
-background: #ff9a3c;
-}
-
+    background: #ff9a3c;
+    }
+    
 .navbar-brand {
-    max-width: 50%;
-    width: 100px;
-    height:100px;
-    text-indent: 9999cm;
-    margin-left: 30px;
-    background: url(../img/logopiccolo.jpg) center center no-repeat;
-	padding: 0 15px;
-	
+        max-width: 50%;
+        width: 100px;
+        height:100px;
+        text-indent: 9999cm;
+        margin-left: 30px;
+        background: url(../img/logo.png) center center no-repeat;
+        padding: 0 15px;
+        
 }
 
-.nav-item{
-  padding-left: 75px;
-}
 
-.navbar-nav .nav-item .nav-link {
+/**Css per la navbar */
+.n{
+    padding-left: 75px;
+  }
+
+.n .l {
     color: white;
     font-size: 15pt;
 	white-space:nowrap;
 	
 }
-
-h1{
-    color: #155263;
-    font-weight: bold;
-}
-
-h2{
-    font-weight: bold;
-    font-size: 15pt;
-    text-align:left;
-}
-.navbar-nav .nav-item .nav-link:hover {
+/**Per hover quando vado sopra link navbar*/
+.n .l:hover {
 	color: #5c5757;
   }
 
-.header-sezione {
-    border-bottom: 2px solid #ff9a3c;
-    margin-bottom: 2em;
-    margin-top: 2em;
+/**Per bottone login*/
+.btnLogin{
+    padding-left: 320px;
 }
 
-body{ 
-    background-color: white;  
-}
-
+/**Parte centrale*/
 .adoptionBtn{
-  background-color: orange;
-  border-radius: 8px;
-  border-color:orange;
-}
-.adoptionBtn:hover{
     background-color: orange;
-    background-image:linear-gradient(rgb(0 0 0/5%) 0 0);;
-}
+    border-radius: 8px;
+    border-color:orange;
+  }
+  .adoptionBtn:hover{
+      background-color: orange;
+      background-image:linear-gradient(rgb(0 0 0/5%) 0 0);;
+  }
 
-.hidden{
-  display:none;
-}
-.servizi {
+  .servizi {
     display: flex;
     justify-content: center;
 }
@@ -98,6 +92,7 @@ body{
     color: #596e79;
 }
 
+/**Parte info in basso*/
 .column {
     width: 100%;
     background-color: #393e46;
@@ -120,6 +115,11 @@ body{
       
     }
   }
+.header-sezione {
+    border-bottom: 2px solid #357ebd;
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
 
 blockquote {
     padding: 10px 20px;
@@ -202,3 +202,11 @@ div#menu li:hover ul
 }
 
 div#menu li li { border:none; width:150px; }
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none;
+}

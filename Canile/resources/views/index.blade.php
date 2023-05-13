@@ -6,25 +6,6 @@ Canile
 
 @section('stile','style.css') 
 
-@section('left_navbar')
-<li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('home')}}">Home Page</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('dog.index')}}">Tutti i cani</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Adozioni</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="">Salute dei cani</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Recensioni</a>
-                  </li>
-                  
-@endsection
-
 @section('corpo')
 
                 <div class="col-sm-9">
@@ -91,7 +72,7 @@ Canile
         <div class="colums">
           <div class="column">
             <br/><br/><br/><br/>
-            <img src="img/logo.jpg" class="img-responsive" width="200"  height="200" >
+            <img src="img/logob.png" class="img-responsive" width="200"  height="200" >
           </div>
 
           <div class="column">
@@ -129,7 +110,5 @@ Canile
             Sabato: 12-18
             <br/>
             Domenica: chiuso
-
-         
 @endsection
 
