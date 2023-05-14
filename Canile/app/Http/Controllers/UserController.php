@@ -12,7 +12,8 @@ class UserController extends Controller
         $dl=new DataLayer();
         
         $dog=$dl->findDogById($id);
-        return view('user.adoption')->with("dog",$dog);
+        $userID = $dl->getUserID($_SESSION["loggedName"]);
+        return view('user.adoption')->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
         
     }
 

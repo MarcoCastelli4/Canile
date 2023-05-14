@@ -17,12 +17,14 @@ I cani
 
 @section('corpo')
 
+@if($loggedName=='admin')
 <div class="row">
     <div class="col-xs-6">   
   
         <a href="{{ route('dog.create') }}" class="btn btn-success">  <i class="bi bi-plus-square"></i> Create new dog</a> <!--btn:bottone, btn-success: bottone verde-->
       </div>
 </div>
+@endif
 
 <!-- Se la lista dei cani è vuota oppure non ci sono più cani disponibili -->
 <?php 
@@ -35,7 +37,11 @@ foreach($dog_list as $dog){
   ?>
 @if ($dog_list->isEmpty() or $dog_available==0)
 <div class="alert alert-warning" role="alert">
-<strong>No dog are available in database! </strong>Please create new dog with the button above!
+  @if($loggedName=='admin')
+  <strong>No dog are available in database! </strong>Please create new dog with the button above!
+  @else
+  <strong>No dog are available! </strong> Please contact service!
+  @endif
 </div>
   @else
             <div class="row">
@@ -75,8 +81,10 @@ foreach($dog_list as $dog){
                                 <td>{{$dog['lunghezza pelo']}}</td>
                                 <td>{{$dog['data nascita']}}</td>
                                 <td>{{$dog->sesso}}</td>
+                               
+                                @if($loggedName=='admin')
                                 <td>
-                                    <a class="btn btn-primary"  href="{{ route('dog.edit', ['dog' => $dog ->id]) }}">
+                                    <a class="btn btn-primary"  href="{{ route('dog.edit', ['dog' => $dog->id]) }}">
                                     <i class="bi-pencil-square"></i> Edit</a>
                                 </td>
                                 <td>
@@ -90,9 +98,11 @@ foreach($dog_list as $dog){
                                 <td>
                             <a class="btn btn-success" href="{{ route('dog.vaccination', ['id' => $dog->id]) }}"><i class="bi bi-virus"></i> Vaccination</a>
                                 </td>
+                                @else
                               <td>
                              <a class="btn adoptionBtn" href="{{ route('user.adoption', ['id' => $dog->id]) }}"><span><img src="../img/adopt.png" width="48" height="48" /></span></a>
                               </td>
+                              @endif
                             </tr>
                             @endif
                             @endforeach

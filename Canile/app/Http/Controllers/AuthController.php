@@ -35,4 +35,12 @@ class AuthController extends Controller
         session_destroy();
         return Redirect::to(route('home'));
     }
+
+    public function registration(Request $req) {
+        $dl = new DataLayer();
+        
+        $dl->addUser($req->input('name'), $req->input('password'), $req->input('email'));
+       
+        return Redirect::to(route('user.login'));
+    }
 }

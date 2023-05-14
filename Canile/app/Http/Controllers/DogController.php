@@ -22,7 +22,7 @@ class DogController extends Controller
         $dogs_list = $dl->listDogs();
         $vaccinations = $dl->getAllVaccinations();
 
-        return view('dog.editDog')->with('dogList', $dogs_list)->with('vaccinations',$vaccinations);
+        return view('dog.editDog')->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with('dogList', $dogs_list)->with('vaccinations',$vaccinations);
     }
 
     public function destroy($id)
@@ -43,9 +43,9 @@ class DogController extends Controller
         $dl = new DataLayer();
         $dog = $dl->findDogById($id);
         if ($dog !== null) {
-            return view('dog.deleteDog')->with('dog', $dog);
+            return view('dog.deleteDog')->with('dog', $dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
         } else {
-            return view('dog.deleteErrorPage');
+            return view('dog.deleteErrorPage')->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
         }
     }
 
@@ -66,9 +66,10 @@ class DogController extends Controller
         $dl = new DataLayer();
         $dogs_list = $dl->listDogs();
         $dog = $dl->findDogById($id);
+        $userID = $dl->getUserID($_SESSION["loggedName"]);
        // $vaccinations = $dl->getAllVaccinatios();
 
-        return view('dog.editDog')->with('dogList', $dogs_list)->with('dog', $dog);//->with('vaccinations',$vaccinations);
+        return view('dog.editDog')->with('dogList', $dogs_list)->with('dog', $dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);//->with('vaccinations',$vaccinations);
     }
 
     public function update(Request $request, $id)
@@ -87,8 +88,9 @@ class DogController extends Controller
         
         $vaccinations=$dl->getAllVaccinations();
         $dog=$dl->findDogById($id);
+        $userID = $dl->getUserID($_SESSION["loggedName"]);
 
-        return view('dog.infoDog')->with("vaccination_list",$vaccinations)->with("dog",$dog);
+        return view('dog.infoDog')->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
     
     }
 
@@ -98,7 +100,8 @@ class DogController extends Controller
         $dl=new DataLayer();
         $vaccinations=$dl->getAllVaccinations();
         $dog=$dl->findDogById($id);
-        return view('dog.vaccination')->with("vaccination_list",$vaccinations)->with("dog",$dog);
+        $userID = $dl->getUserID($_SESSION["loggedName"]);
+        return view('dog.vaccination')->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);;
     }
 
     public function addVaccination(Request $request, $dog_id)
