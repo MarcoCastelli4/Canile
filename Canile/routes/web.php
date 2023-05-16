@@ -21,20 +21,23 @@ Route::get('/user/logout',[AuthController::class,'logout'])->name('user.logout')
 
 
 
-//Utente loggato
-Route::middleware(['authCustom'])->group(function() {
+// utente visitatore (oltre ai login e register)
 Route::get('/dog',[DogController::class,'index'])->name('dog.index');
 Route::get('/dog/{id}/info', [DogController::class, 'info'])->name('dog.info');
 
+//Utente loggato
+Route::middleware(['authCustom'])->group(function() {
 // rotta per le adozioni
 Route::get('/dog/{id}/adoption',[UserController::class,'adoption'])->name('user.adoption');
 Route::post('/dog/{id}/adoption',[UserController::class,'addAdoption'])->name('user.adoption');
 
+});
 
 //rotte per utente admin
 Route::middleware(['IsAdmin'])->group(function () {
-     Route::resource('dog', DogController::class);
-     Route::get('/dog/{id}/info', [DogController::class, 'info'])->name('dog.info');
+     Route::resource('dog', DogController::class)->except([
+        'index'
+    ]);
  
      Route::get('/dog/{id}/destroy', [DogController::class, 'destroy'])->name('dog.destroy');
      Route::get('/dog/{id}/destroy/confirm', [DogController::class, 'confirmDestroy'])->name('dog.destroy.confirm');
@@ -42,9 +45,8 @@ Route::middleware(['IsAdmin'])->group(function () {
      // rotte per le vaccinazioni
      Route::get('/dog/{id}/vaccination',[DogController::class,'vaccination'])->name('dog.vaccination');
      Route::post('/dog/{id}/vaccination',[DogController::class,'addVaccination'])->name('dog.vaccination');
- });
-
 });
+
 
 
 
