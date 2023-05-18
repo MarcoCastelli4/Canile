@@ -91,18 +91,19 @@ foreach($dog_list as $dog){
                             <a class="btn btn-danger" 
                                 href="{{ route('dog.destroy.confirm', ['id' => $dog->id]) }}"><i class="bi-trash3"></i> Delete</a>
                             </td>
-                                <td>
-                            <a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> More</a>
-                                </td>
-
+                              
                                 <td>
                             <a class="btn btn-success" href="{{ route('dog.vaccination', ['id' => $dog->id]) }}"><i class="bi bi-virus"></i> Vaccination</a>
                                 </td>
                                 @else
                               <td>
+                      
                              <a class="btn adoptionBtn" href="{{ route('user.adoption', ['id' => $dog->id]) }}"><span><img src="../img/adopt.png" width="48" height="48" /></span></a>
                               </td>
                               @endif
+                              <td>
+                            <a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> More</a>
+                                </td>
                             </tr>
                             @endif
                             @endforeach

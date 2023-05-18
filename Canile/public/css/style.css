@@ -1,49 +1,82 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 23-feb-2020, 12.24.39
-    Author     : devis
-*/
 
-.navbar-color{
-    background: #ff9a3c;
-    }
-    
-.navbar-brand {
-        max-width: 50%;
-        width: 100px;
-        height:100px;
-        text-indent: 9999cm;
-        margin-left: 30px;
-        background: url(../img/logo.png) center center no-repeat;
-        padding: 0 15px;
-        
+.breadcrumb{
+  padding-top: 20%;
 }
 
+.logo-container {
+  width: 110px; /* Set the width as needed */
+  height: 100px; /* Set the height as needed */
+  background-image: url('../img/l.png');
+  background-size: cover;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  
+}
 
-/**Css per la navbar */
-.n{
-    padding-left: 75px;
+.image-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  width: 100%;
+  height: 400px; /* Adjust the height as needed */
+}
+
+.image-container img {
+  width: 200px; /* Adjust the width of each image */
+  height: 100%; /* Maintain the aspect ratio of the images */
+  object-fit: cover; /* Adjust the object-fit property as needed */
+  margin-right: 10px; /* Adjust the spacing between images */
+}
+
+#mainNavigation a {
+    font-family: 'Cabin', sans-serif;
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    text-shadow:1px 1px 2px rgba(0,0,0,0.4)
+  }
+  
+  .dropdown-menu {
+    background:#42b883
+  }
+  a.dropdown-toggle {
+    color:#dfdfdf !important
+  }
+  a.dropdown-item:hover {
+    color:#42b883 !important
+  }
+  .nav-item a{
+    color:#dfdfdf;
+  }
+  .nav-item a:hover {
+    color:#fff
+  }
+  .nav-item{
+    min-width:12vw;
+  }
+  #mainNavigation {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:123;
+    padding-bottom:60px;
+    background: url('../img/l.png');
+      
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+  }
+  #navbarNavDropdown.collapsing .navbar-nav,
+  #navbarNavDropdown.show .navbar-nav{
+    background:#ff9a3c;
+    padding:12px;
   }
 
-.n .l {
-    color: white;
-    font-size: 15pt;
-	white-space:nowrap;
-	
-}
-/**Per hover quando vado sopra link navbar*/
-.n .l:hover {
-	color: #5c5757;
-  }
-
-/**Per bottone login*/
-.btnLogin{
-    padding-left: 320px;
-}
+  /*-----------------------------------------*/
 
 /**Parte centrale*/
 .adoptionBtn{
@@ -95,9 +128,9 @@ and open the template in the editor.
 /**Parte info in basso*/
 .column {
     width: 100%;
-    background-color: #393e46;
+    /*background-color: #393e46;*/
     height: 450px;
-    color: white;
+    color: black;
     font-size: 15pt;
   }
   @media (min-width: 48em) {

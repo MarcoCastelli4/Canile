@@ -12,9 +12,8 @@ class DogController extends Controller
         $dl=new DataLayer();
         // ottengo la lista
         $dogs=$dl->listDogs();
-        if(isset($_SESSION['logged']))
-            return view('dog.dogs')->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with("dog_list",$dogs);
-        else echo 'ciao';
+        return view('dog.dogs')->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with("dog_list",$dogs);
+        
     }
 
     public function create()

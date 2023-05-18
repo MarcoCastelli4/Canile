@@ -9,6 +9,8 @@ use App\Http\Controllers\AuthController;
 
 
 Route::get('/',[FrontController::class,'getHome'])->name('home');
+Route::get('/aboutUs',[FrontController::class,'getAboutUs'])->name('aboutus');
+Route::get('/contactUs',[FrontController::class,'getContactUs'])->name('contactus');
 
 /**Metodo 'getHome' attivato quando vado sulla rotta specificata */
 
@@ -21,17 +23,20 @@ Route::get('/user/logout',[AuthController::class,'logout'])->name('user.logout')
 
 
 
-// utente visitatore (oltre ai login e register)
-Route::get('/dog',[DogController::class,'index'])->name('dog.index');
-Route::get('/dog/{id}/info', [DogController::class, 'info'])->name('dog.info');
+
 
 //Utente loggato
 Route::middleware(['authCustom'])->group(function() {
+
+     // utente visitatore (oltre ai login e register)
+Route::get('/dog',[DogController::class,'index'])->name('dog.index');
+Route::get('/dog/{id}/info', [DogController::class, 'info'])->name('dog.info');
+
 // rotta per le adozioni
 Route::get('/dog/{id}/adoption',[UserController::class,'adoption'])->name('user.adoption');
 Route::post('/dog/{id}/adoption',[UserController::class,'addAdoption'])->name('user.adoption');
 
-});
+
 
 //rotte per utente admin
 Route::middleware(['IsAdmin'])->group(function () {
@@ -47,6 +52,9 @@ Route::middleware(['IsAdmin'])->group(function () {
      Route::post('/dog/{id}/vaccination',[DogController::class,'addVaccination'])->name('dog.vaccination');
 });
 
+
+
+});
 
 
 

@@ -26,61 +26,63 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-color" aria-label="Thirteenth navbar example">
-            <div class="container-fluid">
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                
-              </button>
-              <a class="navbar-brand col-lg-3 me-0" href="{{route('home')}}">&nbsp;</a>
-              <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-                <ul class="navbar-nav col-lg-6">
-                <li class="nav-item n">
-                    <a class="nav-link l" aria-current="page" href="{{route('home')}}">Home Page</a>
-                  </li>
-                  <li class="nav-item n">
-                    <a class="nav-link l" aria-current="page" href="{{route('dog.index')}}">Tutti i cani</a>
-                  </li>
-                  <li class="nav-item n">
-                    <a class="nav-link l" aria-current="page" href="#">Adozioni</a>
-                  </li>
-                  <li class="nav-item n">
-                    <a class="nav-link l" aria-current="page" href="#">Salute dei cani</a>
-                  </li>
-                  <li class="nav-item n">
-                    <a class="nav-link l" aria-current="page" href="#">Recensioni</a>
-                  </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right btnLogin">
-                    @if($logged)
-                    <li><i>Welcome {{$loggedName}}</i><br/><a class="btn btn-outline-dark" href="{{route('user.logout')}}">Logout</a></li>
-                    @else
-                    <li><a class="btn btn-outline-dark" href="{{route('user.login')}}">Login</a></li>
-                    @endif
-                </ul>
-              </div>
-            </div>
-          </nav>
+    
+          <div id="mainNavigation">
+	      <nav role="navigation">
+		  <div class="logo-container"></div>
+	      </nav>
+	      <div class="navbar-expand-md">
+	        <div class="navbar-dark text-center my-2">
+	          <button class="navbar-toggler w-75" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	            <span class="navbar-toggler-icon"></span> <span class="align-middle">Menu</span>
+	          </button>
+	        </div>
+	        <div class="text-center mt-3 collapse navbar-collapse" id="navbarNavDropdown">
+	          <ul class="navbar-nav mx-auto ">
+	            <li class="nav-item">
+	              <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href="{{route('dog.index')}}"> The dogs</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href="">Medical info</a>
+	            </li>
+	            <li class="nav-item">
+	              <a class="nav-link" href="#">Review</a>
+	            </li>
+	            <li class="nav-item dropdown">
+	              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                Company
+	              </a>
+	              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	                <li><a class="dropdown-item" href="#">Blog</a></li>
+	                <li><a class="dropdown-item" href="{{route('aboutus')}}">About Us</a></li>
+	                <li><a class="dropdown-item" href="{{route('contactus')}}">Contact us</a></li>
+	              </ul>
 
-        <div class='container'>
+                <li class="nav-item">
+                    @if($logged)
+                    <i>Welcome {{$loggedName}}</i><br/><a class="btn btn-outline-dark" href="{{route('user.logout')}}">Logout</a>
+                    @else
+                    <a class="btn btn-outline-dark" href="{{route('user.login')}}">Login</a>
+                    @endif
+				</li>
+	            </li>
+	         
+	        </div>
+	      </div>
+	    </div>
+		
+        <div class='container breadcrumb'>
           @yield('breadcrumb')
         </div>
-
-        <div class="container">
-            <header class="header-sezione">
-                <h1>
-                    Canile Boscoverde
-                </h1>
-            </header>
-        </div>
-        
 
         <div class="container">
             <div class="row">
             @yield('corpo')
                
         </div>
-
     </body>
 
 

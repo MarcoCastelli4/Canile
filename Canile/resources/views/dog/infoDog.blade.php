@@ -17,14 +17,12 @@ I cani
 @endsection
 
 @section('corpo')
-<div class="row">
-  <!-- 
-    <div class="col-xs-6">   
-  
-        <a href="{{ route('dog.create') }}" class="btn btn-success">  <i class="bi bi-plus-square"></i> Create new dog</a> 
-      </div> 
-    -->
-</div>
+<div class="image-container">
+    <img src="../../img/logo.png" alt="Image 1">
+    <img src="../../img/logo.png" alt="Image 2">
+    <img src="../../img/logo.png" alt="Image 3">
+    <!-- Add more <img> elements for additional images -->
+  </div>
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-striped table-hover table-responsive" style="width:100%">

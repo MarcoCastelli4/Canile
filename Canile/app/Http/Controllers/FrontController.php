@@ -11,10 +11,31 @@ class FrontController extends Controller
         
         session_start();
         if (isset($_SESSION['logged'])) {
-            return view('index')->with('logged', true)->with('loggedName', $_SESSION['loggedName']);
+            return view('homepage')->with('logged', true)->with('loggedName', $_SESSION['loggedName']);
         } else {
-            return view('index')->with('logged', false);
+            return view('homepage')->with('logged', false);
         }
         
+    }
+
+    public function getAboutUs()
+    {
+        session_start();
+        if (isset($_SESSION['logged'])) {
+            return view('aboutUs')->with('logged', true)->with('loggedName', $_SESSION['loggedName']);
+        } else {
+            return view('aboutUs')->with('logged', false);
+        }
+    }
+
+
+    public function getContactUs()
+    {
+        session_start();
+        if (isset($_SESSION['logged'])) {
+            return view('contactUs')->with('logged', true)->with('loggedName', $_SESSION['loggedName']);
+        } else {
+            return view('contactUs')->with('logged', false);
+        }
     }
 }

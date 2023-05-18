@@ -1,0 +1,53 @@
+@extends('layouts.master') 
+
+@section('titolo')
+Canile
+@endsection
+
+@section('stile','style.css') 
+
+
+@section('corpo')
+<div class="colums">
+          <div class="column">
+            <br/><br/><br/><br/>
+            <img src="img/logob.png" class="img-responsive" width="200"  height="200" >
+          </div>
+
+          <div class="column">
+            <br/><br/><br/>
+            </i> Canile Boscoverde<br/>
+            Parco Del Lago Moro 25047 Darfo Boario Terme
+            CF: 90049020093
+            <br/><br/><br/>
+            <i class="bi bi-telephone">&nbsp+39 0364 331944</i>
+            <br/>
+            <br/>
+            <i class="bi bi-envelope-fill">&nbspCanileBoscoverde@email.com</i>
+          </div>
+
+          <div class="column">
+            <br/>
+            Seguici su:
+            <br/>
+            <i class="bi bi-facebook" style="font-size: 50px;">
+              &nbsp
+            </i><i class="bi bi-instagram" style="font-size: 50px;"></i>
+
+            <br/>
+            <br/>
+            Orario:
+            <br/>
+            Lunedì: 10-14
+            <br/>
+            Martedi: 10-18
+            <br/>
+            Mercoledì: chiuso
+            <br/>
+            Giovedì: 10-18
+            <br/>
+            Sabato: 12-18
+            <br/>
+            Domenica: chiuso
+
+@endsection
