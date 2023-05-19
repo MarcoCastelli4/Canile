@@ -50,9 +50,8 @@ Route::middleware(['IsAdmin'])->group(function () {
      // rotte per le vaccinazioni
      Route::get('/dog/{id}/vaccination',[DogController::class,'vaccination'])->name('dog.vaccination');
      Route::post('/dog/{id}/vaccination',[DogController::class,'addVaccination'])->name('dog.vaccination');
+
 });
-
-
 
 });
 

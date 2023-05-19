@@ -25,8 +25,6 @@ return new class extends Migration
             $table->date('data nascita');
             $table->bigInteger('user_id')->unsigned()->default(1);
         });
-
-        
         Schema::table('dog', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
 

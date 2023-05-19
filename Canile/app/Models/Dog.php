@@ -32,6 +32,12 @@ class Dog extends Model
         return $this-> hasMany(Document::class,'dog_id','id');
             
     }
+
+     # un cane ha tanti documenti
+     public function image(){
+        return $this-> hasMany(Image::class,'dog_id','id');
+            
+    }
     #un cane ha un solo utente
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');

@@ -28,8 +28,31 @@ class DataLayer {
         $dog->delete();
     }
 
+    public function uploadImage($image,$dog){
+        $filename = $image;
+        echo $filename;
+    $tempname = $image;
+    $folder = "img/upload" . $filename;
+ 
+    $db = mysqli_connect("localhost", "marco", "marco", "canile");
+ 
+    // Get all the submitted data from the form
+    //$sql = "INSERT INTO image (filename) VALUES ('$filename','$dog->id')";
+ 
+    // Execute query
+    //mysqli_query($db, $sql);
+ 
+    // Now let's move the uploaded image into the folder: image
+    if (move_uploaded_file($tempname, $folder)) {
+        echo "<h3>  Image uploaded successfully!</h3>";
+    } else {
+        echo "<h3>  Failed to upload image!</h3>";
+    }
+
+    }
+
    // aggiungere un cane senza nessuna vaccinazione
-   public function addDog($nome,$razza,$colore,$lunghezzapelo,$taglia,$sesso,$datanascita) {
+   public function addDog($nome,$razza,$colore,$lunghezzapelo,$taglia,$sesso,$datanascita,$documents,$images) {
     $dog = new Dog;
     $dog->nome = $nome;
     $dog->razza = $razza;
@@ -38,15 +61,31 @@ class DataLayer {
     $dog->taglia = $taglia;
     $dog->sesso = $sesso;
     $dog['data nascita']=$datanascita;
+
+    if(is_array($images)){
+        foreach($images as $i){
+            $this->uploadImage($i,$dog);
+        }
+    }
+    else{
+        $this->uploadImage($images,$dog);
+    }
+
     $dog->save();
     }
+
 
     public function getAllVaccinations() {
        return Vaccination::orderBy('malattia','asc')->get();
     }   
 
+    public function getDogImages($id)
+    {
+        $dog = Dog::find($id);
+        return $dog->image;
+    }
 
-    public function editDog($id, $nome,$razza,$colore,$lunghezzapelo,$taglia,$sesso,$datanascita) {
+    public function editDog($id, $nome,$razza,$colore,$lunghezzapelo,$taglia,$sesso,$datanascita,$documents,$images) {
         $dog = Dog::find($id);
         $dog->nome = $nome;
         $dog->razza = $razza;
@@ -55,7 +94,16 @@ class DataLayer {
         $dog->taglia = $taglia;
         $dog->sesso = $sesso;
         $dog['data nascita']=$datanascita;
-        $dog->save();
+
+        if(is_array($images)){
+            foreach($images as $i){
+                $this->uploadImage($i,$dog);
+            }
+        }
+        else{
+            echo $images;
+            //$this->uploadImage($images,$dog);
+        }
 
         // Cancel the previous list of vaccinations
         
@@ -63,6 +111,8 @@ class DataLayer {
         foreach($prevVaccination as $prev) {
             $dog->vaccination()->detach($prev->id);
         }
+
+        $dog->save();
 
         // Update the list of vaccination --> preferisco modificarla quando inseriamo una nuova vaccinaizone
         /*
@@ -73,6 +123,7 @@ class DataLayer {
         // Book::find($id)->update(['title' => $title, 'author_id' => $author_id]);
     }
 
+    
     // Aggiunge vaccinazione per cane
     public function addDogVaccination($dog_id,$vaccination_id,$data) {
        

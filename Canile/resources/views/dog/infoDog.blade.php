@@ -16,13 +16,16 @@ I cani
 </nav>
 @endsection
 
+
+
 @section('corpo')
-<div class="image-container">
-    <img src="../../img/logo.png" alt="Image 1">
-    <img src="../../img/logo.png" alt="Image 2">
-    <img src="../../img/logo.png" alt="Image 3">
-    <!-- Add more <img> elements for additional images -->
-  </div>
+<h3> Some pictures with {{$dog->nome}} </h3>
+<div class="images-container">
+@foreach ($images as $image)
+    <img src="{{url($image->path)}}">
+@endforeach
+</div>
+  
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-striped table-hover table-responsive" style="width:100%">
@@ -33,7 +36,6 @@ I cani
                             <tr>
                                 <th>Nome</th>
                                 <th>Vaccinazioni</th>
-                                <th>Fotografie</th>
                                 <th>Documentazione</th>
                                 <!--<th>Documentazione</th>-->
                             </tr>

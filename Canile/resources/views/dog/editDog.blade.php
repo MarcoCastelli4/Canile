@@ -116,6 +116,13 @@ style.css
         <input class="form-control" id="datanascita" name="datanascita" placeholder="YYY/MM/DD" type="text" value="{{$dog['data nascita']}}"/>
         @endif
       </div>
+      <br/>
+        <label for="imageMultiple" class="form-label">Upload dog images</label>
+        <input class="form-control" type="file" name="images" id="images" multiple />
+
+        <br/>
+        <label for="docuemntMultiple" class="form-label">Upload dog documents</label>
+        <input class="form-control" type="file"  name="documents" id="documents" multiple />
 
       <br/>
       <a href="{{ route('dog.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Cancel</a>
@@ -126,6 +133,9 @@ style.css
             <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Create</label>
             <input  id="mySubmit" type="submit" value="Create" class="hidden"/>
             @endif
+
+
+           
       <form>
 </div>
    
@@ -145,4 +155,5 @@ style.css
         })
     })
 </script>
+
 @endsection

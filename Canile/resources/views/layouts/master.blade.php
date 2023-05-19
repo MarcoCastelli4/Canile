@@ -31,7 +31,7 @@
 	      <nav role="navigation">
 		  <div class="logo-container"></div>
 	      </nav>
-	      <div class="navbar-expand-md">
+	      <div class="navbar-expand-md" id="navbar">
 	        <div class="navbar-dark text-center my-2">
 	          <button class="navbar-toggler w-75" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 	            <span class="navbar-toggler-icon"></span> <span class="align-middle">Menu</span>
@@ -74,7 +74,7 @@
 	      </div>
 	    </div>
 		
-        <div class='container breadcrumb'>
+        <div class='container'>
           @yield('breadcrumb')
         </div>
 
@@ -89,3 +89,18 @@
 </html>
 
 @yield('script')
+
+<script>
+var lastScrollTop;
+navbar = document.getElementById('mainNavigation');
+window.addEventListener('scroll',function(){
+var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+if(scrollTop > lastScrollTop){
+navbar.style.top='-80px';
+}
+else{
+navbar.style.top='0';
+}
+lastScrollTop = scrollTop;
+});
+</script>
