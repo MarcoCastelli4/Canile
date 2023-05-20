@@ -54,7 +54,7 @@ class DogController extends Controller
         $dl = new DataLayer();
         $dl->addDog($request->input('nome'), $request->input('razza'), $request->input('colore'),
         $request->input('lunghezzapelo'), $request->input('taglia'), $request->input('sesso'),
-        $request->input('datanascita'),$request->input('documentMultiple'),$request->input('imageMultiple'));
+        $request->input('datanascita'),$request->file('documents'),$request->file('images'));
 
 
         return Redirect::to(route('dog.index'));
@@ -92,10 +92,10 @@ class DogController extends Controller
         $userID = $dl->getUserID($_SESSION["loggedName"]);
 
         $images=$dl->getDogImages($id);
-
+        $documents=$dl->getDogDocuments($id);
        
 
-       return view('dog.infoDog')->with("images",$images)->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
+       return view('dog.infoDog')->with("documents",$documents)->with("images",$images)->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
     
     }
 

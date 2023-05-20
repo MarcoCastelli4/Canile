@@ -22,34 +22,43 @@ class DataLayer {
     public function deleteDog($id) {
         $dog = Dog::find($id);
         $vaccination = $dog->vaccination;
+
+        // disassocio immagini e documenti associati
+        $dog->image()->delete();
+
+        $dog->document()->delete();
+       
         foreach($vaccination as $v) {
             $dog->vaccination()->detach($v->id);
         }
+
+       
         $dog->delete();
     }
 
-    public function uploadImage($image,$dog){
-        $filename = $image;
-        echo $filename;
-    $tempname = $image;
-    $folder = "img/upload" . $filename;
- 
-    $db = mysqli_connect("localhost", "marco", "marco", "canile");
- 
-    // Get all the submitted data from the form
-    //$sql = "INSERT INTO image (filename) VALUES ('$filename','$dog->id')";
- 
-    // Execute query
-    //mysqli_query($db, $sql);
- 
-    // Now let's move the uploaded image into the folder: image
-    if (move_uploaded_file($tempname, $folder)) {
-        echo "<h3>  Image uploaded successfully!</h3>";
-    } else {
-        echo "<h3>  Failed to upload image!</h3>";
+    // salva  img nel database e dentro la cartella
+    public function uploadImage($image,$dog):void{
+        $v = Image::count()+1;
+        $i=new Image();
+        $i->path='/img/upload/'.$dog->id.$v.'.png';
+        $i->dog_id=$dog->id;
+        $i->save();
+
+        $image->storeAs('public/img/upload',$dog->id.$v.'.png');
     }
 
+    // salva  documenti nel database e dentro la cartella
+    public function uploadDocument($document,$dog):void{
+        $v = Document::count()+1;
+        $i=new Document();
+        $i->titolo=$document->getClientOriginalName();
+        $i->path='/document/upload/'.$dog->id.$v.'.pdf';
+        $i->dog_id=$dog->id;
+        $i->save();
+
+        $document->storeAs('public/document/upload',$dog->id.$v.'.pdf');
     }
+
 
    // aggiungere un cane senza nessuna vaccinazione
    public function addDog($nome,$razza,$colore,$lunghezzapelo,$taglia,$sesso,$datanascita,$documents,$images) {
@@ -61,18 +70,24 @@ class DataLayer {
     $dog->taglia = $taglia;
     $dog->sesso = $sesso;
     $dog['data nascita']=$datanascita;
-
-    if(is_array($images)){
-        foreach($images as $i){
-            $this->uploadImage($i,$dog);
-        }
-    }
-    else{
-        $this->uploadImage($images,$dog);
-    }
-
     $dog->save();
+
+
+    // aggiungo le immagini
+    if (isset($images)){
+    foreach($images as $i){
+        $this->uploadImage($i,$dog);
+       }
     }
+
+    // aggiungo i documenti
+    if (isset($documents)){
+        foreach($documents as $d){
+         $this->uploadDocument($d,$dog);
+        }
+       }
+    }
+
 
 
     public function getAllVaccinations() {
@@ -85,6 +100,12 @@ class DataLayer {
         return $dog->image;
     }
 
+    public function getDogDocuments($id)
+    {
+        $dog = Dog::find($id);
+        return $dog->document;
+    }
+
     public function editDog($id, $nome,$razza,$colore,$lunghezzapelo,$taglia,$sesso,$datanascita,$documents,$images) {
         $dog = Dog::find($id);
         $dog->nome = $nome;
@@ -95,18 +116,19 @@ class DataLayer {
         $dog->sesso = $sesso;
         $dog['data nascita']=$datanascita;
 
-        if(is_array($images)){
-            foreach($images as $i){
-                $this->uploadImage($i,$dog);
-            }
+        if (isset($images)){
+        foreach($images as $i){
+         $this->uploadImage($i,$dog);
         }
-        else{
-            echo $images;
-            //$this->uploadImage($images,$dog);
+       }
+
+       if (isset($documents)){
+        foreach($documents as $d){
+         $this->uploadDocument($d,$dog);
         }
+       }
 
         // Cancel the previous list of vaccinations
-        
         $prevVaccination = $dog->vaccination;
         foreach($prevVaccination as $prev) {
             $dog->vaccination()->detach($prev->id);

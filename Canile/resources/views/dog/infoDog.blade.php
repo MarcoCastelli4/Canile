@@ -19,10 +19,10 @@ I cani
 
 
 @section('corpo')
-<h3> Some pictures with {{$dog->nome}} </h3>
+<h3> Medical and other information about {{$dog->nome}} </h3>
 <div class="images-container">
 @foreach ($images as $image)
-    <img src="{{url($image->path)}}">
+    <img src="{{asset('storage'.$image->path)}}">
 @endforeach
 </div>
   
@@ -34,16 +34,13 @@ I cani
                         
                         <thead>
                             <tr>
-                                <th>Nome</th>
                                 <th>Vaccinazioni</th>
                                 <th>Documentazione</th>
-                                <!--<th>Documentazione</th>-->
                             </tr>
                         </thead>
                        
                         <tbody>
                             <tr>
-                                <td>{{$dog->nome}}</td> 
                                 <td>
                                 @foreach ($dog->vaccination as $v)
                                 {{ $v->malattia }}
@@ -51,23 +48,13 @@ I cani
                                  <br/>
                                  @endforeach
                                 </td>
-                                <td></td>
                                 <td>
-                                  <!--credo fara lezione per gestire pdf o img nel database-->
-                                <a href="C:\Users\Marco Castelli\Desktop\Documenti\ricevutaPesca.pdf" download="prova.pdf">Download</a>
+                                @foreach ($documents as $d)
+                                <a href="{{asset('storage'.$d->path)}}" download="{{ $d->titolo }}">{{ $d->titolo }}</a>
+                                 <br/>
+                                 @endforeach
                                 </td>
-                                <!--
-                                <td>
-                                    <a class="btn btn-primary"  href="{{ route('dog.edit', ['dog' => $dog ->id]) }}">
-                                    <i class="bi-pencil-square"></i> Edit</a>
-                                </td>
-                                <td>
-                            <a class="btn btn-danger" 
-                                href="{{ route('dog.destroy.confirm', ['id' => $dog->id]) }}"><i class="bi-trash3"></i> Delete</a>
-                                </td>-->
-                            </tr>
-                          
-                       
+                            </tr>    
                         </tbody>
                     </table>
                     

@@ -46,9 +46,6 @@
 	              <a class="nav-link" href="{{route('dog.index')}}"> The dogs</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="">Medical info</a>
-	            </li>
-	            <li class="nav-item">
 	              <a class="nav-link" href="#">Review</a>
 	            </li>
 	            <li class="nav-item dropdown">
@@ -56,7 +53,6 @@
 	                Company
 	              </a>
 	              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-	                <li><a class="dropdown-item" href="#">Blog</a></li>
 	                <li><a class="dropdown-item" href="{{route('aboutus')}}">About Us</a></li>
 	                <li><a class="dropdown-item" href="{{route('contactus')}}">Contact us</a></li>
 	              </ul>

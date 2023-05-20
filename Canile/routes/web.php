@@ -36,8 +36,6 @@ Route::get('/dog/{id}/info', [DogController::class, 'info'])->name('dog.info');
 Route::get('/dog/{id}/adoption',[UserController::class,'adoption'])->name('user.adoption');
 Route::post('/dog/{id}/adoption',[UserController::class,'addAdoption'])->name('user.adoption');
 
-
-
 //rotte per utente admin
 Route::middleware(['IsAdmin'])->group(function () {
      Route::resource('dog', DogController::class)->except([

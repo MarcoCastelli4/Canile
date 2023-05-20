@@ -24,10 +24,10 @@ style.css
 <div class='row'>
   
     @if(!isset($dog->id))
-        <form method="post" action="{{route('dog.store')}}">
+        <form method="post" action="{{route('dog.store')}}" enctype="multipart/form-data">
             <!--NB ogni volta che uso la form metto @csrf uso per motivi di sicurezza -->
     @else   
-        <form method="post" action="{{route('dog.update',['dog' => $dog->id]) }}">
+        <form method="post" action="{{route('dog.update',['dog' => $dog->id]) }}" enctype="multipart/form-data">
         <div class="alert alert-warning" role="alert">
         Stai modificando il cane con id: <strong>"{{$dog->id}}"</strong>  e nome: <strong>"{{$dog->nome}}"</strong> 
         </div>
@@ -96,6 +96,7 @@ style.css
             Sesso
             <br/>
             <div class="form-group">
+            @if(!isset($dog->id))
             <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="sesso" id="maschio" value="maschio">
             <label class="form-check-label" for="maschio">Maschio</label>
@@ -104,7 +105,27 @@ style.css
             <input class="form-check-input" type="radio" name="sesso" id="femmina" value="femmina">
             <label class="form-check-label" for="femmina">Femmina</label>
             </div>
+            @elseif ($dog->sesso=="Femmina")
+            <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="sesso" id="maschio" value="maschio">
+            <label class="form-check-label" for="maschio">Maschio</label>
             </div>
+            <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio"  checked="true" name="sesso" id="femmina" value="femmina">
+            <label class="form-check-label" for="femmina">Femmina</label>
+            </div>
+            @elseif ($dog->sesso=="Maschio")
+            <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" checked="true" name="sesso" id="maschio" value="maschio">
+            <label class="form-check-label" for="maschio">Maschio</label>
+            </div>
+            <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="sesso" id="femmina" value="femmina">
+            <label class="form-check-label" for="femmina">Femmina</label>
+            </div>
+            @endif
+            </div>
+
 
             <br/>
 
@@ -117,12 +138,12 @@ style.css
         @endif
       </div>
       <br/>
-        <label for="imageMultiple" class="form-label">Upload dog images</label>
-        <input class="form-control" type="file" name="images" id="images" multiple />
+        <label for="images" class="form-label">Upload dog images</label>
+        <input class="form-control" id="images" type="file" name="images[]"  multiple />
 
         <br/>
-        <label for="docuemntMultiple" class="form-label">Upload dog documents</label>
-        <input class="form-control" type="file"  name="documents" id="documents" multiple />
+        <label for="docuemnts" class="form-label">Upload dog documents</label>
+        <input class="form-control" id="documents" type="file"  name="documents[]"  multiple />
 
       <br/>
       <a href="{{ route('dog.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Cancel</a>
