@@ -1,6 +1,5 @@
 @extends('layouts.master')
 
-
 @section('stile')
 style.css
 @endsection

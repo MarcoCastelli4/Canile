@@ -15,42 +15,16 @@
     </head>
 
     <body>
-        <div class="container">
-            <div class="row" style="margin-top: 4em">
-                <div>
-                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login" type="button" role="tab" aria-controls="pills-login" aria-selected="true">Login</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#pills-register" type="button" role="tab" aria-controls="pills-register" aria-selected="false">Register</button>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab" tabindex="0">
-                            <form id="login-form" action="{{ route('user.login') }}" method="post" style="margin-top: 2em">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="text" name="email" class="form-control" placeholder="e-Mail"/>
-                                </div>
 
-                                <div class="form-group">
-                                    <input type="password" name="password" class="form-control" placeholder="Password"/>
-                                </div>
-
-                                <a href="{{ route('home') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Back</a>
-                                <label for="Login" class="btn btn-primary"><i class="bi-check-lg"></i> Login</label>
-                                <input id="Login" type="submit" value="Login" class="hidden"/>
-
-                        
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="pills-register-tab" tabindex="0">
-                            <form id="register-form" action="{{ route('user.register') }}" method="post" style="margin-top: 2em">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="text" name="name" class="form-control" placeholder="Name" value=""/>
-                                </div>
+    <div class="container containerAuth" id="containerAuth">
+	<div class="form-container sign-up-container">
+    <form id="register-form" action="{{ route('user.register') }}" method="post" style="margin-top: 2em">
+        @csrf
+        <h1>Create account</h1>
+			<span>Use your email for registration</span>
+        <div class="form-group">
+         <input type="text" name="name" class="form-control" placeholder="Name" value=""/>
+         </div>
 
                                 <div class="form-group">
                                     <input type="text" name="email" class="form-control" placeholder="Email" value=""/>
@@ -64,16 +38,65 @@
                                     <input type="password" name="confirm-password" class="form-control" placeholder="Confirm password" value=""/>
                                 </div>
 
+                                <div class="container">
                                 <a href="{{ route('home') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Back</a>
                                 <label for="Register" class="btn btn-primary"><i class="bi-check-lg"></i> Register</label>
                                 <input id="Register" type="submit" value="Register" class="hidden"/>
-
+                                </div>
                             </form>
-                        </div>
-                    </div>
+	</div>
+	<div class="form-container sign-in-container">
+            <form id="login-form" action="{{ route('user.login') }}" method="post" style="margin-top: 2em">
+            <h1>Sign-in</h1>
+			<span>Use your email for sign-in</span>   
+            @csrf
+                                <div class="form-group">
+                                    <input type="text" name="email" class="form-control" placeholder="e-Mail"/>
+                                </div>
 
-                </div>
-            </div>
-        </div>
-    </body>
+                                <div class="form-group">
+                                    <input type="password" name="password" class="form-control" placeholder="Password"/>
+                                </div>
+
+                                <div class="container">
+                                <a href="{{ route('home') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Back</a>
+                                <label for="Login" class="btn btn-primary"><i class="bi-check-lg"></i> Login</label>
+                                <input id="Login" type="submit" value="Login" class="hidden"/>
+                                </div>
+
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button class="ghost" id="signUp">Sign Up</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+
 </html>
+
+
+<script>
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('containerAuth');
+
+signUpButton.addEventListener('click', () => {
+	container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+	container.classList.remove("right-panel-active");
+});
+</script>

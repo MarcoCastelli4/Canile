@@ -1,9 +1,7 @@
 @extends('layouts.master') 
 
 @section('titolo')
-I cani
-
-
+Vaccination dog
 @endsection
 
 @section('stile','style.css') 

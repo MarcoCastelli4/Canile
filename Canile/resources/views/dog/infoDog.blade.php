@@ -1,7 +1,7 @@
 @extends('layouts.master') 
 
 @section('titolo')
-I cani
+Info dog
 @endsection
 
 @section('stile','style.css') 

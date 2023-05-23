@@ -1,5 +1,8 @@
 @extends('layouts.master')
 
+@section('titolo')
+Edit dog
+@endsection
 
 @section('stile')
 style.css

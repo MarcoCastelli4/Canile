@@ -162,10 +162,8 @@ class DataLayer {
      }
 
      public function validUser($email,$password){
-        print($email);
          //prendo l'utente con la mail specificata
         $users = User::where('email',$email)->get(['password']);
-        print($users);
         if(count($users) == 0)
         {
             return false;
