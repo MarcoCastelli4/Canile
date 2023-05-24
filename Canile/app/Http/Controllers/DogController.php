@@ -9,11 +9,14 @@ class DogController extends Controller
 {
     public function index()
     {
+        session_start();
         $dl=new DataLayer();
         // ottengo la lista
         $dogs=$dl->listDogs();
-        return view('dog.dogs')->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with("dog_list",$dogs);
-        
+        if(isset($_SESSION["loggedName"]))
+          return view('dog.dogs')->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with("dog_list",$dogs);
+        else 
+        return view('dog.dogs')->with('logged', false)->with('loggedName', "")->with("dog_list",$dogs);
     }
 
     public function create()
@@ -85,6 +88,7 @@ class DogController extends Controller
 
     public function info($id)
     {
+        session_start();
         $dl=new DataLayer();
         
         $vaccinations=$dl->getAllVaccinations();

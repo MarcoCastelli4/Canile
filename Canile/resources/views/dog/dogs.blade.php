@@ -82,6 +82,7 @@ foreach($dog_list as $dog){
                                 <td>{{$dog['data nascita']}}</td>
                                 <td>{{$dog->sesso}}</td>
                                
+                                @if($logged==true)
                                 @if($loggedName=='admin')
                                 <td>
                                     <a class="btn btn-primary"  href="{{ route('dog.edit', ['dog' => $dog->id]) }}">
@@ -100,6 +101,7 @@ foreach($dog_list as $dog){
                       
                              <a class="btn adoptionBtn" href="{{ route('user.adoption', ['id' => $dog->id]) }}"><span><img src="../img/adopt.png" width="48" height="48" /></span></a>
                               </td>
+                              @endif
                               @endif
                               <td>
                             <a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> More</a>

@@ -1,4 +1,5 @@
 
+/* Autenticazione */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 * {
@@ -243,6 +244,13 @@ footer a {
 }
 
 /************************************************/
+
+.carousel{
+  height: 350px;
+  width: 500px;
+  margin: auto;
+}
+
 .breadcrumb{
   padding-top: 20%;
 }
@@ -327,7 +335,8 @@ footer a {
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
   background: -moz-linear-gradient(top,  rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(0,0,0,0.65), #42b883, #42b883);
+  background: #A7C2B5;
+background: linear-gradient(0deg, #A7C2B5, #5ACB98);
   
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
   }

@@ -20,10 +20,23 @@ Info dog
 
 @section('corpo')
 <h3> Medical and other information about {{$dog->nome}} </h3>
-<div class="images-container">
+<div id="carouselIndicators" class="carousel slide">
+  <div class="carousel-inner">
 @foreach ($images as $image)
-    <img src="{{asset('storage'.$image->path)}}">
+    <div class="carousel-item active">
+    <img src="{{asset('storage'.$image->path)}}" >
+    </div>
 @endforeach
+</div>
+<button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 </div>
   
             <div class="row">
@@ -62,4 +75,3 @@ Info dog
             </div>
             
 @endsection
-
