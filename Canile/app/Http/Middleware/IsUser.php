@@ -17,7 +17,7 @@ class IsUser
      */
     public function handle($request, Closure $next)
     {
-         if ($_SESSION['loggedName']=='admin') {
+         if ($_SESSION['isAdmin']==true) {
             return Redirect::to(route('dog.index'));
          }
          return $next($request);

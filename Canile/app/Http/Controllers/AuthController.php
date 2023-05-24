@@ -25,6 +25,10 @@ class AuthController extends Controller
             $_SESSION['loggedName']=$dl->getUserName($req->input('email'));
             $_SESSION['email']=$req->input('name');
             
+            // salvo la variabile globale di admin
+            $_SESSION['isAdmin']=$dl->isAdmin($req->input('email'));
+
+           
            return Redirect::to(route('dog.index'));
         }
         return view('auth.authErrorPage');

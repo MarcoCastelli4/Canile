@@ -17,7 +17,7 @@ The dogs
 
 @section('corpo')
 
-@if($loggedName=='admin')
+@if($isAdmin==true)
 <div class="row">
     <div class="col-xs-6">   
   
@@ -27,23 +27,16 @@ The dogs
 @endif
 
 <!-- Se la lista dei cani è vuota oppure non ci sono più cani disponibili -->
-<?php 
-$dog_available=0;
-foreach($dog_list as $dog){
-  if (($dog->user_id==1)){
-    $dog_available=$dog_available+1;
-  } 
-}
-  ?>
-@if ($dog_list->isEmpty() or $dog_available==0)
+
+@if (count($dog_list)==0)
 <div class="alert alert-warning" role="alert">
-  @if($loggedName=='admin')
+  @if($isAdmin==true)
   <strong>No dog are available in database! </strong>Please create new dog with the button above!
   @else
   <strong>No dog are available! </strong> Please contact service!
   @endif
 </div>
-  @else
+@else
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-striped table-hover table-responsive" style="width:100%">
@@ -73,7 +66,6 @@ foreach($dog_list as $dog){
                         <tbody>
                         @foreach($dog_list as $dog)
                             <tr>
-                                @if (($dog->user_id==1))
                                 <td>{{$dog->nome}}</td>
                                 <td>{{$dog->razza}}</td>
                                 <td>{{$dog->taglia}}</td>
@@ -83,7 +75,7 @@ foreach($dog_list as $dog){
                                 <td>{{$dog->sesso}}</td>
                                
                                 @if($logged==true)
-                                @if($loggedName=='admin')
+                                @if($isAdmin==true)
                                 <td>
                                     <a class="btn btn-primary"  href="{{ route('dog.edit', ['dog' => $dog->id]) }}">
                                     <i class="bi-pencil-square"></i> Edit</a>
@@ -107,7 +99,6 @@ foreach($dog_list as $dog){
                             <a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> More</a>
                                 </td>
                             </tr>
-                            @endif
                             @endforeach
                           @endif
                         </tbody>

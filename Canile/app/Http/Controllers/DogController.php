@@ -12,11 +12,11 @@ class DogController extends Controller
         session_start();
         $dl=new DataLayer();
         // ottengo la lista
-        $dogs=$dl->listDogs();
+        $dogs=$dl->getDogAvailable();
         if(isset($_SESSION["loggedName"]))
-          return view('dog.dogs')->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with("dog_list",$dogs);
+          return view('dog.dogs')->with('isAdmin',$_SESSION['isAdmin'])->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with("dog_list",$dogs);
         else 
-        return view('dog.dogs')->with('logged', false)->with('loggedName', "")->with("dog_list",$dogs);
+        return view('dog.dogs')->with('isAdmin', false)->with('logged', false)->with('loggedName', "")->with("dog_list",$dogs);
     }
 
     public function create()
@@ -93,13 +93,18 @@ class DogController extends Controller
         
         $vaccinations=$dl->getAllVaccinations();
         $dog=$dl->findDogById($id);
-        $userID = $dl->getUserID($_SESSION["loggedName"]);
-
         $images=$dl->getDogImages($id);
         $documents=$dl->getDogDocuments($id);
-       
+        
+        if(isset($_SESSION["loggedName"])){
+            $userID = $dl->getUserID($_SESSION["loggedName"]);
+           return view('dog.infoDog')->with("documents",$documents)->with("images",$images)->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
+        }
+        else
+        return view('dog.infoDog')->with("documents",$documents)->with("images",$images)->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', false)->with('loggedName', "");
+        
 
-       return view('dog.infoDog')->with("documents",$documents)->with("images",$images)->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
+       
     
     }
 

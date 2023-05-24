@@ -171,10 +171,26 @@ class DataLayer {
         //ha inserito psw corretta?
         return (md5($password) == ($users[0]->password));
      }
+
+     // verifico se è l'admin
+     public function isAdmin($email){
+       $user=User::where('isAdmin',1)->get(['email']);
+       if(count($user) == 0)
+        {
+            return false;
+        }
+        return $email==($user[0]->email);
+    }
  
      public function getUserName($email){
          $users=User::where('email',$email)->get();
          return $users[0]->name;
+     }
+
+     // restituisco i cani disponibili per l'adozione
+     public function getDogAvailable(){
+        return Dog::doesntHave('adoption')->get();
+ 
      }
 
      public function addUser($name, $password, $email) {
