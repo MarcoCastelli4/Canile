@@ -30,10 +30,11 @@ style.css
     </label><br><br>
             
       <br/>
+      <div class="container">
       <a href="{{ route('dog.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Cancel</a>
             <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Adopt!</label>
             <input  id="mySubmit" type="submit" value="Adopt" class="hidden"/>
-           
+      </div>
       <form>
 </div>
    

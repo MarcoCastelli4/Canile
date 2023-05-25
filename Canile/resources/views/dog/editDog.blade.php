@@ -55,7 +55,7 @@ style.css
             <input class="form-control" type="text" id="razza" name="razza" placeholder="Razza" value="{{$dog->razza}}"> 
             @endif
             </div>
-            <br/>
+            
 
             <div class="form-group">
             <label for="colore"> Colore</label>
@@ -64,7 +64,7 @@ style.css
             @else
             <input class="form-control" type="text" id="colore" name="colore" placeholder="Colore" value="{{$dog->colore}}"> 
             @endif
-            <br/>
+           
             </div>
 
             <div class="form-group">
@@ -80,7 +80,7 @@ style.css
             </select>
             </div>
 
-            </br>
+            
 
             <div class="form-group">
             <label for="taglia">Taglia</label>
@@ -95,7 +95,7 @@ style.css
             </select>
             </div>
 
-            <br/>
+           
             Sesso
             <br/>
             <div class="form-group">
@@ -130,7 +130,7 @@ style.css
             </div>
 
 
-            <br/>
+            
 
         <div class="form-group"> <!-- Date input -->
         <label class="control-label" for="datanascita">Data di nascita</label>
@@ -140,15 +140,16 @@ style.css
         <input class="form-control" id="datanascita" name="datanascita" placeholder="YYY/MM/DD" type="text" value="{{$dog['data nascita']}}"/>
         @endif
       </div>
-      <br/>
+      <div class="form-group">
         <label for="images" class="form-label">Upload dog images</label>
         <input class="form-control" id="images" type="file" name="images[]"  multiple />
-
-        <br/>
+</div>
+<div class="form-group">
         <label for="docuemnts" class="form-label">Upload dog documents</label>
         <input class="form-control" id="documents" type="file"  name="documents[]"  multiple />
-
+        </div>
       <br/>
+      <div class="container">
       <a href="{{ route('dog.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Cancel</a>
             @if(isset($dog->id))
             <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Update</label>
@@ -157,7 +158,7 @@ style.css
             <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Create</label>
             <input  id="mySubmit" type="submit" value="Create" class="hidden"/>
             @endif
-
+    </div>
 
            
       <form>

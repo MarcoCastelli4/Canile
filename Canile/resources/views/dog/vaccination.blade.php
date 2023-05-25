@@ -40,8 +40,11 @@ Vaccination dog
       </div>
 
       <br/>
+      <div class="container">
       <a href="{{ route('dog.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Cancel</a>
-      <input class="btn btn-primary" id="mySubmit" type="submit" value="Insert" class="hidden"/>
+      <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Insert</label>
+            <input  id="mySubmit" type="submit" value="Insert" class="hidden"/>
+</div>
       <form>
 </div>  
 @endsection
