@@ -23,6 +23,7 @@ class AuthController extends Controller
             //salvo le info dell'utente
             $_SESSION['logged']=true;
             $_SESSION['loggedName']=$dl->getUserName($req->input('email'));
+            $_SESSION['user_id']=$dl->getUserId($req->input('email'));
             $_SESSION['email']=$req->input('name');
             
             // salvo la variabile globale di admin

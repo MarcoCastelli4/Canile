@@ -243,6 +243,13 @@ footer a {
     text-decoration: none;
 }
 
+.form-group .form-control,
+  .form-group select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+
 /************************************************/
 
 .carousel{

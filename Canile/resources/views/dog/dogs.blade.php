@@ -6,6 +6,13 @@ The dogs
 
 @section('stile','style.css') 
 
+@section('navbar')
+@if($isAdmin==false)
+<li class="nav-item">
+    <a class="nav-link" href="{{route('user.dogs',['id' => $user_id])}}"> My Dogs</a>
+</li>
+@endif
+@endsection
 @section('breadcrumb')
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
@@ -18,12 +25,52 @@ The dogs
 @section('corpo')
 
 @if($isAdmin==true)
-<div class="row">
-    <div class="col-xs-6">   
-  
+<div class="container">
         <a href="{{ route('dog.create') }}" class="btn btn-success">  <i class="bi bi-plus-square"></i> Create new dog</a> <!--btn:bottone, btn-success: bottone verde-->
-      </div>
+        </td>
+        <a class="btn btn-success" id="createVaccinationButton">
+    <i class="bi bi-plus-square"></i> Create Vaccination
+  </a>
 </div>
+
+<!-- Modal per nuova vaccinazione -->
+<div class="modal fade" id="modalVaccination" tabindex="-1" role="dialog" aria-labelledby="modalVaccination" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create vaccination</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="post" action="{{route('vaccination.store')}}">
+            
+            @csrf
+            <div class="form-group">
+                <label for="nome"> Malattia</label>
+                <input class="form-control" type="text" id="malattia" name="malattia" placeholder="Malattia">
+            </div>
+
+            <div class="form-group">
+                <label for="nome"> Validità</label>
+                <input class="form-control" type="number" id="validità" name="validità" placeholder="Validità (mesi)">
+            </div>
+    
+
+      </div>
+      <div class="modal-footer">
+      <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Create</label>
+      <input  id="mySubmit" type="submit" value="Create" class="hidden"/>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
 @endif
 
 <!-- Se la lista dei cani è vuota oppure non ci sono più cani disponibili -->
@@ -84,6 +131,7 @@ The dogs
                             <a class="btn btn-danger" 
                                 href="{{ route('dog.destroy.confirm', ['id' => $dog->id]) }}"><i class="bi-trash3"></i> Delete</a>
                             </td>
+                            
                               
                                 <td>
                             <a class="btn btn-success" href="{{ route('dog.vaccination', ['id' => $dog->id]) }}"><i class="bi bi-virus"></i> Vaccination</a>
@@ -107,5 +155,48 @@ The dogs
                 </div>
             </div>
             
+
+@endsection
+
+@section('script')
+<script>
+  function activateModal() {
+  // Get the modal element
+  var modal = document.getElementById('modalVaccination');
+
+  // Activate the modal
+  $(modal).modal('show');
+}
+
+// Get the button element
+var button = document.getElementById('createVaccinationButton'); 
+
+// Add a click event listener to the button
+button.addEventListener('click', activateModal);
+    </script>
+
+<script>
+  // Get the close button element
+  var closeButton = document.querySelector('.modal .close');
+
+  // Add click event listener to the close button
+  closeButton.addEventListener('click', function() {
+    // Find the modal element
+    var modal = document.getElementById('modalVaccination');
+
+    // Hide the modal by removing the 'show' class
+    modal.classList.remove('show');
+
+    // Remove the modal backdrop
+    var modalBackdrop = document.querySelector('.modal-backdrop');
+    modalBackdrop.parentNode.removeChild(modalBackdrop);
+
+    // Enable scrolling on the body element
+    document.body.classList.remove('modal-open');
+
+    // Reload the page
+    location.reload();
+  });
+</script>
 
 @endsection

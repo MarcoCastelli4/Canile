@@ -47,7 +47,6 @@ style.css
             </div>
             
             <div class="form-group">
-            <br/>
             <label for="razza"> Razza</label>
             @if(!isset($dog->id))
             <input class="form-control" type="text" id="razza" name="razza" placeholder="Razza"> 
@@ -97,7 +96,6 @@ style.css
 
            
             Sesso
-            <br/>
             <div class="form-group">
             @if(!isset($dog->id))
             <div class="form-check form-check-inline">

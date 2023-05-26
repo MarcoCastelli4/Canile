@@ -36,6 +36,8 @@ Route::middleware(['authCustom','IsAdmin'])->group(function () {
      Route::get('/dog/{id}/vaccination',[DogController::class,'vaccination'])->name('dog.vaccination');
      Route::post('/dog/{id}/vaccination',[DogController::class,'addVaccination'])->name('dog.vaccination');
 
+     Route::post('/vaccination',[VaccinationController::class,'store'])->name('vaccination.store');
+
 });
 
 //rotte per utente registrato
@@ -43,6 +45,8 @@ Route::middleware(['authCustom','IsUser'])->group(function () {
 // rotta per le adozioni
 Route::get('/dog/{id}/adoption',[UserController::class,'adoption'])->name('user.adoption');
 Route::post('/dog/{id}/adoption',[UserController::class,'addAdoption'])->name('user.adoption');
+
+Route::get('/user/{id}/dogs',[UserController::class,'index'])->name('user.dogs');
 });
 
 

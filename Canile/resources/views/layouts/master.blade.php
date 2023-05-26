@@ -43,8 +43,9 @@
 	              <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="{{route('dog.index')}}"> The dogs</a>
+	              <a class="nav-link" href="{{route('dog.index')}}"> Dogs</a>
 	            </li>
+              @yield('navbar')
 	            <li class="nav-item">
 	              <a class="nav-link" href="#">Review</a>
 	            </li>
@@ -57,6 +58,8 @@
 	                <li><a class="dropdown-item" href="{{route('contactus')}}">Contact us</a></li>
 	              </ul>
 
+
+               
                 <li class="nav-item">
                     @if($logged)
                     <i>Welcome {{$loggedName}}</i><br/><a class="btn btn-outline-dark" href="{{route('user.logout')}}">Logout</a>

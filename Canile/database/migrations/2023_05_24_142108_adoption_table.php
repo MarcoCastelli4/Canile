@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('adoption',function(blueprint $table) //per creare una nuova tabella Schema::
         {
+            $table->increments('id');
             $table->integer('dog_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->date('data');

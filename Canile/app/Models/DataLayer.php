@@ -156,8 +156,22 @@ class DataLayer {
     }
 
     //Aggiunge adozione cane - utente
-    public function addDogAdoption($dog_id,$user_id,$data) {
-       // TODO!
+    public function addDogAdoption($dog_id,$user_id) {
+
+        // controlla che non sia già presente nel db
+        if ((Adoption::where('dog_id','=',$dog_id))->count()>0){
+           return false;
+        }
+        else{
+            $adoption = new Adoption;
+            $adoption->dog_id=$dog_id;
+            $adoption->user_id=$user_id;
+            $adoption->data= now()->format('Y-m-d');
+    
+            $adoption->save();
+        }
+       
+
          
      }
 
@@ -187,6 +201,11 @@ class DataLayer {
          return $users[0]->name;
      }
 
+     public function getUserId($email){
+        $users=User::where('email',$email)->get();
+        return $users[0]->id;
+    }
+
      // restituisco i cani disponibili per l'adozione
      public function getDogAvailable(){
         return Dog::doesntHave('adoption')->get();
@@ -201,9 +220,15 @@ class DataLayer {
         $user->save();
     }
     
-    public function getUserID($username) {
-        $users = User::where('email',$username)->get(['id']);
-        return $users[0]->id;
+    public function addVaccination($malattia,$validità){
+        $vaccination = new Vaccination();
+        $vaccination->malattia=$malattia;
+        $vaccination->validità=$validità;
+
+        $vaccination->save();
     }
 
+    public function getMyDogs($user_id){
+        return $adoptedDogs = $user->adoption;
+    }
 }
