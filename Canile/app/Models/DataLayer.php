@@ -236,4 +236,18 @@ class DataLayer {
         return $dogs;
 
     }
+
+    public function getAllReviews(){
+        return Review::orderByDesc('data')->get();
+
+    }
+
+    public function addReview($titolo,$contenuto,$user_id){
+        $review = new Review;
+        $review->titolo=$titolo;
+        $review->contenuto=$contenuto;
+        $review->data= now()->format('Y-m-d');
+
+        $review->save();
+    }
 }

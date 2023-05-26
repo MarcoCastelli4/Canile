@@ -6,6 +6,7 @@ use App\Http\Controllers\DogController;
 use App\Http\Controllers\VaccinationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReviewController;
 
 
 
@@ -23,6 +24,7 @@ Route::get('/user/logout',[AuthController::class,'logout'])->name('user.logout')
 Route::get('/dog',[DogController::class,'index'])->name('dog.index');
 Route::get('/dog/{id}/info', [DogController::class, 'info'])->name('dog.info');
 
+Route::resource('review', ReviewController::class);
 
 //rotte per utente admin 
 Route::middleware(['authCustom','IsAdmin'])->group(function () {
