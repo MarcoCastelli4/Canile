@@ -106,7 +106,7 @@ style.css
             <input class="form-check-input" type="radio" name="sesso" id="femmina" value="femmina">
             <label class="form-check-label" for="femmina">Femmina</label>
             </div>
-            @elseif ($dog->sesso=="Femmina")
+            @elseif ($dog->sesso=="femmina")
             <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="sesso" id="maschio" value="maschio">
             <label class="form-check-label" for="maschio">Maschio</label>
@@ -115,7 +115,7 @@ style.css
             <input class="form-check-input" type="radio"  checked="true" name="sesso" id="femmina" value="femmina">
             <label class="form-check-label" for="femmina">Femmina</label>
             </div>
-            @elseif ($dog->sesso=="Maschio")
+            @elseif ($dog->sesso=="maschio")
             <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" checked="true" name="sesso" id="maschio" value="maschio">
             <label class="form-check-label" for="maschio">Maschio</label>

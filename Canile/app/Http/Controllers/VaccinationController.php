@@ -14,7 +14,8 @@ class VaccinationController extends Controller
         $dl=new DataLayer();
         $dog_list=$dl->getMyDogs($id);
         
-        return view('user.adoption')->with("vaccination_list",$vaccinations)->with("dog_list",$dogs);
+        return view('user.adoption')->with("vaccination_list",$vaccinations)->with("dog_list",$dogs)
+        ->with('user_id', $_SESSION["user_id"])->with('isAdmin', $_SESSION["isAdmin"])->with('logged',true);
         
     }
 

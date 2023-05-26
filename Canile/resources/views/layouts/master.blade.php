@@ -45,7 +45,14 @@
 	            <li class="nav-item">
 	              <a class="nav-link" href="{{route('dog.index')}}"> Dogs</a>
 	            </li>
-              @yield('navbar')
+              
+@if($logged)
+@if($isAdmin==0)
+<li class="nav-item">
+    <a class="nav-link" href="{{route('user.dogs',['id' => $user_id])}}"> My Dogs</a>
+</li>
+@endif
+@endif
 	            <li class="nav-item">
 	              <a class="nav-link" href="#">Review</a>
 	            </li>

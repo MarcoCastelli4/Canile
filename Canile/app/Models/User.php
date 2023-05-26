@@ -50,6 +50,6 @@ class User extends Authenticatable
 
      # un utente può adottare più cani
      public function adoption(){
-        return $this-> hasMany(Adoption::class,'adoption_id','id');
+        return $this-> hasMany(Adoption::class,'user_id','id');
     }
 }

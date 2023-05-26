@@ -48,15 +48,15 @@ The dogs
                               <td>
                             <a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> More</a>
                                 </td>
+                                @endif
                             </tr>
-                            @endforeach
-                          @endif
+                        @endforeach
+                          
                         </tbody>
                     </table>
                     
                 </div>
             </div>
-            
-
-@endsection
+            @endif
+            @endsection
 

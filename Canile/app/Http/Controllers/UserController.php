@@ -14,7 +14,7 @@ class UserController extends Controller
         // ottengo la lista
         $dogs=$dl->getMyDogs($id);
         if(isset($_SESSION["loggedName"])){
-           return view('dog.dogs')->with('user_id',$_SESSION["user_id"])->with('isAdmin',$_SESSION['isAdmin'])->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with("dog_list",$dogs);
+           return view('user.dogs')->with('user_id',$_SESSION["user_id"])->with('isAdmin',$_SESSION['isAdmin'])->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with("dog_list",$dogs);
         }
          
     }
@@ -26,7 +26,8 @@ class UserController extends Controller
         
         $dog=$dl->findDogById($id);
         $userID = $dl->getUserID($_SESSION["loggedName"]);
-        return view('user.adoption')->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
+        return view('user.adoption')->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"])
+        ->with('user_id', $_SESSION["user_id"])->with('isAdmin', $_SESSION["isAdmin"]);
         
     }
 
@@ -39,6 +40,6 @@ class UserController extends Controller
         $dl->addDogAdoption($dog_id,$user_id);
         $dogs=$dl->getDogAvailable();
         
-        return view('dog.dogs')->with('isAdmin',$_SESSION['isAdmin'])->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with("dog_list",$dogs);
+        return Redirect::to(route('dog.index'));
     }
 }

@@ -26,7 +26,7 @@ class DogController extends Controller
         $dogs_list = $dl->listDogs();
         $vaccinations = $dl->getAllVaccinations();
 
-        return view('dog.editDog')->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with('dogList', $dogs_list)->with('vaccinations',$vaccinations);
+        return view('dog.editDog')->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with('dogList', $dogs_list)->with('vaccinations',$vaccinations)->with('isAdmin', $_SESSION["isAdmin"])->with('user_id', $_SESSION["user_id"]);
     }
 
     public function destroy($id)
@@ -47,9 +47,9 @@ class DogController extends Controller
         $dl = new DataLayer();
         $dog = $dl->findDogById($id);
         if ($dog !== null) {
-            return view('dog.deleteDog')->with('dog', $dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
+            return view('dog.deleteDog')->with('dog', $dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with('isAdmin', $_SESSION["isAdmin"])->with('user_id', $_SESSION["user_id"]);
         } else {
-            return view('dog.deleteErrorPage')->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
+            return view('dog.deleteErrorPage')->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with('isAdmin', $_SESSION["isAdmin"])->with('user_id', $_SESSION["user_id"]);
         }
     }
 
@@ -73,7 +73,8 @@ class DogController extends Controller
         $userID = $dl->getUserID($_SESSION["loggedName"]);
        // $vaccinations = $dl->getAllVaccinatios();
 
-        return view('dog.editDog')->with('dogList', $dogs_list)->with('dog', $dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);//->with('vaccinations',$vaccinations);
+        return view('dog.editDog')->with('dogList', $dogs_list)->with('dog', $dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"])
+        ->with('isAdmin', $_SESSION["isAdmin"])->with('user_id', $_SESSION["user_id"]);;//->with('vaccinations',$vaccinations);
     }
 
     public function update(Request $request, $id)
@@ -99,7 +100,10 @@ class DogController extends Controller
         
         if(isset($_SESSION["loggedName"])){
             $userID = $dl->getUserID($_SESSION["loggedName"]);
-           return view('dog.infoDog')->with("documents",$documents)->with("images",$images)->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
+           return view('dog.infoDog')->with("documents",$documents)->with("images",$images)
+           ->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', true)
+           ->with('isAdmin', $_SESSION["isAdmin"])->with('loggedName', $_SESSION["loggedName"])
+           ->with('user_id', $_SESSION["user_id"]);
         }
         else
         return view('dog.infoDog')->with("documents",$documents)->with("images",$images)->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', false)->with('loggedName', "");
@@ -129,7 +133,8 @@ class DogController extends Controller
         $dog=$dl->findDogById($dog_id);
        
         // sarebbe bello mettere popup hai inserito vaccinazione
-        return view('dog.vaccination')->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('isAdmin',$_SESSION['isAdmin']);
+        return view('dog.vaccination')->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('isAdmin',$_SESSION['isAdmin'])
+        ->with('user_id', $_SESSION["user_id"])->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
     }
 
    

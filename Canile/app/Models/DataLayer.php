@@ -229,6 +229,11 @@ class DataLayer {
     }
 
     public function getMyDogs($user_id){
-        return $adoptedDogs = $user->adoption;
+        $user = User::find($user_id);
+        $dogs = $user->adoption->map(function ($adoption) {
+            return $adoption->dog;
+        });
+        return $dogs;
+
     }
 }

@@ -6,13 +6,6 @@ The dogs
 
 @section('stile','style.css') 
 
-@section('navbar')
-@if($isAdmin==false)
-<li class="nav-item">
-    <a class="nav-link" href="{{route('user.dogs',['id' => $user_id])}}"> My Dogs</a>
-</li>
-@endif
-@endsection
 @section('breadcrumb')
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
