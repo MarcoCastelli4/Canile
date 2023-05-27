@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('titolo');
             $table->string('contenuto');
             $table->date('data');
+            $table->integer('valutazione');
             $table->bigInteger('user_id')->unsigned()->default(1);
         });
         Schema::table('review', function (Blueprint $table) {

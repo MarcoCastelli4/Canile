@@ -20,25 +20,34 @@ Info dog
 
 @section('corpo')
 <h3> Medical and other information about {{$dog->nome}} </h3>
-<div id="carouselIndicators" class="carousel slide">
-  <div class="carousel-inner">
-@foreach ($images as $image)
-    <div class="carousel-item active">
-    <img src="{{asset('storage'.$image->path)}}" >
+
+<div class="row justify-content-center align-items-center">
+  <div class="col-md-4">
+    <div id="carouselIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        @foreach ($images as $index => $image)
+          <div class="carousel-item{{ $index == 0 ? ' active' : '' }} text-center">
+            <img src="{{ asset('storage'.$image->path) }}" style="width: 100%; height: auto; object-fit: cover; display: inline-block;">
+          </div>
+        @endforeach
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-@endforeach
+  </div>
 </div>
-<button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-</div>
+
+
+
   
+
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-striped table-hover table-responsive" style="width:100%">

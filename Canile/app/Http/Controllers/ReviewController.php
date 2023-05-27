@@ -27,7 +27,7 @@ class ReviewController extends Controller
     {
         session_start();
         $dl = new DataLayer();
-        $dl->addReview($request->input('titolo'), $request->input('contenuto'),$_SESSION["user_id"]);
+        $dl->addReview($request->input('titolo'), $request->input('contenuto'), $request->input('valutazione'),$_SESSION["user_id"]);
         return Redirect::to(route('review.index'));
     }
 }

@@ -242,10 +242,11 @@ class DataLayer {
 
     }
 
-    public function addReview($titolo,$contenuto,$user_id){
+    public function addReview($titolo,$contenuto,$valutazione,$user_id){
         $review = new Review;
         $review->titolo=$titolo;
         $review->contenuto=$contenuto;
+        $review->valutazione=$valutazione;
         $review->data= now()->format('Y-m-d');
 
         $review->save();
