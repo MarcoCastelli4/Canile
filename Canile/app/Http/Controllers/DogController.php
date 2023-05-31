@@ -70,7 +70,7 @@ class DogController extends Controller
         $dl = new DataLayer();
         $dogs_list = $dl->listDogs();
         $dog = $dl->findDogById($id);
-        $userID = $dl->getUserID($_SESSION["loggedName"]);
+        
        // $vaccinations = $dl->getAllVaccinatios();
 
         return view('dog.editDog')->with('dogList', $dogs_list)->with('dog', $dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"])
@@ -99,7 +99,7 @@ class DogController extends Controller
         $documents=$dl->getDogDocuments($id);
         
         if(isset($_SESSION["loggedName"])){
-            $userID = $dl->getUserID($_SESSION["loggedName"]);
+            
            return view('dog.infoDog')->with("documents",$documents)->with("images",$images)
            ->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', true)
            ->with('isAdmin', $_SESSION["isAdmin"])->with('loggedName', $_SESSION["loggedName"])
@@ -119,7 +119,7 @@ class DogController extends Controller
         $dl=new DataLayer();
         $vaccinations=$dl->getAllVaccinations();
         $dog=$dl->findDogById($id);
-        $userID = $dl->getUserID($_SESSION["loggedName"]);
+        
         return view('dog.vaccination')->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with('isAdmin',$_SESSION['isAdmin']);
     }
 
@@ -132,9 +132,7 @@ class DogController extends Controller
         $vaccinations=$dl->getAllVaccinations();
         $dog=$dl->findDogById($dog_id);
        
-        // sarebbe bello mettere popup hai inserito vaccinazione
-        return view('dog.vaccination')->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('isAdmin',$_SESSION['isAdmin'])
-        ->with('user_id', $_SESSION["user_id"])->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
+        return Redirect::to(route('dog.vaccination',['id' => $dog->id]));
     }
 
    

@@ -128,21 +128,15 @@ class DataLayer {
         }
        }
 
+       /*
         // Cancel the previous list of vaccinations
         $prevVaccination = $dog->vaccination;
         foreach($prevVaccination as $prev) {
             $dog->vaccination()->detach($prev->id);
-        }
+        }*/
 
         $dog->save();
 
-        // Update the list of vaccination --> preferisco modificarla quando inseriamo una nuova vaccinaizone
-        /*
-        foreach($vaccinations as $v) {
-            $dog->vaccination()->attach($v);
-        }*/
-        // massive update (only with fillable property enabled on Book): 
-        // Book::find($id)->update(['title' => $title, 'author_id' => $author_id]);
     }
 
     

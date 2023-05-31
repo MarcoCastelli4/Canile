@@ -25,7 +25,7 @@ class UserController extends Controller
         $dl=new DataLayer();
         
         $dog=$dl->findDogById($id);
-        $userID = $dl->getUserID($_SESSION["loggedName"]);
+        
         return view('user.adoption')->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"])
         ->with('user_id', $_SESSION["user_id"])->with('isAdmin', $_SESSION["isAdmin"]);
         
@@ -36,8 +36,7 @@ class UserController extends Controller
 
         $dl=new DataLayer(); 
         $dog_id=$id;
-        $user_id = $dl->getUserID($_SESSION["loggedName"]);
-        $dl->addDogAdoption($dog_id,$user_id);
+        $dl->addDogAdoption($dog_id,$_SESSION["user_id"]);
         $dogs=$dl->getDogAvailable();
         
         return Redirect::to(route('dog.index'));
