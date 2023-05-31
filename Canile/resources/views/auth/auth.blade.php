@@ -23,19 +23,19 @@
         <h1>Create account</h1>
 			<span>Use your email for registration</span>
         <div class="form-group">
-         <input type="text" name="name" class="form-control" placeholder="Name" value=""/>
+         <input required type="text" name="name" class="form-control" placeholder="Name" value=""/>
          </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="email" class="form-control" placeholder="Email" value=""/>
+                                    <input required type="email" name="email" class="form-control" placeholder="Email" value=""/>
                                 </div>
 
                                 <div class="form-group text-center">
-                                    <input type="password" name="password" class="form-control" placeholder="Password" value=""/>
+                                    <input required type="password" name="password" class="form-control" placeholder="Password" value=""/>
                                 </div>
 
                                 <div class="form-group text-center">
-                                    <input type="password" name="confirm-password" class="form-control" placeholder="Confirm password" value=""/>
+                                    <input required type="password" name="confirm-password" class="form-control" placeholder="Confirm password" value=""/>
                                 </div>
 
                                 <div class="container">
@@ -51,11 +51,11 @@
 			<span>Use your email for sign-in</span>   
             @csrf
                                 <div class="form-group">
-                                    <input type="text" name="email" class="form-control" placeholder="e-Mail"/>
+                                    <input required type="email" name="email" class="form-control" placeholder="e-Mail"/>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="password" name="password" class="form-control" placeholder="Password"/>
+                                    <input required type="password" name="password" class="form-control" placeholder="Password"/>
                                 </div>
 
                                 <div class="container">

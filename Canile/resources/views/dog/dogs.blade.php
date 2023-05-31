@@ -42,12 +42,12 @@ The dogs
             @csrf
             <div class="form-group">
                 <label for="nome"> Malattia</label>
-                <input class="form-control" type="text" id="malattia" name="malattia" placeholder="Malattia">
+                <input required class="form-control" type="text" id="malattia" name="malattia" placeholder="Malattia">
             </div>
 
             <div class="form-group">
                 <label for="nome"> Validità</label>
-                <input class="form-control" type="number" id="validità" name="validità" placeholder="Validità (mesi)">
+                <input required class="form-control" type="number" id="validità" name="validità" placeholder="Validità (mesi)">
             </div>
     
 

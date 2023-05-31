@@ -40,7 +40,7 @@ style.css
             <div class="form-group">
                 <label for="nome"> Nome</label>
                 @if(!isset($dog->id))
-                <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome"> 
+                <input required class="form-control" type="text" id="nome" name="nome" placeholder="Nome"> 
             @else
                 <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome" value="{{$dog->nome}}"> 
             @endif
@@ -49,9 +49,9 @@ style.css
             <div class="form-group">
             <label for="razza"> Razza</label>
             @if(!isset($dog->id))
-            <input class="form-control" type="text" id="razza" name="razza" placeholder="Razza"> 
+            <input required class="form-control" type="text" id="razza" name="razza" placeholder="Razza"> 
             @else
-            <input class="form-control" type="text" id="razza" name="razza" placeholder="Razza" value="{{$dog->razza}}"> 
+            <input required class="form-control" type="text" id="razza" name="razza" placeholder="Razza" value="{{$dog->razza}}"> 
             @endif
             </div>
             
@@ -59,9 +59,9 @@ style.css
             <div class="form-group">
             <label for="colore"> Colore</label>
             @if(!isset($dog->id))
-            <input class="form-control" type="text" id="colore" name="colore" placeholder="Colore"> 
+            <input required class="form-control" type="text" id="colore" name="colore" placeholder="Colore"> 
             @else
-            <input class="form-control" type="text" id="colore" name="colore" placeholder="Colore" value="{{$dog->colore}}"> 
+            <input required class="form-control" type="text" id="colore" name="colore" placeholder="Colore" value="{{$dog->colore}}"> 
             @endif
            
             </div>
@@ -99,7 +99,7 @@ style.css
             <div class="form-group">
             @if(!isset($dog->id))
             <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="sesso" id="maschio" value="maschio">
+            <input required class="form-check-input" type="radio" name="sesso" id="maschio" value="maschio">
             <label class="form-check-label" for="maschio">Maschio</label>
             </div>
             <div class="form-check form-check-inline">
@@ -133,9 +133,9 @@ style.css
         <div class="form-group"> <!-- Date input -->
         <label class="control-label" for="datanascita">Data di nascita</label>
         @if(!isset($dog->id))
-        <input class="form-control" id="datanascita" name="datanascita" placeholder="YYY/MM/DD" type="text"/>
+        <input required class="form-control" id="datanascita" name="datanascita" placeholder="YYY/MM/DD" type="text"/>
         @else
-        <input class="form-control" id="datanascita" name="datanascita" placeholder="YYY/MM/DD" type="text" value="{{$dog['data nascita']}}"/>
+        <input required class="form-control" id="datanascita" name="datanascita" placeholder="YYY/MM/DD" type="text" value="{{$dog['data nascita']}}"/>
         @endif
       </div>
       <div class="form-group">
