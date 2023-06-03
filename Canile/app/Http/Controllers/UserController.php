@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\DataLayer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Session;
 
 class UserController extends Controller
 {
@@ -41,6 +42,9 @@ class UserController extends Controller
             'accept_terms' => 'required',    
         ]);
         $dl->addDogAdoption($dog_id,$_SESSION["user_id"]);
+
+        Session::flash('dog_adopted');
+
         $dogs=$dl->getDogAvailable();
         
         return Redirect::to(route('dog.index'));

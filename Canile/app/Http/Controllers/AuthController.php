@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\DataLayer;
 use Illuminate\Support\Facades\Redirect;
 
+
 class AuthController extends Controller
 {
     /**Rimando alla vista */
@@ -67,6 +68,7 @@ class AuthController extends Controller
 
 
         $dl->addUser($req->input('name'), $req->input('password'), $req->input('email'));
+
         return Redirect::to(route('user.login'));
     }
 }

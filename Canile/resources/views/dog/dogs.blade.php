@@ -32,9 +32,6 @@ The dogs
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Create vaccination</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
       <div class="modal-body">
       <form method="post" action="{{route('vaccination.store')}}">
@@ -44,7 +41,7 @@ The dogs
                 <label for="nome"> Malattia</label>
                 <input class="form-control" type="text" id="malattia" name="malattia" placeholder="Malattia">
                 @error('malattia')
-                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                <div id="modal_error" class="alert alert-danger" role="alert">{{$message}}</div>
                 @enderror
               </div>
 
@@ -52,7 +49,7 @@ The dogs
                 <label for="nome"> Validità</label>
                 <input  class="form-control" type="number" id="validità" name="validità" placeholder="Validità (mesi)">
                 @error('validità')
-                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                <div id="modal_error" class="alert alert-danger" role="alert">{{$message}}</div>
                 @enderror
               </div>
       </div>
@@ -70,15 +67,40 @@ The dogs
 
 @endif
 
-<!-- Se la lista dei cani è vuota oppure non ci sono più cani disponibili -->
+<!-- Popup inserimenti corretti -->
 @if(Session::has('dogstore'))
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+  <script>
+  swal('Great!' , 'A new dog is available for adoption!', "success");
+</script>
 @endif
+
+@if(Session::has('dogedit'))
+  <script>
+  swal('Great!' , 'Dog modified correctly!', "success");
+</script>
+@endif
+
+
+@if(Session::has('dogvaccination'))
+  <script>
+  swal('Great!' , 'Dog vaccination insert correctly!', "success");
+</script>
+@endif
+
+@if(Session::has('vaccinationstore'))
+  <script>
+  swal('Great!' , 'A new vaccination is available for dogs!', "success");
+</script>
+@endif
+
+@if(Session::has('dog_adopted'))
+  <script>
+  swal('Congratulation!' , 'You are adopted a new dog, check you email box for more details!', "success");
+</script>
+@endif
+
+
+<!-- Se la lista dei cani è vuota oppure non ci sono più cani disponibili -->
 @if (count($dog_list)==0)
 <div class="alert alert-warning" role="alert">
   @if($isAdmin==true)
@@ -163,45 +185,53 @@ The dogs
 @endsection
 
 @section('script')
-<script>$('.alert').alert()</script>
+
+
+<script>$(".alert").alert('close')</script>
+<script>
+   var modalError = document.getElementById("modal_error");
+
+// VOGLIO CHE LA MODAL RIMANGA APERTA SE CE ERRORE
+if (modalError) {
+   activateModal();
+}
+</script>
+
+
 <script>
   function activateModal() {
   // Get the modal element
   var modal = document.getElementById('modalVaccination');
-
   // Activate the modal
   $(modal).modal('show');
 }
 
 // Get the button element
 var button = document.getElementById('createVaccinationButton'); 
-
 // Add a click event listener to the button
 button.addEventListener('click', activateModal);
-    </script>
+</script>
 
 <script>
   // Get the close button element
   var closeButton = document.querySelector('.modal .close');
-
   // Add click event listener to the close button
   closeButton.addEventListener('click', function() {
+    
     // Find the modal element
     var modal = document.getElementById('modalVaccination');
-
     // Hide the modal by removing the 'show' class
     modal.classList.remove('show');
-
     // Remove the modal backdrop
     var modalBackdrop = document.querySelector('.modal-backdrop');
     modalBackdrop.parentNode.removeChild(modalBackdrop);
-
     // Enable scrolling on the body element
     document.body.classList.remove('modal-open');
-
     // Reload the page
     location.reload();
+    
   });
 </script>
+
 
 @endsection

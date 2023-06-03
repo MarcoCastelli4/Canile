@@ -54,6 +54,7 @@ class DogController extends Controller
         }
     }
 
+    // ipotizzo che posso inserire dei cani con info uguali, quindi non ho controlli nel database
     public function store(Request $request)
     {
         $dl = new DataLayer();
@@ -71,7 +72,8 @@ class DogController extends Controller
         $request->input('lunghezzapelo'), $request->input('taglia'), $request->input('sesso'),
         $request->input('datanascita'),$request->file('documents'),$request->file('images'));
 
-        Session::flash('dogstore','cane inserito correttamente!');
+        // cane inserito correttamente
+        Session::flash('dogstore');
 
         return Redirect::to(route('dog.index'));
     }
@@ -84,8 +86,6 @@ class DogController extends Controller
         $dogs_list = $dl->listDogs();
         $dog = $dl->findDogById($id);
         
-       // $vaccinations = $dl->getAllVaccinatios();
-
         return view('dog.editDog')->with('dogList', $dogs_list)->with('dog', $dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"])
         ->with('isAdmin', $_SESSION["isAdmin"])->with('user_id', $_SESSION["user_id"]);;//->with('vaccinations',$vaccinations);
     }
@@ -106,6 +106,9 @@ class DogController extends Controller
         $dl->editDog($id,  $request->input('nome'), $request->input('razza'), $request->input('colore'),
         $request->input('lunghezzapelo'), $request->input('taglia'), $request->input('sesso'),
         $request->input('datanascita'),$request->file('documents'),$request->file('images'));
+
+          // cane inserito correttamente
+          Session::flash('dogedit');
 
         return Redirect::to(route('dog.index'));
 
@@ -158,8 +161,11 @@ class DogController extends Controller
 
         $vaccinations=$dl->getAllVaccinations();
         $dog=$dl->findDogById($dog_id);
+
+          // vaccinazione inserita correttamente
+          Session::flash('dogvaccination');
        
-        return Redirect::to(route('dog.vaccination',['id' => $dog->id]));
+          return Redirect::to(route('dog.index'));
     }
 
    

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DataLayer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Session;
 
 class ReviewController extends Controller
 {
@@ -33,6 +34,9 @@ class ReviewController extends Controller
         ]);
 
         $dl->addReview($request->input('titolo'), $request->input('contenuto'), $request->input('valutazione'),$_SESSION["user_id"]);
+       
+        Session::flash('review_store');
+
         return Redirect::to(route('review.index'));
     }
 }

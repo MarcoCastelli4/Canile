@@ -18,6 +18,12 @@ style.css
 
 @section('corpo')
 
+@if(Session::has('review_store'))
+  <script>
+  swal('Well Done!' , 'Review insert correctly!', "success");
+</script>
+@endif
+
 @if($logged==true && $isAdmin==false)
 <div class="container">
         <a class="btn btn-success" id="createReviewButton">

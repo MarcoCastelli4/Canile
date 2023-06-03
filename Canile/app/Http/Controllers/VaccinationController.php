@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DataLayer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Session;
 
 
 class VaccinationController extends Controller
@@ -24,11 +25,13 @@ class VaccinationController extends Controller
     {
         $dl = new DataLayer();
         $request->validate([
-            'malattia' => 'required',
+            'malattia' => 'required|unique:vaccination',
             'validità' => 'required|integer|min:1',   
         ]);
 
         $dl->addVaccination($request->input('malattia'), $request->input('validità'));
+
+        Session::flash('vaccinationstore');
         return Redirect::to(route('dog.index'));
     }
 }
