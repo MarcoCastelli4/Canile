@@ -35,7 +35,10 @@ class DogController extends Controller
         $dl = new DataLayer();
         $book = $dl->findDogById($id);
         if ($book !== null) {
-            $dl->deleteDog($id);
+            if($dl->deleteDog($id)==false){
+                Session::flash('dog_not_deleted');
+            }
+            
             return Redirect::to(route('dog.index'));
         } else {
             return view('dog.deleteErrorPage');

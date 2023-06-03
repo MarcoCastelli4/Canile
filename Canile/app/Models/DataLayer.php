@@ -21,6 +21,12 @@ class DataLayer {
     // cancellare un cane
     public function deleteDog($id) {
         $dog = Dog::find($id);
+         // Il cane è adottato quindi non cancellabile dal database
+        if ($dog->adoption) {
+            return false;
+        }
+
+        
         $vaccination = $dog->vaccination;
 
         // disassocio immagini e documenti associati
@@ -152,8 +158,10 @@ class DataLayer {
     //Aggiunge adozione cane - utente
     public function addDogAdoption($dog_id,$user_id) {
 
-        // controlla che non sia già presente nel db
-        if ((Adoption::where('dog_id','=',$dog_id))->count()>0){
+        $dog = Dog::find($dog_id);
+
+        // controlla che è già adottato
+        if ($dog->adoption()->exists()){
            return false;
         }
         else{
@@ -163,6 +171,7 @@ class DataLayer {
             $adoption->data= now()->format('Y-m-d');
     
             $adoption->save();
+            return true;
         }
        
 

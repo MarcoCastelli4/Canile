@@ -41,12 +41,15 @@ class UserController extends Controller
         $request->validate([
             'accept_terms' => 'required',    
         ]);
-        $dl->addDogAdoption($dog_id,$_SESSION["user_id"]);
-
-        Session::flash('dog_adopted');
+        if($dl->addDogAdoption($dog_id,$_SESSION["user_id"])==false){
+            Session::flash('dog_adoption_error');
+        }
+        else{
+            Session::flash('dog_adopted');
+        }
 
         $dogs=$dl->getDogAvailable();
-        
         return Redirect::to(route('dog.index'));
+        
     }
 }

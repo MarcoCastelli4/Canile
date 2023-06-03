@@ -100,6 +100,20 @@ The dogs
 @endif
 
 
+<!-- Popup errori -->
+@if(Session::has('dog_not_deleted'))
+  <script>
+  swal('Warning!' , 'You cannot delete a dog if it has been adopted!', "error");
+</script>
+@endif
+
+@if(Session::has('dog_adoption_error'))
+  <script>
+  swal('Warning!' , 'Adoption not available for this dog!', "error");
+</script>
+@endif
+
+
 <!-- Se la lista dei cani è vuota oppure non ci sono più cani disponibili -->
 @if (count($dog_list)==0)
 <div class="alert alert-warning" role="alert">
