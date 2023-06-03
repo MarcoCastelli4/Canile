@@ -40,29 +40,39 @@ style.css
             <div class="form-group">
                 <label for="nome"> Nome</label>
                 @if(!isset($dog->id))
-                <input required class="form-control" type="text" id="nome" name="nome" placeholder="Nome"> 
+                <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome"> 
             @else
                 <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome" value="{{$dog->nome}}"> 
-            @endif
+                @endif
+                @error('nome')
+                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                @enderror
+               
             </div>
             
             <div class="form-group">
             <label for="razza"> Razza</label>
             @if(!isset($dog->id))
-            <input required class="form-control" type="text" id="razza" name="razza" placeholder="Razza"> 
+            <input class="form-control" type="text" id="razza" name="razza" placeholder="Razza"> 
             @else
-            <input required class="form-control" type="text" id="razza" name="razza" placeholder="Razza" value="{{$dog->razza}}"> 
+            <input class="form-control" type="text" id="razza" name="razza" placeholder="Razza" value="{{$dog->razza}}"> 
             @endif
+            @error('razza')
+                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                @enderror
             </div>
             
 
             <div class="form-group">
             <label for="colore"> Colore</label>
             @if(!isset($dog->id))
-            <input required class="form-control" type="text" id="colore" name="colore" placeholder="Colore"> 
+            <input  class="form-control" type="text" id="colore" name="colore" placeholder="Colore"> 
             @else
-            <input required class="form-control" type="text" id="colore" name="colore" placeholder="Colore" value="{{$dog->colore}}"> 
+            <input  class="form-control" type="text" id="colore" name="colore" placeholder="Colore" value="{{$dog->colore}}"> 
             @endif
+            @error('colore')
+                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                @enderror
            
             </div>
 
@@ -99,7 +109,7 @@ style.css
             <div class="form-group">
             @if(!isset($dog->id))
             <div class="form-check form-check-inline">
-            <input required class="form-check-input" type="radio" name="sesso" id="maschio" value="maschio">
+            <input checked class="form-check-input" type="radio" name="sesso" id="maschio" value="maschio">
             <label class="form-check-label" for="maschio">Maschio</label>
             </div>
             <div class="form-check form-check-inline">
@@ -133,18 +143,22 @@ style.css
         <div class="form-group"> <!-- Date input -->
         <label class="control-label" for="datanascita">Data di nascita</label>
         @if(!isset($dog->id))
-        <input required class="form-control" id="datanascita" name="datanascita" placeholder="YYY/MM/DD" type="text"/>
+        <input class="form-control" id="datanascita" name="datanascita" placeholder="YYY/MM/DD" type="text"/>
         @else
-        <input required class="form-control" id="datanascita" name="datanascita" placeholder="YYY/MM/DD" type="text" value="{{$dog['data nascita']}}"/>
+        <input  class="form-control" id="datanascita" name="datanascita" placeholder="YYY/MM/DD" type="text" value="{{$dog['data nascita']}}"/>
         @endif
+
+        @error('datanascita')
+                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                @enderror
       </div>
       <div class="form-group">
         <label for="images" class="form-label">Upload dog images</label>
-        <input class="form-control" id="images" type="file" name="images[]"  multiple />
+        <input class="form-control" id="images" type="file" name="images[]"  multiple accept=".jpg, .jpeg, .png"/>
 </div>
 <div class="form-group">
         <label for="docuemnts" class="form-label">Upload dog documents</label>
-        <input class="form-control" id="documents" type="file"  name="documents[]"  multiple />
+        <input class="form-control" id="documents" type="file"  name="documents[]"  multiple accept=".pdf" />
         </div>
       <br/>
       <div class="container">

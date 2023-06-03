@@ -22,20 +22,32 @@
         @csrf
         <h1>Create account</h1>
 			<span>Use your email for registration</span>
-        <div class="form-group">
-         <input required type="text" name="name" class="form-control" placeholder="Name" value=""/>
-         </div>
+                                <div class="form-group">
+                                <input  type="text" name="name" class="form-control" placeholder="Name" value=""/>
+                                 @error('name')
+                                        <div id="registration_error"  class="alert alert-danger" role="alert">{{$message}}</div>
+                                        @enderror
+                                 </div>
 
                                 <div class="form-group">
-                                    <input required type="email" name="email" class="form-control" placeholder="Email" value=""/>
+                                    <input type="text" name="email" class="form-control" placeholder="Email" value=""/>
+                                    @error('email')
+                                     <div id="registration_error"  class="alert alert-danger" role="alert">{{$message}}</div>
+                                     @enderror
                                 </div>
 
                                 <div class="form-group text-center">
-                                    <input required type="password" name="password" class="form-control" placeholder="Password" value=""/>
+                                    <input type="password" name="password" class="form-control" placeholder="Password" value=""/>
+                                    @error('password')
+                                      <div id="registration_error"  class="alert alert-danger" role="alert">{{$message}}</div>
+                                      @enderror
                                 </div>
 
                                 <div class="form-group text-center">
-                                    <input required type="password" name="confirm-password" class="form-control" placeholder="Confirm password" value=""/>
+                                    <input type="password" name="confirm-password" class="form-control" placeholder="Confirm password" value=""/>
+                                    @error('confirm-password')
+                                      <div id="registration_error"  class="alert alert-danger" role="alert">{{$message}}</div>
+                                      @enderror
                                 </div>
 
                                 <div class="container">
@@ -51,11 +63,17 @@
 			<span>Use your email for sign-in</span>   
             @csrf
                                 <div class="form-group">
-                                    <input required type="email" name="email" class="form-control" placeholder="e-Mail"/>
+                                    <input type="text" name="l_email" class="form-control" placeholder="e-Mail"/>
+                                    @error('l_email')
+                                    <div class="alert alert-danger" role="alert">{{$message}}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <input required type="password" name="password" class="form-control" placeholder="Password"/>
+                                    <input type="password" name="l_password" class="form-control" placeholder="Password"/>
+                                    @error('l_password')
+                                  <div class="alert alert-danger" role="alert">{{$message}}</div>
+                                 @enderror
                                 </div>
 
                                 <div class="container">
@@ -63,7 +81,6 @@
                                 <label for="Login" class="btn btn-primary"><i class="bi-check-lg"></i> Login</label>
                                 <input id="Login" type="submit" value="Login" class="hidden"/>
                                 </div>
-
 		</form>
 	</div>
 	<div class="overlay-container">
@@ -71,12 +88,12 @@
 			<div class="overlay-panel overlay-left">
 				<h1>Welcome Back!</h1>
 				<p>To keep connected with us please login with your personal info</p>
-				<button class="ghost" id="signIn">Sign In</button>
+				<button class="ghost authBotton" id="signIn">Sign In</button>
 			</div>
 			<div class="overlay-panel overlay-right">
 				<h1>Hello, Friend!</h1>
 				<p>Enter your personal details and start journey with us</p>
-				<button class="ghost" id="signUp">Sign Up</button>
+				<button class="ghost authBotton" id="signUp">Sign Up</button>
 			</div>
 		</div>
 	</div>
@@ -93,10 +110,16 @@ const signInButton = document.getElementById('signIn');
 const container = document.getElementById('containerAuth');
 
 signUpButton.addEventListener('click', () => {
-	container.classList.add("right-panel-active");
+    container.classList.add("right-panel-active");
 });
 
 signInButton.addEventListener('click', () => {
-	container.classList.remove("right-panel-active");
+    container.classList.remove("right-panel-active");
 });
+
+// per rimanere sulla parte di registrazione se c'è un errore in registrazione
+var errorMessage = document.getElementById("registration_error").textContent;
+if(errorMessage){
+    container.classList.add("right-panel-active");
+}
 </script>

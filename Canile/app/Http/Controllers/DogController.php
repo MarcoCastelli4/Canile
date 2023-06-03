@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\DataLayer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Session;
 
 class DogController extends Controller
 {
@@ -56,10 +57,21 @@ class DogController extends Controller
     public function store(Request $request)
     {
         $dl = new DataLayer();
+        $request->validate([
+            'nome' => 'required',
+            'razza' => 'required',
+            'colore' => 'required',
+            'lunghezzapelo' => 'required',
+            'taglia' => 'required',
+            'sesso' => 'required',
+            'datanascita' => 'required',    
+        ]);
+
         $dl->addDog($request->input('nome'), $request->input('razza'), $request->input('colore'),
         $request->input('lunghezzapelo'), $request->input('taglia'), $request->input('sesso'),
         $request->input('datanascita'),$request->file('documents'),$request->file('images'));
 
+        Session::flash('dogstore','cane inserito correttamente!');
 
         return Redirect::to(route('dog.index'));
     }
@@ -68,6 +80,7 @@ class DogController extends Controller
     public function edit($id)
     {
         $dl = new DataLayer();
+        
         $dogs_list = $dl->listDogs();
         $dog = $dl->findDogById($id);
         
@@ -80,6 +93,16 @@ class DogController extends Controller
     public function update(Request $request, $id)
     {
         $dl = new DataLayer();
+        $request->validate([
+            'nome' => 'required',
+            'razza' => 'required',
+            'colore' => 'required',
+            'lunghezzapelo' => 'required',
+            'taglia' => 'required',
+            'sesso' => 'required',
+            'datanascita' => 'required',    
+        ]);
+        
         $dl->editDog($id,  $request->input('nome'), $request->input('razza'), $request->input('colore'),
         $request->input('lunghezzapelo'), $request->input('taglia'), $request->input('sesso'),
         $request->input('datanascita'),$request->file('documents'),$request->file('images'));
@@ -127,6 +150,10 @@ class DogController extends Controller
     {
        
         $dl = new DataLayer();
+        $request->validate([
+            'dataVaccinazione' => 'required',    
+        ]);
+
         $dl->addDogVaccination($dog_id, $request->input('vaccination_id'), $request->input('dataVaccinazione'));
 
         $vaccinations=$dl->getAllVaccinations();

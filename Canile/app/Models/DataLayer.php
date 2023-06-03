@@ -206,12 +206,14 @@ class DataLayer {
  
      }
 
+     // abbiamo già il controllo nel validator se email già presente nel database
      public function addUser($name, $password, $email) {
         $user = new User();
         $user->name = $name;
         $user->password = md5($password);
         $user->email = $email;
         $user->save();
+        
     }
     
     public function addVaccination($malattia,$validità){

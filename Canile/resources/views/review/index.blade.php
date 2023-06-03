@@ -43,11 +43,17 @@ style.css
             <div class="form-group">
                 <label for="nome"> Titolo</label>
                 <input class="form-control" type="text" id="titolo" name="titolo" placeholder="Titolo">
+                @error('titolo')
+                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="nome"> Contenuto</label>
                 <input class="form-control" type="text" id="contenuto" name="contenuto" placeholder="Contenuto">
+                @error('contenuto')
+                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                @enderror
             </div>
     
             <div class="form-group">

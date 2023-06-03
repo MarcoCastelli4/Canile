@@ -36,8 +36,11 @@ Vaccination dog
 
         <div class="form-group"> <!-- Date input -->
         <label class="control-label" for="dataVaccinazione">Data vaccinazione</label>
-        <input required class="form-control" id="dataVaccinazione" name="dataVaccinazione" placeholder="YYY/MM/DD" type="text"/>
-      </div>
+        <input class="form-control" id="dataVaccinazione" name="dataVaccinazione" placeholder="YYY/MM/DD" type="text"/>
+        @error('dataVaccinazione')
+           <div class="alert alert-danger" role="alert">{{$message}}</div>
+         @enderror  
+    </div>
 
       <br/>
       <div class="container">

@@ -6,6 +6,7 @@ use App\Models\DataLayer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
+
 class VaccinationController extends Controller
 {
     
@@ -22,6 +23,11 @@ class VaccinationController extends Controller
     public function store(Request $request)
     {
         $dl = new DataLayer();
+        $request->validate([
+            'malattia' => 'required',
+            'validità' => 'required|integer|min:1',   
+        ]);
+
         $dl->addVaccination($request->input('malattia'), $request->input('validità'));
         return Redirect::to(route('dog.index'));
     }

@@ -25,9 +25,12 @@ style.css
         src="https://app.enzuzo.com/__enzuzo-privacy-app.js?mode=tos&apiHost=https://app.enzuzo.com&qt=1683796015307&referral=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJDdXN0b21lcklEIjoyMTU0NCwiQ3VzdG9tZXJOYW1lIjoiY3VzdC00a1lkdlMzSyIsIkN1c3RvbWVyTG9nb1VSTCI6IiIsIlJvbGVzIjpbInJlZmVycmFsIl0sIlByb2R1Y3QiOiJlbnRlcnByaXNlIiwiaXNzIjoiRW56dXpvIEluYy4iLCJuYmYiOjE2ODM3OTYwMTV9.sxKrXuD2yQFdcCqEjW3FFcaMdUIySSq2UxznHF7vq5k">
         </script>
         <label for="accept_terms">
-      <input type="checkbox" id="accept_terms" name="accept_terms" required>
+      <input type="checkbox" id="accept_terms" name="accept_terms">
       I have read and agree to the privacy policy.
     </label><br><br>
+    @error('accept_terms')
+                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                @enderror
             
       <br/>
       <div class="container">

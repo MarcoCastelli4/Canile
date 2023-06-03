@@ -31,11 +31,15 @@ class UserController extends Controller
         
     }
 
-    public function addAdoption($id)
+    public function addAdoption(Request $request,$id)
     {
 
         $dl=new DataLayer(); 
         $dog_id=$id;
+
+        $request->validate([
+            'accept_terms' => 'required',    
+        ]);
         $dl->addDogAdoption($dog_id,$_SESSION["user_id"]);
         $dogs=$dl->getDogAvailable();
         

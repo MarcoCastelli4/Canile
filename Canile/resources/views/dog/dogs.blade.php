@@ -42,15 +42,19 @@ The dogs
             @csrf
             <div class="form-group">
                 <label for="nome"> Malattia</label>
-                <input required class="form-control" type="text" id="malattia" name="malattia" placeholder="Malattia">
-            </div>
+                <input class="form-control" type="text" id="malattia" name="malattia" placeholder="Malattia">
+                @error('malattia')
+                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                @enderror
+              </div>
 
             <div class="form-group">
                 <label for="nome"> Validità</label>
-                <input required class="form-control" type="number" id="validità" name="validità" placeholder="Validità (mesi)">
-            </div>
-    
-
+                <input  class="form-control" type="number" id="validità" name="validità" placeholder="Validità (mesi)">
+                @error('validità')
+                <div class="alert alert-danger" role="alert">{{$message}}</div>
+                @enderror
+              </div>
       </div>
       <div class="modal-footer">
       <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Create</label>
@@ -67,7 +71,14 @@ The dogs
 @endif
 
 <!-- Se la lista dei cani è vuota oppure non ci sono più cani disponibili -->
-
+@if(Session::has('dogstore'))
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+@endif
 @if (count($dog_list)==0)
 <div class="alert alert-warning" role="alert">
   @if($isAdmin==true)
@@ -152,6 +163,7 @@ The dogs
 @endsection
 
 @section('script')
+<script>$('.alert').alert()</script>
 <script>
   function activateModal() {
   // Get the modal element
