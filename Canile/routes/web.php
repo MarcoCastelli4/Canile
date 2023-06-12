@@ -7,7 +7,7 @@ use App\Http\Controllers\VaccinationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReviewController;
-
+use App\Http\Controllers\MailController;
 
 
 // utente visitatore
@@ -49,6 +49,9 @@ Route::get('/dog/{id}/adoption',[UserController::class,'adoption'])->name('user.
 Route::post('/dog/{id}/adoption',[UserController::class,'addAdoption'])->name('user.adoption');
 
 Route::get('/user/{id}/dogs',[UserController::class,'index'])->name('user.dogs');
+
+Route::get('/mail/{dog_id}/{user_id}',[MailController::class,'sendMail'])->name('mail.confirm');
+
 });
 
 

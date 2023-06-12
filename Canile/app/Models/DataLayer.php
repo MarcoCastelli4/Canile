@@ -209,12 +209,20 @@ class DataLayer {
         return $users[0]->id;
     }
 
+    public function getUserMail($id){
+        $users=User::where('id',$id)->get();
+        return $users[0]->email;
+    }
+
      // restituisco i cani disponibili per l'adozione
      public function getDogAvailable(){
         return Dog::doesntHave('adoption')->get();
  
      }
 
+     public function getDog($id){
+       return Dog::find($id);
+     }
      // abbiamo già il controllo nel validator se email già presente nel database
      public function addUser($name, $password, $email) {
         $user = new User();

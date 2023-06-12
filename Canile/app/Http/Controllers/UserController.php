@@ -48,8 +48,9 @@ class UserController extends Controller
             Session::flash('dog_adopted');
         }
 
-        $dogs=$dl->getDogAvailable();
-        return Redirect::to(route('dog.index'));
+        //$dogs=$dl->getDogAvailable();
+      //  return Redirect::to(route('dog.index'));
+      return Redirect::to(route('mail.confirm',[$dog_id,$_SESSION["user_id"]]));
         
     }
 }
