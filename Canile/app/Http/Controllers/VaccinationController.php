@@ -24,14 +24,20 @@ class VaccinationController extends Controller
     public function store(Request $request)
     {
         $dl = new DataLayer();
-        $request->validate([
+
+        $validatedData = $request->validate([
             'malattia' => 'required|unique:vaccination',
-            'validità' => 'required|integer|min:1',   
+            'validita' => 'required|integer|min:1',
         ]);
-
-        $dl->addVaccination($request->input('malattia'), $request->input('validità'));
-
+        
+        $dl->addVaccination($request->input('malattia'), $request->input('validita'));
+        
         Session::flash('vaccinationstore');
-        return Redirect::to(route('dog.index'));
+        
+        return response()->json([
+            'error' => false,
+            'message' => 'Vaccination created successfully',
+        ]);
+        return Redirect::to(route('dog.index'));        
     }
 }

@@ -34,7 +34,7 @@ The dogs
         <h5 class="modal-title" id="exampleModalLabel">Create vaccination</h5>
       </div>
       <div class="modal-body">
-      <form method="post" action="{{route('vaccination.store')}}">
+      <form method="post" id="modalForm" action="{{route('vaccination.store')}}">
             
             @csrf
             <div class="form-group">
@@ -47,15 +47,15 @@ The dogs
 
             <div class="form-group">
                 <label for="nome"> Validità</label>
-                <input  class="form-control" type="number" id="validità" name="validità" placeholder="Validità (mesi)">
-                @error('validità')
+                <input  class="form-control" type="number" id="validita" name="validita" placeholder="Validità (mesi)">
+                @error('validita')
                 <div id="modal_error" class="alert alert-danger" role="alert">{{$message}}</div>
                 @enderror
               </div>
       </div>
       <div class="modal-footer">
       <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Create</label>
-      <input  id="mySubmit" type="submit" value="Create" class="hidden"/>
+      <input  id="mySubmit" type="submit" value="Create" class="hidden" onclick="event.preventDefault(); checkModal()"/>
       </div>
       </form>
     </div>
@@ -202,15 +202,6 @@ The dogs
 
 
 <script>$(".alert").alert('close')</script>
-<script>
-   var modalError = document.getElementById("modal_error");
-
-// VOGLIO CHE LA MODAL RIMANGA APERTA SE CE ERRORE
-if (modalError) {
-   activateModal();
-}
-</script>
-
 
 <script>
   function activateModal() {
@@ -243,9 +234,40 @@ button.addEventListener('click', activateModal);
     document.body.classList.remove('modal-open');
     // Reload the page
     location.reload();
-    
   });
 </script>
 
+<script>
+  function checkModal(){
+    var malattia = document.getElementById("malattia").value.trim();
+    var validita = document.getElementById("validita").value.trim();
 
+    if (malattia === "") {
+      alert("Il campo 'Malattia' non può essere vuoto.");
+      return;
+    }
+
+    if (validita === "" || Number(validita) <= 0) {
+      alert("Il campo 'Validità' deve essere un numero maggiore di zero.");
+      return;
+    }
+
+    // Se i controlli passano, invia la richiesta AJAX
+    $.ajax('/vaccination', {
+      method: 'POST',
+      data: { malattia: malattia, validita: validita },
+      success: function(result) {
+        if (result && result.error === false) {
+          alert('SUCCESSO!')
+          window.location.href = "dog.index";
+        } else {
+          alert('NON VA!');
+        }
+      },
+      error: function(xhr, status, error) {
+        alert('Errore nella richiesta AJAX: ' + error);
+      }
+    });
+  }
+  </script>
 @endsection
