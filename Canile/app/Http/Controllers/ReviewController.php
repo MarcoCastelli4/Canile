@@ -23,10 +23,17 @@ class ReviewController extends Controller
          }
     }
 
+    public function edit()
+    {
+        $dl = new DataLayer();
+        
+        return view('review.edit')->with('user_id', $_SESSION["user_id"])
+        ->with('isAdmin', $_SESSION["isAdmin"])->with('logged',true)->with('loggedName', $_SESSION["loggedName"]);
+    }
+
 
     public function store(Request $request)
     {
-        session_start();
         $dl = new DataLayer();
         $request->validate([
             'titolo' => 'required',

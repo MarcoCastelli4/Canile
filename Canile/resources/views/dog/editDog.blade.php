@@ -157,7 +157,7 @@ style.css
         <input class="form-control" id="images" type="file" name="images[]"  multiple accept=".jpg, .jpeg, .png"/>
 </div>
 <div class="form-group">
-        <label for="docuemnts" class="form-label">Upload dog documents</label>
+        <label for="documents" class="form-label">Upload dog documents</label>
         <input class="form-control" id="documents" type="file"  name="documents[]"  multiple accept=".pdf" />
         </div>
       <br/>

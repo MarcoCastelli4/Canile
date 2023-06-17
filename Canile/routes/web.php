@@ -24,7 +24,9 @@ Route::get('/user/logout',[AuthController::class,'logout'])->name('user.logout')
 Route::get('/dog',[DogController::class,'index'])->name('dog.index');
 Route::get('/dog/{id}/info', [DogController::class, 'info'])->name('dog.info');
 
-Route::resource('review', ReviewController::class);
+Route::get('/review', [ReviewController::class,'index'])->name('review.index');
+
+
 
 //rotte per utente admin 
 Route::middleware(['authCustom','IsAdmin'])->group(function () {
@@ -39,6 +41,7 @@ Route::middleware(['authCustom','IsAdmin'])->group(function () {
      Route::post('/dog/{id}/vaccination',[DogController::class,'addVaccination'])->name('dog.vaccination');
 
      Route::post('/vaccination',[VaccinationController::class,'store'])->name('vaccination.store');
+     Route::get('/vaccination/edit',[VaccinationController::class,'edit'])->name('vaccination.edit');
 
 });
 
@@ -51,6 +54,9 @@ Route::post('/dog/{id}/adoption',[UserController::class,'addAdoption'])->name('u
 Route::get('/user/{id}/dogs',[UserController::class,'index'])->name('user.dogs');
 
 Route::get('/mail/{dog_id}/{user_id}',[MailController::class,'sendMail'])->name('mail.confirm');
+
+Route::get('/review/edit',[ReviewController::class,'edit'])->name('review.edit');
+Route::post('/review/store', [ReviewController::class,'store'])->name('review.store');
 
 });
 

@@ -21,6 +21,14 @@ class VaccinationController extends Controller
         
     }
 
+    public function edit()
+    {
+        $dl = new DataLayer();
+        
+        return view('vaccination.edit')->with('user_id', $_SESSION["user_id"])
+        ->with('isAdmin', $_SESSION["isAdmin"])->with('logged',true)->with('loggedName', $_SESSION["loggedName"]);
+    }
+
     public function store(Request $request)
     {
         $dl = new DataLayer();
@@ -33,11 +41,7 @@ class VaccinationController extends Controller
         $dl->addVaccination($request->input('malattia'), $request->input('validita'));
         
         Session::flash('vaccinationstore');
-        
-        return response()->json([
-            'error' => false,
-            'message' => 'Vaccination created successfully',
-        ]);
-        return Redirect::to(route('dog.index'));        
+    
+        return Redirect::to(route('vaccination.edit'));        
     }
 }

@@ -21,48 +21,9 @@ The dogs
 <div class="container">
         <a href="{{ route('dog.create') }}" class="btn btn-success">  <i class="bi bi-plus-square"></i> Create new dog</a> <!--btn:bottone, btn-success: bottone verde-->
         </td>
-        <a class="btn btn-success" id="createVaccinationButton">
+        <a href="{{ route('vaccination.edit') }}" class="btn btn-success">
     <i class="bi bi-plus-square"></i> Create Vaccination
   </a>
-</div>
-
-<!-- Modal per nuova vaccinazione -->
-<div class="modal fade" id="modalVaccination" tabindex="-1" role="dialog" aria-labelledby="modalVaccination" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create vaccination</h5>
-      </div>
-      <div class="modal-body">
-      <form method="post" id="modalForm" action="{{route('vaccination.store')}}">
-            
-            @csrf
-            <div class="form-group">
-                <label for="nome"> Malattia</label>
-                <input class="form-control" type="text" id="malattia" name="malattia" placeholder="Malattia">
-                @error('malattia')
-                <div id="modal_error" class="alert alert-danger" role="alert">{{$message}}</div>
-                @enderror
-              </div>
-
-            <div class="form-group">
-                <label for="nome"> Validità</label>
-                <input  class="form-control" type="number" id="validita" name="validita" placeholder="Validità (mesi)">
-                @error('validita')
-                <div id="modal_error" class="alert alert-danger" role="alert">{{$message}}</div>
-                @enderror
-              </div>
-      </div>
-      <div class="modal-footer">
-      <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Create</label>
-      <input  id="mySubmit" type="submit" value="Create" class="hidden" onclick="event.preventDefault(); checkModal()"/>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
 </div>
 
 @endif
@@ -87,11 +48,7 @@ The dogs
 </script>
 @endif
 
-@if(Session::has('vaccinationstore'))
-  <script>
-  swal('Great!' , 'A new vaccination is available for dogs!', "success");
-</script>
-@endif
+
 
 @if(Session::has('dog_adopted'))
   <script>
@@ -196,78 +153,21 @@ The dogs
             </div>
             
 
-@endsection
-
-@section('script')
+<script>
 
 
-<script>$(".alert").alert('close')</script>
+</script>
 
 <script>
-  function activateModal() {
-  // Get the modal element
-  var modal = document.getElementById('modalVaccination');
-  // Activate the modal
-  $(modal).modal('show');
-}
 
 // Get the button element
-var button = document.getElementById('createVaccinationButton'); 
+var button = document.getElementById('createVaccinationButton');
 // Add a click event listener to the button
-button.addEventListener('click', activateModal);
+button.addEventListener('click', function() {
+  var modal = document.getElementById('modalVaccination');
+  var bootstrapModal = new bootstrap.Modal(modal);
+  bootstrapModal.show();
+});
 </script>
 
-<script>
-  // Get the close button element
-  var closeButton = document.querySelector('.modal .close');
-  // Add click event listener to the close button
-  closeButton.addEventListener('click', function() {
-    
-    // Find the modal element
-    var modal = document.getElementById('modalVaccination');
-    // Hide the modal by removing the 'show' class
-    modal.classList.remove('show');
-    // Remove the modal backdrop
-    var modalBackdrop = document.querySelector('.modal-backdrop');
-    modalBackdrop.parentNode.removeChild(modalBackdrop);
-    // Enable scrolling on the body element
-    document.body.classList.remove('modal-open');
-    // Reload the page
-    location.reload();
-  });
-</script>
-
-<script>
-  function checkModal(){
-    var malattia = document.getElementById("malattia").value.trim();
-    var validita = document.getElementById("validita").value.trim();
-
-    if (malattia === "") {
-      alert("Il campo 'Malattia' non può essere vuoto.");
-      return;
-    }
-
-    if (validita === "" || Number(validita) <= 0) {
-      alert("Il campo 'Validità' deve essere un numero maggiore di zero.");
-      return;
-    }
-
-    // Se i controlli passano, invia la richiesta AJAX
-    $.ajax('/vaccination', {
-      method: 'POST',
-      data: { malattia: malattia, validita: validita },
-      success: function(result) {
-        if (result && result.error === false) {
-          alert('SUCCESSO!')
-          window.location.href = "dog.index";
-        } else {
-          alert('NON VA!');
-        }
-      },
-      error: function(xhr, status, error) {
-        alert('Errore nella richiesta AJAX: ' + error);
-      }
-    });
-  }
-  </script>
 @endsection
