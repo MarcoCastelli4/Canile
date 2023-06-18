@@ -517,3 +517,30 @@ div#menu li li { border:none; width:150px; }
 .hidden {
     display: none;
 }
+
+/*SIDEBAR*/
+.sidebar {
+  width: 300px;
+  /* Add other styles as needed */
+}
+
+#breed-filter {
+  margin-bottom: 10px;
+  width: 340px;
+  /* Add other styles as needed */
+}
+#taglia-filter {
+  margin-bottom: 10px;
+  width: 340px;
+  /* Add other styles as needed */
+}
+#sesso-filter {
+  margin-bottom: 10px;
+  width: 340px;
+  /* Add other styles as needed */
+}
+#pelo-filter {
+  margin-bottom: 10px;
+  width: 340px;
+  /* Add other styles as needed */
+}

@@ -81,6 +81,113 @@ The dogs
   @endif
 </div>
 @else
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filter</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      Choose filter to view dogs.
+    </div>
+    <div class="dropdown mt-3">
+
+      @php
+      $uniqueBreeds = $dog_list->pluck('razza')->unique();
+      $uniqueTaglia = $dog_list->pluck('taglia')->unique();
+      $uniquePelo = array( "Corto", "Medio","Lungo");
+      $uniqueSesso = array( "maschio", "femmina");
+      @endphp
+
+      <table class="table table-bordered">
+    <thead>
+        <tr class="filtro-razza">
+            <th>
+            <i class="bi bi-plus-circle"></i> Razza <span class="caret"></span>
+            </th>
+        </tr>
+        <tr class="razza">
+            <td>
+                <div id="breed-filter-container">
+                    <select id="breed-filter" multiple>
+                        @foreach($uniqueBreeds as $razza)
+                            <option value="{{ $razza }}">{{ $razza }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr class="filtro-taglia">
+            <th>
+            <i class="bi bi-plus-circle"></i> Taglia <span class="caret"></span>
+            </th>
+        </tr>
+        <tr class="taglia">
+            <td>
+                <div id="taglia-filter-container">
+                    <select id="taglia-filter" multiple>
+                        @foreach($uniqueTaglia as $t)
+                            <option value="{{ $t }}">{{ $t }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr class="filtro-pelo">
+            <th>
+            <i class="bi bi-plus-circle"></i> Lunghezza pelo <span class="caret"></span>
+            </th>
+        </tr>
+        <tr class="pelo">
+            <td>
+                <div id="pelo-filter-container">
+                    <select id="pelo-filter" multiple>
+                        @foreach($uniquePelo as $p)
+                            <option value="{{ $p }}">{{ $p }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr class="filtro-sesso">
+            <th>
+            <i class="bi bi-plus-circle"></i> Sesso <span class="caret"></span>
+            </th>
+        </tr>
+        <tr class="sesso">
+            <td>
+                <div id="sesso-filter-container">
+                    <select id="sesso-filter" multiple>
+                        @foreach($uniqueSesso as $sesso)
+                            <option value="{{ $sesso }}">{{ $sesso }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </td>
+        </tr>
+    </thead>
+</table>
+    </div>
+  </div>
+  <div class="container">
+  <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="btn btn-default">
+  <i class="bi bi-filter"></i>Filter Dog
+  </a>
+</div>
+</div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        
+        <div class="container">
+  <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="btn btn-default">
+  <i class="bi bi-filter"></i>Filter Dog
+  </a>
+</div>
+    </div>
+
+       
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-striped table-hover table-responsive" style="width:100%">
@@ -151,9 +258,13 @@ The dogs
                     
                 </div>
             </div>
-            
+            </div>
 
 <script>
+$("#menu-toggle").click(function(e) {
+  e.preventDefault();
+  $("#wrapper").toggleClass("toggled");
+});
 
 
 </script>
@@ -169,5 +280,53 @@ button.addEventListener('click', function() {
   bootstrapModal.show();
 });
 </script>
+
+
+<script>
+  //nascondo tabella per filtri
+    $(document).ready(function() {
+        $("tr[class=razza]").each(function() {
+            $(this).hide();
+        });
+        $("tr[class=sesso]").each(function() {
+            $(this).hide();
+        });
+        $("tr[class=pelo]").each(function() {
+            $(this).hide();
+        });
+        $("tr[class=taglia]").each(function() {
+            $(this).hide();
+        });
+    });
+    // quando clicco icona si aprono
+    $(".filtro-razza th i").each(function() {
+            $(this).click(function() {
+                $("tr[class=razza]").each(function() {
+                    $(this).toggle();
+                });
+            });
+        });
+        $(".filtro-taglia th i").each(function() {
+            $(this).click(function() {
+                $("tr[class=taglia]").each(function() {
+                    $(this).toggle();
+                });
+            });
+        });
+        $(".filtro-sesso th i").each(function() {
+            $(this).click(function() {
+                $("tr[class=sesso]").each(function() {
+                    $(this).toggle();
+                });
+            });
+        });$(".filtro-pelo th i").each(function() {
+            $(this).click(function() {
+                $("tr[class=pelo]").each(function() {
+                    $(this).toggle();
+                });
+            });
+        });
+</script>
+
 
 @endsection
