@@ -172,4 +172,10 @@ class DogController extends Controller
     }
 
    
+    public function dogFilter(Request $request){
+        // Update the dog_list variable with the filteredDogList
+         $dogs_list=$request->input('dogList');
+        
+         return response()->json(['dog_list' => $dogs_list]);
+    }
 }

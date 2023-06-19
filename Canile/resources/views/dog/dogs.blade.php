@@ -94,92 +94,114 @@ The dogs
     <div class="dropdown mt-3">
 
       @php
-      $uniqueBreeds = $dog_list->pluck('razza')->unique();
+      $uniqueRazza = $dog_list->pluck('razza')->unique();
       $uniqueTaglia = $dog_list->pluck('taglia')->unique();
       $uniquePelo = array( "Corto", "Medio","Lungo");
       $uniqueSesso = array( "maschio", "femmina");
       @endphp
 
-      <table class="table table-bordered">
+      <form>
+      <div class="table-container">
+  <table class="table">
     <thead>
-        <tr class="filtro-razza">
-            <th>
-            <i class="bi bi-plus-circle"></i> Razza <span class="caret"></span>
-            </th>
-        </tr>
-        <tr class="razza">
-            <td>
-                <div id="breed-filter-container">
-                    <select id="breed-filter" multiple>
-                        @foreach($uniqueBreeds as $razza)
-                            <option value="{{ $razza }}">{{ $razza }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </td>
-        </tr>
-        <tr class="filtro-taglia">
-            <th>
-            <i class="bi bi-plus-circle"></i> Taglia <span class="caret"></span>
-            </th>
-        </tr>
-        <tr class="taglia">
-            <td>
-                <div id="taglia-filter-container">
-                    <select id="taglia-filter" multiple>
-                        @foreach($uniqueTaglia as $t)
-                            <option value="{{ $t }}">{{ $t }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </td>
-        </tr>
-        <tr class="filtro-pelo">
-            <th>
-            <i class="bi bi-plus-circle"></i> Lunghezza pelo <span class="caret"></span>
-            </th>
-        </tr>
-        <tr class="pelo">
-            <td>
-                <div id="pelo-filter-container">
-                    <select id="pelo-filter" multiple>
-                        @foreach($uniquePelo as $p)
-                            <option value="{{ $p }}">{{ $p }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </td>
-        </tr>
-        <tr class="filtro-sesso">
-            <th>
-            <i class="bi bi-plus-circle"></i> Sesso <span class="caret"></span>
-            </th>
-        </tr>
-        <tr class="sesso">
-            <td>
-                <div id="sesso-filter-container">
-                    <select id="sesso-filter" multiple>
-                        @foreach($uniqueSesso as $sesso)
-                            <option value="{{ $sesso }}">{{ $sesso }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </td>
-        </tr>
+      <tr class="filtro-razza">
+        <th>
+          <i class="bi bi-plus-circle"></i> Razza <span class="caret"></span>
+        </th>
+      </tr>
     </thead>
-</table>
+    <tbody>
+      <tr class="razza">
+        <td>
+          <div class="form-group">
+            <select class="form-control" name="razza-filter" id="razza-filter" multiple>
+              @foreach($uniqueRazza as $razza)
+              <option value="{{ $razza }}">{{ $razza }}</option>
+              @endforeach
+            </select>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table">
+    <thead>
+      <tr class="filtro-taglia">
+        <th>
+          <i class="bi bi-plus-circle"></i> Taglia <span class="caret"></span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="taglia">
+        <td>
+          <div class="form-group">
+            <select class="form-control" name="taglia-filter" id="taglia-filter" multiple>
+              @foreach($uniqueTaglia as $t)
+              <option value="{{ $t }}">{{ $t }}</option>
+              @endforeach
+            </select>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table">
+    <thead>
+      <tr class="filtro-sesso">
+        <th>
+          <i class="bi bi-plus-circle"></i> Sesso <span class="caret"></span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="sesso">
+        <td>
+          <div class="form-group">
+            <select class="form-control" name="sesso-filter" id="sesso-filter" multiple>
+              @foreach($uniqueSesso as $sesso)
+              <option value="{{ $sesso }}">{{ $sesso }}</option>
+              @endforeach
+            </select>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table">
+    <thead>
+      <tr class="filtro-pelo">
+        <th>
+          <i class="bi bi-plus-circle"></i> Lunghezza pelo <span class="caret"></span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="pelo">
+        <td>
+          <div class="form-group">
+            <select class="form-control" name="pelo-filter" id="pelo-filter" multiple>
+              @foreach($uniquePelo as $p)
+              <option value="{{ $p }}">{{ $p }}</option>
+              @endforeach
+            </select>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  <button type="submit" class="btn btn-outline-warning"  data-bs-dismiss="offcanvas">Filter</button>
+</form>
+
     </div>
   </div>
-  <div class="container">
-  <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="btn btn-default">
-  <i class="bi bi-filter"></i>Filter Dog
-  </a>
-</div>
 </div>
         <!-- /#sidebar-wrapper -->
-
         <!-- Page Content -->
-        
         <div class="container">
   <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="btn btn-default">
   <i class="bi bi-filter"></i>Filter Dog
@@ -190,7 +212,7 @@ The dogs
        
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-striped table-hover table-responsive" style="width:100%">
+                    <table class="table table-striped table-hover table-responsive lista" style="width:100%">
                         <col width='10%'>
                         <col width='10%'>
                         <col width='10%'>
@@ -261,24 +283,10 @@ The dogs
             </div>
 
 <script>
-$("#menu-toggle").click(function(e) {
-  e.preventDefault();
-  $("#wrapper").toggleClass("toggled");
-});
-
-
-</script>
-
-<script>
-
-// Get the button element
-var button = document.getElementById('createVaccinationButton');
-// Add a click event listener to the button
-button.addEventListener('click', function() {
-  var modal = document.getElementById('modalVaccination');
-  var bootstrapModal = new bootstrap.Modal(modal);
-  bootstrapModal.show();
-});
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
 </script>
 
 
@@ -328,5 +336,117 @@ button.addEventListener('click', function() {
         });
 </script>
 
+<script>
+    // converto la variable dog_list per essere accessibile al javascript
+    var dog_list_js = {!! json_encode($dog_list) !!};
+
+  $(document).ready(function() {
+
+    $("select").change(function() {
+      var selectedValues = $(this).val();
+      $("select").not(this).each(function() {
+        var currentValue = $(this).val();
+        $(this).val(selectedValues.concat(currentValue));
+      });
+    });
+
+    // Handle form submission
+    $("form").submit(function(event) {
+      event.preventDefault(); // Prevent the form from submitting
+      
+      
+      // Get the filter values
+      var razza = $("#razza-filter").val();
+      // Check if selectedRazza is null or empty
+      if (!razza || razza.length === 0) {
+        // If no values are selected, consider all razza values as selected
+            razza = dog_list_js.map(function(dog) {
+             return dog.razza;
+         });
+        }
+      var taglia = $("#taglia-filter").val();
+      // Check if selectedTagla is null or empty
+      if (!taglia || taglia.length === 0) {
+        // If no values are selected, consider all razza values as selected
+        taglia = dog_list_js.map(function(dog) {
+             return dog.taglia;
+         });
+        }
+      var pelo = $("#pelo-filter").val();
+      // Check if selectedPelo is null or empty
+      if (!pelo || pelo.length === 0) {
+        // If no values are selected, consider all razza values as selected
+        pelo = dog_list_js.map(function(dog) {
+             return dog.pelo;
+         });
+        }
+      var sesso = $("#sesso-filter").val();
+      // Check if selectedSesso is null or empty
+      if (!sesso || sesso.length === 0) {
+        // If no values are selected, consider all razza values as selected
+        sesso = dog_list_js.map(function(dog) {
+             return dog.sesso;
+         });
+        }
+
+      // Call a function to update the dog list
+      var filteredDogList = filterDogs(razza, taglia, pelo, sesso);
+
+      // invio richiesta ajax
+      $.ajaxSetup({
+    headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+      $.ajax({
+      url: "/update-dog-list",
+      type: "POST",
+      data: { dogList: filteredDogList },
+      success: function(response) {
+        // Handle the success response from the server, if needed
+        console.log(response);
+        console.log("Corretto");
+        //window.location.href = window.location.href;
+        updatePage(response.dog_list);
+      },
+      error: function(xhr, status, error) {
+        // Handle any errors that occur during the AJAX request
+        console.error(error);
+        console.log("Errore");
+      }
+    });
+    });
+    
+    // Function to update the dog list
+    function filterDogs(razza, taglia, pelo, sesso) {
+      return dog_list_js.filter(function(dog) {
+        // Apply the filter conditions
+        return (
+          (razza.length === 0 || razza.includes(dog.razza)) &&
+          (taglia.length === 0 || taglia.includes(dog.taglia)) &&
+          (pelo.length === 0 || pelo.includes(dog.pelo)) &&
+          (sesso.length === 0 || sesso.includes(dog.sesso))
+        );
+      });
+    }
+  });
+
+  function updatePage(dogList) {
+  // Perform the necessary DOM manipulation to update the page
+  // For example, update a table with the new dog_list
+
+  // Assuming you have a table element with id "dogTable"
+  var table = $("#lista");
+  table.empty(); // Clear existing data from the table
+
+  // Iterate over the dogList and populate the table with the updated data
+  for (var i = 0; i < dogList.length; i++) {
+    var dog = dogList[i];
+    // Append a new row to the table with the dog details
+    var row = "<tr><td>" + dog.name + "</td><td>" + dog.razza + "</td></tr>";
+    table.append(row);
+  }
+}
+</script>
 
 @endsection
