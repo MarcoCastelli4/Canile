@@ -174,8 +174,16 @@ class DogController extends Controller
    
     public function dogFilter(Request $request){
         // Update the dog_list variable with the filteredDogList
-         $dogs_list=$request->input('dogList');
+         $dog_list=$request->input('dogList');
         
-         return response()->json(['dog_list' => $dogs_list]);
+         return response()->json(['dog_list' => $dog_list]);
+        
+        /*
+        if(isset($_SESSION["loggedName"])){
+            return view('dog.dogs')->with("dog_list",$dog_list)->with('user_id',$_SESSION["user_id"])->with('isAdmin',$_SESSION['isAdmin'])->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
+        }
+        else 
+        return view('dog.dogs')->with("dog_list",$dog_list)->with('isAdmin', false)->with('logged', false)->with('loggedName', "");
+   */
     }
 }

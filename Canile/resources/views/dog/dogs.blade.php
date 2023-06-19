@@ -194,7 +194,10 @@ The dogs
     </tbody>
   </table>
 </div>
+<div class="container">
   <button type="submit" class="btn btn-outline-warning"  data-bs-dismiss="offcanvas">Filter</button>
+  <button type="submit" class="btn btn-outline-success"  data-bs-dismiss="offcanvas" onClick="resetFilter()">Reset Filter</button>
+</div>
 </form>
 
     </div>
@@ -209,10 +212,10 @@ The dogs
 </div>
     </div>
 
-       
+    <div id="dog_list_container" data-dog-list="{{ $dog_list }}">
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-striped table-hover table-responsive lista" style="width:100%">
+                    <table class="table table-striped table-hover table-responsive" id="dog_list_table" style="width:100%">
                         <col width='10%'>
                         <col width='10%'>
                         <col width='10%'>
@@ -238,7 +241,7 @@ The dogs
                        
                         <tbody>
                         @foreach($dog_list as $dog)
-                            <tr>
+                            <tr id="{{$dog->id}}">
                                 <td>{{$dog->nome}}</td>
                                 <td>{{$dog->razza}}</td>
                                 <td>{{$dog->taglia}}</td>
@@ -281,6 +284,7 @@ The dogs
                 </div>
             </div>
             </div>
+</div>
 
 <script>
     $("#menu-toggle").click(function(e) {
@@ -390,32 +394,36 @@ The dogs
         }
 
       // Call a function to update the dog list
+      
       var filteredDogList = filterDogs(razza, taglia, pelo, sesso);
-
       // invio richiesta ajax
       $.ajaxSetup({
     headers: {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
     });
+    
       $.ajax({
       url: "/update-dog-list",
       type: "POST",
       data: { dogList: filteredDogList },
       success: function(response) {
         // Handle the success response from the server, if needed
-        console.log(response);
+        console.log(response.dog_list);
         console.log("Corretto");
-        //window.location.href = window.location.href;
-        updatePage(response.dog_list);
+        //$("#dog_list_container").html(response.dog_list);
+       // $("#dog_list_container").attr("data-dog-list", response.dog_list);
+       updatePage(response.dog_list);
       },
       error: function(xhr, status, error) {
         // Handle any errors that occur during the AJAX request
         console.error(error);
         console.log("Errore");
-      }
+      }   
     });
     });
+
+
     
     // Function to update the dog list
     function filterDogs(razza, taglia, pelo, sesso) {
@@ -431,22 +439,33 @@ The dogs
     }
   });
 
+  
   function updatePage(dogList) {
-  // Perform the necessary DOM manipulation to update the page
-  // For example, update a table with the new dog_list
+    var table = $("#dog_list_table");
+    var rows = table.find("tbody tr");
 
-  // Assuming you have a table element with id "dogTable"
-  var table = $("#lista");
-  table.empty(); // Clear existing data from the table
-
-  // Iterate over the dogList and populate the table with the updated data
-  for (var i = 0; i < dogList.length; i++) {
-    var dog = dogList[i];
-    // Append a new row to the table with the dog details
-    var row = "<tr><td>" + dog.name + "</td><td>" + dog.razza + "</td></tr>";
-    table.append(row);
-  }
+for (var i = 0; i<rows.length;i++) {
+  var row = rows[i];
+// Verificare se l'id della riga non è presente nell'array dogArray
+if (dogList===null || !dogList.some(function(dog) { return dog.id === row.id; })) {
+  // Rimuovere la riga dalla tabella
+  row.parentNode.removeChild(row);
 }
+}
+
+  }
+
+  function resetFilter(){
+    window.location.reload();
+
+    // Select all the select elements in the form
+  var selects = document.querySelectorAll('#razza-filter, #taglia-filter, #sesso-filter, #pelo-filter');
+
+// Reset the selected values for each select element
+selects.forEach(function(select) {
+  select.selectedIndex = -1; // Reset to no selected option
+});
+  }
 </script>
 
 @endsection
