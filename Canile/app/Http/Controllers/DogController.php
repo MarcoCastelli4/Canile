@@ -14,11 +14,13 @@ class DogController extends Controller
         $dl=new DataLayer();
         // ottengo la lista
         $dogs=$dl->getDogAvailable();
+        $lista_razze=$dl->getAllRazzaValues();
+
         if(isset($_SESSION["loggedName"])){
-            return view('dog.dogs')->with('user_id',$_SESSION["user_id"])->with('isAdmin',$_SESSION['isAdmin'])->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with("dog_list",$dogs);
+            return view('dog.dogs')->with('lista_razze',$lista_razze)->with('user_id',$_SESSION["user_id"])->with('isAdmin',$_SESSION['isAdmin'])->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with("dog_list",$dogs);
         }
         else 
-        return view('dog.dogs')->with('isAdmin', false)->with('logged', false)->with('loggedName', "")->with("dog_list",$dogs);
+        return view('dog.dogs')->with('lista_razze',$lista_razze)->with('isAdmin', false)->with('logged', false)->with('loggedName', "")->with("dog_list",$dogs);
     }
 
     public function create()
@@ -174,16 +176,29 @@ class DogController extends Controller
    
     public function dogFilter(Request $request){
         // Update the dog_list variable with the filteredDogList
-         $dog_list=$request->input('dogList');
+        // $dog_list=$request->input('dogList');
+
+        session_start();
+       
+        $dl=new DataLayer();
         
-         return response()->json(['dog_list' => $dog_list]);
-        
-        /*
+
+        // ottengo le info da ajax
+        $razza=$request->input('filterRazza');
+        $taglia=$request->input('filterTaglia');
+        $pelo=$request->input('filterPelo');
+        $sesso=$request->input('filterSesso');
+
+        $lista_razze=$dl->getAllRazzaValues();
+
+        // richiamo metodo per filtrare i dati
+        $dog_list_filtered=$dl->filterDog($razza,$taglia,$pelo,$sesso);
+
         if(isset($_SESSION["loggedName"])){
-            return view('dog.dogs')->with("dog_list",$dog_list)->with('user_id',$_SESSION["user_id"])->with('isAdmin',$_SESSION['isAdmin'])->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
+            return view('dog.dogs')->with('lista_razze',$lista_razze)->with("dog_list",$dog_list_filtered)->with('user_id',$_SESSION["user_id"])->with('isAdmin',$_SESSION['isAdmin'])->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
         }
         else 
-        return view('dog.dogs')->with("dog_list",$dog_list)->with('isAdmin', false)->with('logged', false)->with('loggedName', "");
-   */
+        return view('dog.dogs')->with('lista_razze',$lista_razze)->with("dog_list",$dog_list_filtered)->with('isAdmin', false)->with('logged', false)->with('loggedName', "");
+   
     }
 }

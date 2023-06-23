@@ -264,4 +264,31 @@ class DataLayer {
 
         $review->save();
     }
+
+    public function getAllRazzaValues()
+    {
+    $razzaValues = Dog::query()
+        ->pluck('razza')
+        ->all();
+
+    return $razzaValues;
+    }
+    // per il filtraggio
+    public function filterDog($razza,$taglia,$pelo,$sesso){
+        $dogs = Dog::query();
+        if(!is_null($razza)){
+            $dogs->where('razza', $razza);
+        }
+        if(!is_null($taglia)){
+            $dogs->where('taglia', $taglia);
+        }
+        if(!is_null($sesso)){
+            $dogs->where('sesso', $sesso);
+        }
+        if(!is_null($pelo)){
+            $dogs->where('lunghezza pelo', $pelo);
+        }
+
+    return $dogs->get();
+    }
 }

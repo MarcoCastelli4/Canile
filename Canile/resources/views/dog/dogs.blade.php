@@ -71,17 +71,6 @@ The dogs
 @endif
 
 
-<!-- Se la lista dei cani è vuota oppure non ci sono più cani disponibili -->
-@if (count($dog_list)==0)
-<div class="alert alert-warning" role="alert">
-  @if($isAdmin==true)
-  <strong>No dog are available in database! </strong>Please create new dog with the button above!
-  @else
-  <strong>No dog are available! </strong> Please contact service!
-  @endif
-</div>
-@else
-
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filter</h5>
@@ -94,8 +83,14 @@ The dogs
     <div class="dropdown mt-3">
 
       @php
-      $uniqueRazza = $dog_list->pluck('razza')->unique();
-      $uniqueTaglia = $dog_list->pluck('taglia')->unique();
+      if(is_object($lista_razze)){
+        $uniqueRazza = $lista_razze->unique();
+    } else if(is_array($lista_razze)){
+        $uniqueRazza = collect($lista_razze)->unique();
+    } else {
+        $uniqueRazza = collect([]);
+    }
+      $uniqueTaglia = array( "Piccola", "Media","Grande");
       $uniquePelo = array( "Corto", "Medio","Lungo");
       $uniqueSesso = array( "maschio", "femmina");
       @endphp
@@ -205,13 +200,36 @@ The dogs
 </div>
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
-        <div class="container">
+  <div class="container">
   <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="btn btn-default">
   <i class="bi bi-filter"></i>Filter Dog
   </a>
+
+  <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Order by ...
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Older</a>
+    <a class="dropdown-item" href="#">Younger</a>
+  </div>
+</div>
+
 </div>
     </div>
 
+    <!-- Se la lista dei cani è vuota oppure non ci sono più cani disponibili -->
+@if (count($dog_list)==0)
+<div class="alert alert-warning" role="alert">
+  @if($isAdmin==true)
+  <strong>No dog are available in database! </strong>Please create new dog with the button above!
+  @else
+  <strong>No dog are available! </strong> Please contact service or try resetFilter!
+  @endif
+</div>
+@endif
+
+    @if (count($dog_list)>0)
     <div id="dog_list_container" data-dog-list="{{ $dog_list }}">
             <div class="row">
                 <div class="col-md-12">
@@ -291,6 +309,8 @@ The dogs
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
+
+    $('.dropdown-toggle').dropdown('toggle');
 </script>
 
 
@@ -341,8 +361,6 @@ The dogs
 </script>
 
 <script>
-    // converto la variable dog_list per essere accessibile al javascript
-    var dog_list_js = {!! json_encode($dog_list) !!};
 
   $(document).ready(function() {
 
@@ -357,115 +375,52 @@ The dogs
     // Handle form submission
     $("form").submit(function(event) {
       event.preventDefault(); // Prevent the form from submitting
-      
-      
+
       // Get the filter values
       var razza = $("#razza-filter").val();
-      // Check if selectedRazza is null or empty
-      if (!razza || razza.length === 0) {
-        // If no values are selected, consider all razza values as selected
-            razza = dog_list_js.map(function(dog) {
-             return dog.razza;
-         });
-        }
       var taglia = $("#taglia-filter").val();
-      // Check if selectedTagla is null or empty
-      if (!taglia || taglia.length === 0) {
-        // If no values are selected, consider all razza values as selected
-        taglia = dog_list_js.map(function(dog) {
-             return dog.taglia;
-         });
-        }
       var pelo = $("#pelo-filter").val();
-      // Check if selectedPelo is null or empty
-      if (!pelo || pelo.length === 0) {
-        // If no values are selected, consider all razza values as selected
-        pelo = dog_list_js.map(function(dog) {
-             return dog.pelo;
-         });
-        }
       var sesso = $("#sesso-filter").val();
-      // Check if selectedSesso is null or empty
-      if (!sesso || sesso.length === 0) {
-        // If no values are selected, consider all razza values as selected
-        sesso = dog_list_js.map(function(dog) {
-             return dog.sesso;
-         });
-        }
 
-      // Call a function to update the dog list
-      
-      var filteredDogList = filterDogs(razza, taglia, pelo, sesso);
       // invio richiesta ajax
       $.ajaxSetup({
-    headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-    });
-    
-      $.ajax({
-      url: "/update-dog-list",
-      type: "POST",
-      data: { dogList: filteredDogList },
-      success: function(response) {
-        // Handle the success response from the server, if needed
-        console.log(response.dog_list);
-        console.log("Corretto");
-        //$("#dog_list_container").html(response.dog_list);
-       // $("#dog_list_container").attr("data-dog-list", response.dog_list);
-       updatePage(response.dog_list);
-      },
-      error: function(xhr, status, error) {
-        // Handle any errors that occur during the AJAX request
-        console.error(error);
-        console.log("Errore");
-      }   
-    });
-    });
-
-
-    
-    // Function to update the dog list
-    function filterDogs(razza, taglia, pelo, sesso) {
-      return dog_list_js.filter(function(dog) {
-        // Apply the filter conditions
-        return (
-          (razza.length === 0 || razza.includes(dog.razza)) &&
-          (taglia.length === 0 || taglia.includes(dog.taglia)) &&
-          (pelo.length === 0 || pelo.includes(dog.pelo)) &&
-          (sesso.length === 0 || sesso.includes(dog.sesso))
-        );
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
       });
-    }
+
+      console.log(razza);
+      $.ajax({
+        url: '/dog/filter',
+        method: 'GET',
+        data: { filterRazza: razza, filterTaglia:taglia, filterPelo:pelo, filterSesso:sesso },
+        success: function(response) {
+          var newDocument = document.open('text/html', 'replace');
+          newDocument.write(response);
+          newDocument.close();
+        },
+        error: function(xhr, status, error) {
+          // Handle any errors that occur during the AJAX request
+          console.error(error);
+          console.log("Errore");
+        }
+      });
+    });
+
   });
 
-  
-  function updatePage(dogList) {
-    var table = $("#dog_list_table");
-    var rows = table.find("tbody tr");
-
-for (var i = 0; i<rows.length;i++) {
-  var row = rows[i];
-// Verificare se l'id della riga non è presente nell'array dogArray
-if (dogList===null || !dogList.some(function(dog) { return dog.id === row.id; })) {
-  // Rimuovere la riga dalla tabella
-  row.parentNode.removeChild(row);
-}
-}
-
-  }
-
-  function resetFilter(){
+  function resetFilter() {
     window.location.reload();
 
     // Select all the select elements in the form
-  var selects = document.querySelectorAll('#razza-filter, #taglia-filter, #sesso-filter, #pelo-filter');
+    var selects = document.querySelectorAll('#razza-filter, #taglia-filter, #sesso-filter, #pelo-filter');
 
-// Reset the selected values for each select element
-selects.forEach(function(select) {
-  select.selectedIndex = -1; // Reset to no selected option
-});
+    // Reset the selected values for each select element
+    selects.forEach(function(select) {
+      select.selectedIndex = -1; // Reset to no selected option
+    });
   }
 </script>
+
 
 @endsection

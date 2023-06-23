@@ -26,7 +26,7 @@ Route::get('/dog/{id}/info', [DogController::class, 'info'])->name('dog.info');
 
 Route::get('/review', [ReviewController::class,'index'])->name('review.index');
 
-Route::post('/update-dog-list', [DogController::class,'dogFilter'])->name('dog.filter');
+Route::get('/dog/filter', [DogController::class,'dogFilter'])->name('dog.filter');
 
 //rotte per utente admin 
 Route::middleware(['authCustom','IsAdmin'])->group(function () {
