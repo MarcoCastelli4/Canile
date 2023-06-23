@@ -12,6 +12,11 @@ class UserController extends Controller
     public function index($id)
     {
         $dl=new DataLayer();
+
+        if($id!=$_SESSION["user_id"]){
+            Session::flash('id_user_fail'); 
+            return Redirect::to(route('dog.index'));
+        }
         // ottengo la lista
         $dogs=$dl->getMyDogs($id);
         if(isset($_SESSION["loggedName"])){
@@ -26,15 +31,18 @@ class UserController extends Controller
         $dl=new DataLayer();
         
         $dog=$dl->findDogById($id);
-        
-        return view('user.adoption')->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"])
+        $dog=$dl->findDogById($id);
+        if(is_null($dog)){
+            Session::flash('id_dog_fail'); 
+            return Redirect::to(route('dog.index'));
+        }
+        else return view('user.adoption')->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"])
         ->with('user_id', $_SESSION["user_id"])->with('isAdmin', $_SESSION["isAdmin"]);
         
     }
 
     public function addAdoption(Request $request,$id)
     {
-
         $dl=new DataLayer(); 
         $dog_id=$id;
 

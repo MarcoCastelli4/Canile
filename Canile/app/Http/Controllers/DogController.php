@@ -35,8 +35,8 @@ class DogController extends Controller
     public function destroy($id)
     {
         $dl = new DataLayer();
-        $book = $dl->findDogById($id);
-        if ($book !== null) {
+        $dog = $dl->findDogById($id);
+        if ($dog !== null) {
             if($dl->deleteDog($id)==false){
                 Session::flash('dog_not_deleted');
             }
@@ -126,8 +126,15 @@ class DogController extends Controller
         
         $vaccinations=$dl->getAllVaccinations();
         $dog=$dl->findDogById($id);
+        
+        if(is_null($dog)){
+          Session::flash('id_dog_fail');
+          return Redirect::to(route('dog.index'));
+        }
+        if(!is_null($dog)){
         $images=$dl->getDogImages($id);
         $documents=$dl->getDogDocuments($id);
+        
         
         if(isset($_SESSION["loggedName"])){
             
@@ -138,7 +145,7 @@ class DogController extends Controller
         }
         else
         return view('dog.infoDog')->with("documents",$documents)->with("images",$images)->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', false)->with('loggedName', "");
-        
+    }
 
        
     
@@ -150,8 +157,12 @@ class DogController extends Controller
         $dl=new DataLayer();
         $vaccinations=$dl->getAllVaccinations();
         $dog=$dl->findDogById($id);
-        
-        return view('dog.vaccination')->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with('isAdmin',$_SESSION['isAdmin']);
+        if(is_null($dog)){
+            Session::flash('id_dog_fail'); 
+            return Redirect::to(route('dog.index'));
+        }
+    
+        else return view('dog.vaccination')->with("vaccination_list",$vaccinations)->with("dog",$dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with('isAdmin',$_SESSION['isAdmin']);
     }
 
     public function addVaccination(Request $request, $dog_id)
@@ -162,15 +173,23 @@ class DogController extends Controller
             'dataVaccinazione' => 'required',    
         ]);
 
+        $dog=$dl->findDogById($dog_id);
+        if(is_null($dog)){
+            Session::flash('id_dog_fail'); 
+            return Redirect::to(route('dog.index'));
+        }
+
+        else{
         $dl->addDogVaccination($dog_id, $request->input('vaccination_id'), $request->input('dataVaccinazione'));
 
         $vaccinations=$dl->getAllVaccinations();
         $dog=$dl->findDogById($dog_id);
 
-          // vaccinazione inserita correttamente
-          Session::flash('dogvaccination');
+        // vaccinazione inserita correttamente
+        Session::flash('dogvaccination');
        
-          return Redirect::to(route('dog.index'));
+        return Redirect::to(route('dog.index'));
+        }
     }
 
    

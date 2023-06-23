@@ -21,25 +21,25 @@ class DataLayer {
     // cancellare un cane
     public function deleteDog($id) {
         $dog = Dog::find($id);
-         // Il cane è adottato quindi non cancellabile dal database
-        if ($dog->adoption) {
+        // verifico che il cane esista
+        if(is_null($dog)){
             return false;
         }
-
-        
+         // Il cane è adottato quindi non cancellabile dal database
+        $adoptions = Adoption::query();
+        if($adoptions->where('dog_id', $id)->count() > 0){
+                return false;
+        }
+        else{
         $vaccination = $dog->vaccination;
-
         // disassocio immagini e documenti associati
         $dog->image()->delete();
-
         $dog->document()->delete();
-       
         foreach($vaccination as $v) {
             $dog->vaccination()->detach($v->id);
         }
-
-       
         $dog->delete();
+     }
     }
 
     // salva  img nel database e dentro la cartella
@@ -220,9 +220,7 @@ class DataLayer {
  
      }
 
-     public function getDog($id){
-       return Dog::find($id);
-     }
+    
      // abbiamo già il controllo nel validator se email già presente nel database
      public function addUser($name, $password, $email) {
         $user = new User();

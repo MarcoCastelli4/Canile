@@ -7,16 +7,27 @@ use App\Models\DataLayer;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use App\Mail\ConfirmAdoption;
+use Session;
 
 class MailController extends Controller
 {
     public function sendMail($dog_id,$user_id){
+
+        if($user_id!=$_SESSION["user_id"]){
+            Session::flash('id_user_fail'); 
+            return Redirect::to(route('dog.index'));
+        }
+
         $dl=new DataLayer(); 
-        $dogs=$dl->getDogAvailable();
 
         $emailto=$dl->getUserMail($user_id);
         $name=$dl->getUserName($emailto);
-        $dog=$dl->getDog($dog_id);
+        $dog=$dl->findDogById($dog_id);
+       
+        if(is_null($dog)){
+            Session::flash('id_dog_fail'); 
+            return Redirect::to(route('dog.index'));
+        }
         
         Mail::to($emailto)->send(new ConfirmAdoption($name,$dog));
 

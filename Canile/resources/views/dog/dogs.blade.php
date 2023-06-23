@@ -10,7 +10,7 @@ The dogs
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">I cani</li>
+    <li class="breadcrumb-item active" aria-current="page">Dogs</li>
   </ol>
 </nav>
 @endsection
@@ -31,20 +31,20 @@ The dogs
 <!-- Popup inserimenti corretti -->
 @if(Session::has('dogstore'))
   <script>
-  swal('Great!' , 'A new dog is available for adoption!', "success");
+  swal('Ben fatto!' , 'Un nuovo cane è disponibile nel canile!', "success");
 </script>
 @endif
 
 @if(Session::has('dogedit'))
   <script>
-  swal('Great!' , 'Dog modified correctly!', "success");
+  swal('Ben fatto!' , 'Cane modificato correttamente!', "success");
 </script>
 @endif
 
 
 @if(Session::has('dogvaccination'))
   <script>
-  swal('Great!' , 'Dog vaccination insert correctly!', "success");
+  swal('Ben fatto!' , 'Vaccinazione per il cane inserita correttamente!', "success");
 </script>
 @endif
 
@@ -52,7 +52,7 @@ The dogs
 
 @if(Session::has('dog_adopted'))
   <script>
-  swal('Congratulation!' , 'You are adopted a new dog, check you email box for more details!', "success");
+  swal('Congratulazioni!' , 'Hai adottato un cane del nostro canile! Controlla la tua email per maggiori dettagli!', "success");
 </script>
 @endif
 
@@ -60,25 +60,37 @@ The dogs
 <!-- Popup errori -->
 @if(Session::has('dog_not_deleted'))
   <script>
-  swal('Warning!' , 'You cannot delete a dog if it has been adopted!', "error");
+  swal('Attenzione!' , 'Non puoi cancellare un cane che è stato adottato!', "error");
 </script>
 @endif
 
 @if(Session::has('dog_adoption_error'))
   <script>
-  swal('Warning!' , 'Adoption not available for this dog!', "error");
+  swal('Attenzione!' , 'Adozione non disponibile per il cane!', "error");
+</script>
+@endif
+
+@if(Session::has('id_dog_fail'))
+  <script>
+  swal('Attenzione!' , 'Stai usando un dog id non valido!', "error");
+</script>
+@endif
+
+@if(Session::has('id_user_fail'))
+  <script>
+  swal('Attenzione!' , 'Questo non è il tuo id!', "error");
 </script>
 @endif
 
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filter</h5>
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filtri</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
     <div>
-      Choose filter to view dogs.
+      Scegli un filtro per visualizzare i cani
     </div>
     <div class="dropdown mt-3">
 
@@ -202,7 +214,7 @@ The dogs
         <!-- Page Content -->
   <div class="container">
   <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="btn btn-default">
-  <i class="bi bi-filter"></i>Filter Dog
+  <i class="bi bi-filter"></i>Filtra i cani
   </a>
 
   <div class="dropdown">
@@ -210,8 +222,8 @@ The dogs
     Order by ...
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Older</a>
-    <a class="dropdown-item" href="#">Younger</a>
+    <a class="dropdown-item" href="#">Cuccioli</a>
+    <a class="dropdown-item" href="#">Anziani</a>
   </div>
 </div>
 
@@ -222,9 +234,9 @@ The dogs
 @if (count($dog_list)==0)
 <div class="alert alert-warning" role="alert">
   @if($isAdmin==true)
-  <strong>No dog are available in database! </strong>Please create new dog with the button above!
+  <strong>Nessun cane disponibile nel database! </strong>Per favore, crea un cane tramite il bottone apposito!
   @else
-  <strong>No dog are available! </strong> Please contact service or try resetFilter!
+  <strong>Nesssun cane disponibile! </strong> Resetta i filtri oppure contatta la direzione!
   @endif
 </div>
 @endif
