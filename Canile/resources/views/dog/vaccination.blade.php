@@ -1,7 +1,7 @@
 @extends('layouts.master') 
 
 @section('titolo')
-Vaccination dog
+Vaccinazione cane
 @endsection
 
 @section('stile','style.css') 
@@ -10,8 +10,8 @@ Vaccination dog
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-        <li class="breadcrumb-item " aria-current="page"><a href="{{route('dog.index')}}">Dogs</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Add vaccination</a></li>
+        <li class="breadcrumb-item " aria-current="page"><a href="{{route('dog.index')}}">I cani</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Vaccinazione</a></li>
     </ol>
 </nav>
 @endsection
@@ -44,8 +44,8 @@ Vaccination dog
 
       <br/>
       <div class="container">
-      <a href="{{ route('dog.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Cancel</a>
-      <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Insert</label>
+      <a href="{{ route('dog.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Annulla</a>
+      <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Vaccina</label>
             <input  id="mySubmit" type="submit" value="Insert" class="hidden"/>
 </div>
       <form>

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>User authentication</title>
+        <title>Autenticazione utente</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <!-- Fogli di stile -->
         <link rel="stylesheet" href="{{ url('/') }}/css/bootstrap.min.css">
@@ -20,10 +20,10 @@
 	<div class="form-container sign-up-container">
     <form id="register-form" action="{{ route('user.register') }}" method="post" style="margin-top: 2em">
         @csrf
-        <h1>Create account</h1>
-			<span>Use your email for registration</span>
+        <h1>Crea un account</h1>
+			<span>Inserisci i dati richiesti</span>
                                 <div class="form-group">
-                                <input  type="text" name="name" class="form-control" placeholder="Name" value=""/>
+                                <input  type="text" name="name" class="form-control" placeholder="Nome" value=""/>
                                  @error('name')
                                         <div id="registration_error"  class="alert alert-danger" role="alert">{{$message}}</div>
                                         @enderror
@@ -44,26 +44,26 @@
                                 </div>
 
                                 <div class="form-group text-center">
-                                    <input type="password" name="confirm-password" class="form-control" placeholder="Confirm password" value=""/>
+                                    <input type="password" name="confirm-password" class="form-control" placeholder="Conferma password" value=""/>
                                     @error('confirm-password')
                                       <div id="registration_error"  class="alert alert-danger" role="alert">{{$message}}</div>
                                       @enderror
                                 </div>
 
                                 <div class="container">
-                                <a href="{{ route('home') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Back</a>
-                                <label for="Register" class="btn btn-primary"><i class="bi-check-lg"></i> Register</label>
+                                <a href="{{ route('home') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Indietro</a>
+                                <label for="Register" class="btn btn-primary"><i class="bi-check-lg"></i> Registrati</label>
                                 <input id="Register" type="submit" value="Register" class="hidden"/>
                                 </div>
                             </form>
 	</div>
 	<div class="form-container sign-in-container">
             <form id="login-form" action="{{ route('user.login') }}" method="post" style="margin-top: 2em">
-            <h1>Sign-in</h1>
-			<span>Use your email for sign-in</span>   
+            <h1>Accedi</h1>
+			<span>Inserisci la tua email e la password con i quali ti sei registrato</span>   
             @csrf
                                 <div class="form-group">
-                                    <input type="text" name="l_email" class="form-control" placeholder="e-Mail"/>
+                                    <input type="text" name="l_email" class="form-control" placeholder="Email"/>
                                     @error('l_email')
                                     <div class="alert alert-danger" role="alert">{{$message}}</div>
                                     @enderror
@@ -77,7 +77,7 @@
                                 </div>
 
                                 <div class="container">
-                                <a href="{{ route('home') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Back</a>
+                                <a href="{{ route('home') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Indietro</a>
                                 <label for="Login" class="btn btn-primary"><i class="bi-check-lg"></i> Login</label>
                                 <input id="Login" type="submit" value="Login" class="hidden"/>
                                 </div>
@@ -86,14 +86,14 @@
 	<div class="overlay-container">
 		<div class="overlay">
 			<div class="overlay-panel overlay-left">
-				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
-				<button class="ghost" id="signIn">Sign In</button>
+				<h1>Bentornato!</h1>
+				<p>Per conneterti con noi accedi con le tue credenziali personali</p>
+				<button class="ghost" id="signIn">Accedi</button>
 			</div>
 			<div class="overlay-panel overlay-right">
-				<h1>Hello, Friend!</h1>
-				<p>Enter your personal details and start journey with us</p>
-				<button class="ghost" id="signUp">Sign Up</button>
+				<h1>Ciao Amico!</h1>
+				<p>Inserisci i tuoi dati personali per accedere al canile!</p>
+				<button class="ghost" id="signUp">Registrati</button>
 			</div>
 		</div>
 	</div>

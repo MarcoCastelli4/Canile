@@ -1,7 +1,7 @@
 @extends('layouts.master') 
 
 @section('titolo')
-Info dog
+Informazioni cane
 @endsection
 
 @section('stile','style.css') 
@@ -10,8 +10,8 @@ Info dog
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-        <li class="breadcrumb-item " aria-current="page"><a href="{{route('dog.index')}}">Dogs</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Medical and other information</a></li>
+        <li class="breadcrumb-item " aria-current="page"><a href="{{route('dog.index')}}">I cani</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Informazioni</a></li>
     </ol>
 </nav>
 @endsection
@@ -19,7 +19,7 @@ Info dog
 
 
 @section('corpo')
-<h3> Medical and other information about {{$dog->nome}} </h3>
+<h3> Informazioni mediche e documentazione relativa a: {{$dog->nome}} </h3>
 
 <div class="row justify-content-center align-items-center">
   <div class="col-md-4">
@@ -34,11 +34,11 @@ Info dog
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span class="visually-hidden">Precedente</span>
       </button>
       <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span class="visually-hidden">Successiva</span>
       </button>
     </div>
   </div>

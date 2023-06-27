@@ -39,11 +39,16 @@ class DogController extends Controller
         if ($dog !== null) {
             if($dl->deleteDog($id)==false){
                 Session::flash('dog_not_deleted');
+                return Redirect::to(route('dog.index'));
+            }
+            else{
+                Session::flash('dog_deleted');
+                return Redirect::to(route('dog.index'));
             }
             
-            return Redirect::to(route('dog.index'));
         } else {
-            return view('dog.deleteErrorPage');
+            Session::flash('id_dog_fail');
+            return Redirect::to(route('dog.index'));
         }
         
     }
@@ -55,7 +60,8 @@ class DogController extends Controller
         if ($dog !== null) {
             return view('dog.deleteDog')->with('dog', $dog)->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with('isAdmin', $_SESSION["isAdmin"])->with('user_id', $_SESSION["user_id"]);
         } else {
-            return view('dog.deleteErrorPage')->with('logged', true)->with('loggedName', $_SESSION["loggedName"])->with('isAdmin', $_SESSION["isAdmin"])->with('user_id', $_SESSION["user_id"]);
+            Session::flash('id_dog_fail');
+            return Redirect::to(route('dog.index'));
         }
     }
 

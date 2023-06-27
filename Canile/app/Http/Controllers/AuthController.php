@@ -26,9 +26,9 @@ class AuthController extends Controller
         ],
         [
 
-            'l_email.email' => 'The email must be a valid email address.',
-            'l_email.required' => 'The email field is required.',
-            'l_password.required' => 'The password field is required.'
+            'l_email.email' => 'Il campo email deve contenere una email valida.',
+            'l_email.required' => 'Il campo email è richiesto.',
+            'l_password.required' => 'La password è richiesta.'
 
         ]);
 
@@ -61,9 +61,20 @@ class AuthController extends Controller
         $req->validate([
             'name' => 'required',
             'password' => 'required',
-            'email' =>'required|unique:users,email',
+            'email' =>'required|unique:users|email',
             'password' => 'required|min:6|same:confirm-password',
             'confirm-password' => 'required|min:6',
+        ],
+    
+        [ 'name.required' => 'Il campo nome è richiesto.',
+        'password.required' => 'Il campo password è richiesto.',
+        'confirm-password.required' => 'Il campo conferma password è richiesto.',
+        'email.required' => 'Il campo email è richiesto.',
+        'email.unique' => 'Email già presente nel database',
+        'email.email'=>'Il campo email deve contenere una email valida.',
+        'password.min' => 'La password deve contenere almeno 6 caratteri.',
+        'password.same' => 'Le password non corrispondono.',
+        'confirm-password.min' => 'La conferma password deve contenere almeno 6 caratteri.',
         ]);
 
 

@@ -1,5 +1,10 @@
 @extends('layouts.master')
 
+@section('titolo')
+Recensioni
+@endsection
+
+
 @section('stile')
 style.css
 @endsection
@@ -8,7 +13,7 @@ style.css
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Review</a></li> 
+        <li class="breadcrumb-item active" aria-current="page">Recensioni</a></li> 
     </ol>
 </nav>
 @endsection
@@ -17,14 +22,14 @@ style.css
 
 @if(Session::has('review_store'))
   <script>
-  swal('Well Done!' , 'Review insert correctly!', "success");
+  swal('Ben fatto!' , 'Recensione inserita correttamente!', "success");
 </script>
 @endif
 
 @if($logged==true && $isAdmin==false)
 <div class="container">
   <a href="{{ route('review.edit') }}" class="btn btn-success">
-    <i class="bi bi-plus-square"></i> Write Review
+    <i class="bi bi-plus-square"></i> Scrivi recensione
   </a>
 </div>
 @endif
@@ -66,12 +71,12 @@ style.css
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselBasicExample"
         data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+        <span class="visually-hidden">Precedente</span>
       </button>
       <button class="carousel-control-next" type="button" data-bs-target="#carouselBasicExample"
         data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+        <span class="visually-hidden">Successiva</span>
       </button>
     </div>
     </div>

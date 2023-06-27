@@ -1,15 +1,19 @@
 @component('mail::message')
 
-Great {{$name}} your adoption is confirmed!
+Gentile {{$name}} La tua adozione è avvenuta con successo!
 <br>
-This is the details about adoption:
+Questi i dettagli del tuo amico a quattro zampe:
 <br>
-Dog name: {{$dog->nome}}<br>
-Dog race: {{$dog->razza}}<br>
-Dog colour: {{$dog->colore}}<br>
-Dog dimension: {{$dog->taglia}}<br>
-Dog sex: {{$dog->sesso}}<br>
-Dog birthday: {{$dog['data nascita']}}<br>
+Nome: {{$dog->nome}}<br>
+Razza: {{$dog->razza}}<br>
+Colore: {{$dog->colore}}<br>
+Dimensioni: {{$dog->taglia}}<br>
+Sesso: {{$dog->sesso}}<br>
+Data di nascita: {{$dog['data nascita']}}<br>
+
+<br> <strong>Ha tempo fino a una settimana per ritirare il cane! </strong>
+<br>
+Risponda a questa mail se dovessi avere problemi! Saremo molto disponibili e gentili con lei che ha deciso di fare del bene adottando dal nostro canile!
 
 @component('mail::button',['url'=>'http://127.0.0.1:8000'])
 Canile Boscoverde

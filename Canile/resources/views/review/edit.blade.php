@@ -1,7 +1,7 @@
 @extends('layouts.master') 
 
 @section('titolo')
-Insert vaccination
+Inserisci recensione
 @endsection
 
 @section('stile','style.css') 
@@ -10,8 +10,8 @@ Insert vaccination
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{route('review.index')}}">Review</a></li>
-    <li class="breadcrumb-item active" aria-current="page">New Review</a></li> 
+    <li class="breadcrumb-item"><a href="{{route('review.index')}}">Recensione</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Nuova recensione</a></li> 
   </ol>
 </nav>
 @endsection
@@ -50,20 +50,12 @@ Insert vaccination
 </div>
 
 <div class="container">
-              <a href="{{ route('review.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Cancel</a>
-      <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Send!</label>
+              <a href="{{ route('review.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Annulla</a>
+      <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Invia!</label>
       <input  id="mySubmit" type="submit" value="Create" class="hidden"/>
       </div>
       </form>  
     </div>
-
-
-@if(Session::has('vaccinationstore'))
-  <script>
-  swal('Great!' , 'A new vaccination is available for dogs!', "success");
-</script>
-@endif
-
 
 @endsection
 

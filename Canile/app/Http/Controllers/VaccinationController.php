@@ -42,6 +42,6 @@ class VaccinationController extends Controller
         
         Session::flash('vaccinationstore');
     
-        return Redirect::to(route('vaccination.edit'));        
+        return Redirect::to(route('dog.index'));        
     }
 }

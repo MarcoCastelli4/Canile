@@ -1,7 +1,7 @@
 @extends('layouts.master') 
 
 @section('titolo')
-The dogs
+I miei cani
 @endsection
 
 @section('stile','style.css') 
@@ -12,7 +12,7 @@ The dogs
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">My Dogs</li>
+    <li class="breadcrumb-item active" aria-current="page">I miei cani</li>
   </ol>
 </nav>
 @endsection
@@ -23,7 +23,7 @@ The dogs
 
 @if (count($dog_list)==0)
 <div class="alert alert-warning" role="alert">
-  <strong>You haven't adopted any dogs yet! </strong> Make some four-legged friends happy!<i class="bi bi-emoji-smile"></i>
+  <strong>Nessun cane adottato! </strong> Rendi felice qualche amico a quattro zampe!<i class="bi bi-emoji-smile"></i>
 </div>
 @else
             <div class="row">

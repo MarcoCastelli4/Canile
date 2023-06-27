@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('titolo')
-Edit dog
+Modifica cane
 @endsection
 
 @section('stile')
@@ -162,12 +162,12 @@ style.css
         </div>
       <br/>
       <div class="container">
-      <a href="{{ route('dog.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Cancel</a>
+      <a href="{{ route('dog.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Annulla</a>
             @if(isset($dog->id))
-            <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Update</label>
+            <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Aggiorna</label>
             <input id="mySubmit" type="submit" value="Update" class="hidden"/>
             @else
-            <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Create</label>
+            <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Crea</label>
             <input  id="mySubmit" type="submit" value="Create" class="hidden"/>
             @endif
     </div>

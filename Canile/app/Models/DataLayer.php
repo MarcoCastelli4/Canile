@@ -21,10 +21,7 @@ class DataLayer {
     // cancellare un cane
     public function deleteDog($id) {
         $dog = Dog::find($id);
-        // verifico che il cane esista
-        if(is_null($dog)){
-            return false;
-        }
+
          // Il cane è adottato quindi non cancellabile dal database
         $adoptions = Adoption::query();
         if($adoptions->where('dog_id', $id)->count() > 0){
@@ -39,6 +36,7 @@ class DataLayer {
             $dog->vaccination()->detach($v->id);
         }
         $dog->delete();
+        return true;
      }
     }
 

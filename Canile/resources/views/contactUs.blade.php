@@ -1,7 +1,7 @@
 @extends('layouts.master') 
 
 @section('titolo')
-Contact Us
+Contatti
 @endsection
 
 @section('stile','style.css') 
@@ -10,7 +10,7 @@ Contact Us
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+    <li class="breadcrumb-item active" aria-current="page">Contatti</li>
   </ol>
 </nav>
 @endsection

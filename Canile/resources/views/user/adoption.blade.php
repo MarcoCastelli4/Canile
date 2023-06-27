@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('titolo')
+Adozione
+@endsection
+
 @section('stile')
 style.css
 @endsection
@@ -8,8 +12,8 @@ style.css
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-        <li class="breadcrumb-item " aria-current="page"><a href="{{route('dog.index')}}">Dogs</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Adoption</a></li>
+        <li class="breadcrumb-item " aria-current="page"><a href="{{route('dog.index')}}">I cani</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Adozione</a></li>
         
        
     </ol>
@@ -26,7 +30,7 @@ style.css
         </script>
         <label for="accept_terms">
       <input type="checkbox" id="accept_terms" name="accept_terms">
-      I have read and agree to the privacy policy.
+      Ho letto e accetto i termini e le condizioni.
     </label><br><br>
     @error('accept_terms')
                 <div class="alert alert-danger" role="alert">{{$message}}</div>
@@ -34,8 +38,8 @@ style.css
             
       <br/>
       <div class="container">
-      <a href="{{ route('dog.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Cancel</a>
-            <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Adopt!</label>
+      <a href="{{ route('dog.index') }}" class="btn btn-secondary"><i class="bi-box-arrow-left"></i> Annulla</a>
+            <label for="mySubmit" class="btn btn-primary"><i class="bi-check-lg"></i>Adotta!</label>
             <input  id="mySubmit" type="submit" value="Adopt" class="hidden"/>
       </div>
       <form>

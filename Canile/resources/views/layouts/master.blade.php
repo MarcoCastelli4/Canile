@@ -45,33 +45,33 @@
 	              <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
 	            </li>
 	            <li class="nav-item">
-	              <a class="nav-link" href="{{route('dog.index')}}"> Dogs</a>
+	              <a class="nav-link" href="{{route('dog.index')}}"> I cani</a>
 	            </li>
               
 @if($logged)
 @if($isAdmin==0)
 <li class="nav-item">
-    <a class="nav-link" href="{{route('user.dogs',['id' => $user_id])}}"> My Dogs</a>
+    <a class="nav-link" href="{{route('user.dogs',['id' => $user_id])}}"> I miei cani</a>
 </li>
 @endif
 @endif
 	            <li class="nav-item">
-	              <a class="nav-link" href="{{route('review.index')}}">Review</a>
+	              <a class="nav-link" href="{{route('review.index')}}">Recensioni</a>
 	            </li>
 	            <li class="nav-item dropdown">
 	              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-	                Company
+	                Compagnia
 	              </a>
 	              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-	                <li><a class="dropdown-item" href="{{route('aboutus')}}">About Us</a></li>
-	                <li><a class="dropdown-item" href="{{route('contactus')}}">Contact us</a></li>
+	                <li><a class="dropdown-item" href="{{route('aboutus')}}"> Chi siamo</a></li>
+	                <li><a class="dropdown-item" href="{{route('contactus')}}">Contatti</a></li>
 	              </ul>
 
 
                
                 <li class="nav-item">
                     @if($logged)
-                    <i>Welcome {{$loggedName}}</i><br/><a class="btn btn-outline-dark" href="{{route('user.logout')}}">Logout</a>
+                    <i>Benvenuto {{$loggedName}}</i><br/><a class="btn btn-outline-dark" href="{{route('user.logout')}}">Logout</a>
                     @else
                     <a class="btn btn-outline-dark" href="{{route('user.login')}}">Login</a>
                     @endif

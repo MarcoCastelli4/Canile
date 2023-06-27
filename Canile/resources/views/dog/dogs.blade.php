@@ -1,7 +1,7 @@
 @extends('layouts.master') 
 
 @section('titolo')
-The dogs
+I cani
 @endsection
 
 @section('stile','style.css') 
@@ -10,7 +10,7 @@ The dogs
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Dogs</li>
+    <li class="breadcrumb-item active" aria-current="page">I cani</li>
   </ol>
 </nav>
 @endsection
@@ -19,10 +19,10 @@ The dogs
 
 @if($isAdmin==true)
 <div class="container">
-        <a href="{{ route('dog.create') }}" class="btn btn-success">  <i class="bi bi-plus-square"></i> Create new dog</a> <!--btn:bottone, btn-success: bottone verde-->
+        <a href="{{ route('dog.create') }}" class="btn btn-success">  <i class="bi bi-plus-square"></i> Crea nuovo cane</a> <!--btn:bottone, btn-success: bottone verde-->
         </td>
         <a href="{{ route('vaccination.edit') }}" class="btn btn-success">
-    <i class="bi bi-plus-square"></i> Create Vaccination
+    <i class="bi bi-plus-square"></i> Crea vaccinazione
   </a>
 </div>
 
@@ -44,7 +44,7 @@ The dogs
 
 @if(Session::has('dogvaccination'))
   <script>
-  swal('Ben fatto!' , 'Vaccinazione per il cane inserita correttamente!', "success");
+  swal('Ben fatto!' , 'Cane vaccinato!', "success");
 </script>
 @endif
 
@@ -56,6 +56,17 @@ The dogs
 </script>
 @endif
 
+@if(Session::has('dog_deleted'))
+  <script>
+  swal('Nessun problema!' , 'Cane eliminato correttamente!', "success");
+</script>
+@endif
+
+@if(Session::has('vaccinationstore'))
+  <script>
+  swal('Ben fatto!' , 'Nuova vaccinazione disponibile per i cani!', "success");
+</script>
+@endif
 
 <!-- Popup errori -->
 @if(Session::has('dog_not_deleted'))
@@ -303,7 +314,7 @@ The dogs
                               @endif
                               @endif
                               <td>
-                            <a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> More</a>
+                            <a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> Altro</a>
                                 </td>
                             </tr>
                             @endforeach

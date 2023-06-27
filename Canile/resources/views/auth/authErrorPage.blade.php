@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Authentication error</title>
+    <title>Errore autenticazione</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <!-- Fogli di stile -->
     <link rel="stylesheet" href="{{ url('/') }}/css/bootstrap.min.css">
@@ -19,18 +19,18 @@
 <div class="container">
     <header class="header-sezione">
         <h1>
-                Authentication error
+                Errore autenticazione
         </h1>
     </header>
     <div class="row">
         <div class="col-md-12">
             <div class="card text-center border-danger">
                 <div class='card-header'>
-                    Access denied
+                    Accesso negato
                 </div>
                 <div class='card-body text-danger'>
-                    <p>Wrong credentials</p>
-                    <p><a class="btn btn-secondary" href="{{ route('home') }}"><i class="bi-box-arrow-left"></i> Back to the Home page</a></p>
+                    <p>Credenziali errate</p>
+                    <p><a class="btn btn-secondary" href="{{ route('home') }}"><i class="bi-box-arrow-left"></i> Ritorna alla home</a></p>
                 </div>
             </div>
         </div>
