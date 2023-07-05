@@ -287,4 +287,17 @@ class DataLayer {
 
     return $dogs->get();
     }
+
+    // per ordinare
+    public function orderDog($value){
+        $dogs = Dog::all();
+
+        if ($value === 'Anziani') {
+            $dogs = $dogs->sortBy('data nascita');
+        } elseif ($value === 'Cuccioli') {
+            $dogs = $dogs->sortByDesc('data nascita');
+        }
+
+    return $dogs;
+    }
 }

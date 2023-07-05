@@ -2,7 +2,12 @@
 /* Autenticazione */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
-
+#dropdownMenuButton{
+  background-color: transparent;
+  border: none;
+  color: #333;
+  text-transform: none;
+}
 .sign-up-container {
   overflow-y: scroll;
 }

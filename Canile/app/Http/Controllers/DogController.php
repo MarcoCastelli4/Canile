@@ -77,6 +77,15 @@ class DogController extends Controller
             'taglia' => 'required',
             'sesso' => 'required',
             'datanascita' => 'required',    
+        ],
+    
+        [ 'nome.required' => 'Il campo nome è richiesto.',
+        'razza.required' => 'Il campo razza è richiesto.',
+        'colore.required' => 'Il campo colore è richiesto.',
+        'lunghezzapelo.required' => 'Il campo lunghezza pelo è richiesto.',
+        'taglia.required' => 'Il campo taglia è richiesto.',
+        'sesso.required' => 'Il campo sesso è richiesto.',
+        'datanascita.required' => 'Il campo data nascita è richiesto.',
         ]);
 
         $dl->addDog($request->input('nome'), $request->input('razza'), $request->input('colore'),
@@ -112,6 +121,14 @@ class DogController extends Controller
             'taglia' => 'required',
             'sesso' => 'required',
             'datanascita' => 'required',    
+        ],
+        [ 'nome.required' => 'Il campo nome è richiesto.',
+        'razza.required' => 'Il campo razza è richiesto.',
+        'colore.required' => 'Il campo colore è richiesto.',
+        'lunghezzapelo.required' => 'Il campo lunghezza pelo è richiesto.',
+        'taglia.required' => 'Il campo taglia è richiesto.',
+        'sesso.required' => 'Il campo sesso è richiesto.',
+        'datanascita.required' => 'Il campo data nascita è richiesto.',
         ]);
         
         $dl->editDog($id,  $request->input('nome'), $request->input('razza'), $request->input('colore'),
@@ -177,7 +194,7 @@ class DogController extends Controller
         $dl = new DataLayer();
         $request->validate([
             'dataVaccinazione' => 'required',    
-        ]);
+        ],[ 'dataVaccinazione.required' => 'Il campo data vaccinazione è richiesto.',]);
 
         $dog=$dl->findDogById($dog_id);
         if(is_null($dog)){
@@ -226,4 +243,27 @@ class DogController extends Controller
         return view('dog.dogs')->with('lista_razze',$lista_razze)->with("dog_list",$dog_list_filtered)->with('isAdmin', false)->with('logged', false)->with('loggedName', "");
    
     }
+
+    public function dogOrder(Request $request){
+        
+        session_start();
+        $dl=new DataLayer();
+        // ottengo le info da ajax
+        $val=$request->input('valore');
+       
+        $lista_razze=$dl->getAllRazzaValues();
+
+        // richiamo metodo per ordinare i dati
+        $dog_list_ordered=$dl->orderDog($val);
+
+        if(isset($_SESSION["loggedName"])){
+            return view('dog.dogs')->with('lista_razze',$lista_razze)->with("dog_list",$dog_list_ordered)->with('user_id',$_SESSION["user_id"])->with('isAdmin',$_SESSION['isAdmin'])->with('logged', true)->with('loggedName', $_SESSION["loggedName"]);
+        }
+        else 
+        return view('dog.dogs')->with('lista_razze',$lista_razze)->with("dog_list",$dog_list_ordered)->with('isAdmin', false)->with('logged', false)->with('loggedName', "");
+   
+    }
+
 }
+
+

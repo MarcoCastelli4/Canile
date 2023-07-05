@@ -48,7 +48,7 @@ class UserController extends Controller
 
         $request->validate([
             'accept_terms' => 'required',    
-        ]);
+        ],['accept_terms.required' => 'Accettare i termini e le condizioni per continuare!',]);
         if($dl->addDogAdoption($dog_id,$_SESSION["user_id"])==false){
             Session::flash('dog_adoption_error');
         }

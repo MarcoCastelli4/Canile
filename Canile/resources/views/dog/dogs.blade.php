@@ -223,22 +223,23 @@ I cani
 </div>
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
-  <div class="container">
+        <div class="container d-flex justify-content-center align-items-center">
   <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" class="btn btn-default">
-  <i class="bi bi-filter"></i>Filtra i cani
+    <i class="bi bi-filter"></i> Filtra i cani
   </a>
 
   <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Order by ...
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Cuccioli</a>
-    <a class="dropdown-item" href="#">Anziani</a>
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Ordina
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item ordina" href="#">Cuccioli</a>
+      <a class="dropdown-item ordina" href="#">Anziani</a>
+    </div>
   </div>
 </div>
 
-</div>
+
     </div>
 
     <!-- Se la lista dei cani è vuota oppure non ci sono più cani disponibili -->
@@ -332,8 +333,6 @@ I cani
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
-
-    $('.dropdown-toggle').dropdown('toggle');
 </script>
 
 
@@ -384,7 +383,7 @@ I cani
 </script>
 
 <script>
-
+  // per i filtri
   $(document).ready(function() {
 
     $("select").change(function() {
@@ -445,5 +444,41 @@ I cani
   }
 </script>
 
+<script>
+  $(document).ready(function() {
+    $('.ordina').click(function() {
+    var selectedValue = $(this).text().trim();
+    console.log('Selected value: ' + selectedValue);
+
+    // Perform AJAX request with the selected value
+    // Here, you can make an AJAX request to send the selected value to the server or perform any other actions.
+    // You can use the $.ajax() function or any other AJAX method provided by jQuery.
+    // Example:
+   // invio richiesta ajax
+   $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      $.ajax({
+        url: '/dog/order',
+        method: 'GET',
+        data: { valore: selectedValue },
+        success: function(response) {
+          var newDocument = document.open('text/html', 'replace');
+          newDocument.write(response);
+          newDocument.close();
+        },
+        error: function(xhr, status, error) {
+          // Handle any errors that occur during the AJAX request
+          console.error(error);
+          console.log("Errore");
+        }
+      });
+  });
+});
+
+</script>
 
 @endsection

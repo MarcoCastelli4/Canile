@@ -36,7 +36,14 @@ class VaccinationController extends Controller
         $validatedData = $request->validate([
             'malattia' => 'required|unique:vaccination',
             'validita' => 'required|integer|min:1',
-        ]);
+        ],
+    ['malattia.required' => 'Il campo malattia è richiesto.',
+    'validita.required' => 'Il campo validità è richiesto.',
+    'malattia.unique' => 'Malattia già presente nel database',
+    'validita.integer' => 'Il campo validità deve essere un numero intero.',
+    'validita.min' => 'Il campo validità deve essere almeno :1.',
+
+]);
         
         $dl->addVaccination($request->input('malattia'), $request->input('validita'));
         

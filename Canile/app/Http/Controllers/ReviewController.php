@@ -38,7 +38,9 @@ class ReviewController extends Controller
         $request->validate([
             'titolo' => 'required',
             'contenuto' => 'required', 
-        ]);
+        ],
+        ['titolo.required' => 'Il campo titolo è richiesto.',
+        'contenuto.required' => 'Il campo contenuto è richiesto.',]);
 
         $dl->addReview($request->input('titolo'), $request->input('contenuto'), $request->input('valutazione'),$_SESSION["user_id"]);
        
