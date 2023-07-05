@@ -233,8 +233,8 @@ I cani
       Ordina
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item ordina" href="#">Cuccioli</a>
-      <a class="dropdown-item ordina" href="#">Anziani</a>
+      <a class="dropdown-item ordina" >Cuccioli</a>
+      <a class="dropdown-item ordina" >Anziani</a>
     </div>
   </div>
 </div>

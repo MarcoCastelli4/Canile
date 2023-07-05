@@ -36,7 +36,7 @@ Cancellare il cane dal "{{ $dog->name }}" dal database?
                 Conferma
             </div>
             <div class='card-body'>
-                <p>Il cane <strong>verrà rimosso</strong> dal database</p>
+                <p>Il cane e tutte le informazioni ad esso connesse  <strong>verranno rimosse</strong> dal database </p>
                 <p><a class="btn btn-danger" href="{{ route('dog.destroy', ['id' => $dog->id]) }}"><i class="bi-trash3"></i> Rimuovi</a></p>
             </div>
         </div>

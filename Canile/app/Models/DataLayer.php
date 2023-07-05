@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Support\Facades\Storage;
 
 class DataLayer {
     public function listDogs(){
@@ -29,14 +29,22 @@ class DataLayer {
         }
         else{
         $vaccination = $dog->vaccination;
-        // disassocio immagini e documenti associati
-        $dog->image()->delete();
-        $dog->document()->delete();
+        
+        // Delete the associated images from the storage
+    foreach ($dog->image as $image) {
+        Storage::delete('public'.$image->path);
+        $image->delete();
+    }
+
+    foreach ($dog->document as $document) {
+        Storage::delete('public'.$document->path);
+        $document->delete();
+    }
         foreach($vaccination as $v) {
             $dog->vaccination()->detach($v->id);
         }
         $dog->delete();
-        return true;
+         return true;
      }
     }
 
@@ -44,11 +52,11 @@ class DataLayer {
     public function uploadImage($image,$dog):void{
         $v = Image::count()+1;
         $i=new Image();
-        $i->path='/img/upload/'.$dog->id.$v.'.png';
+        $i->path='/img/upload/'.$dog->id.'-'.$v.'.png';
         $i->dog_id=$dog->id;
         $i->save();
 
-        $image->storeAs('public/img/upload',$dog->id.$v.'.png');
+        $image->storeAs('public/img/upload',$dog->id.'-'.$v.'.png');
     }
 
     // salva  documenti nel database e dentro la cartella
@@ -56,11 +64,11 @@ class DataLayer {
         $v = Document::count()+1;
         $i=new Document();
         $i->titolo=$document->getClientOriginalName();
-        $i->path='/document/upload/'.$dog->id.$v.'.pdf';
+        $i->path='/document/upload/'.$dog->id.'-'.$v.'.pdf';
         $i->dog_id=$dog->id;
         $i->save();
 
-        $document->storeAs('public/document/upload',$dog->id.$v.'.pdf');
+        $document->storeAs('public/document/upload',$dog->id.'-'.$v.'.pdf');
     }
 
 
