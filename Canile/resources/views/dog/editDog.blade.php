@@ -12,11 +12,11 @@ style.css
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-        <li class="breadcrumb-item " aria-current="page"><a href="{{route('dog.index')}}">Dogs</a></li>
+        <li class="breadcrumb-item " aria-current="page"><a href="{{route('dog.index')}}">I cani</a></li>
         @if(!isset($dog->id))
-        <li class="breadcrumb-item active" aria-current="page">Add</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Crea</a></li>
         @else
-        <li class="breadcrumb-item active" aria-current="page">Edit</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Aggiorna</a></li>
         @endif
        
     </ol>
@@ -40,9 +40,9 @@ style.css
             <div class="form-group">
                 <label for="nome"> Nome</label>
                 @if(!isset($dog->id))
-                <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome"> 
+                <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome" maxlength="30" style="text-transform: capitalize;"> 
             @else
-                <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome" value="{{$dog->nome}}"> 
+                <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome" value="{{$dog->nome}}" maxlength="30" style="text-transform: capitalize;"> 
                 @endif
                 @error('nome')
                 <div class="alert alert-danger" role="alert">{{$message}}</div>
@@ -53,9 +53,9 @@ style.css
             <div class="form-group">
             <label for="razza"> Razza</label>
             @if(!isset($dog->id))
-            <input class="form-control" type="text" id="razza" name="razza" placeholder="Razza"> 
+            <input class="form-control" type="text" id="razza" name="razza" placeholder="Razza" maxlength="30" style="text-transform: capitalize;"> 
             @else
-            <input class="form-control" type="text" id="razza" name="razza" placeholder="Razza" value="{{$dog->razza}}"> 
+            <input class="form-control" type="text" id="razza" name="razza" placeholder="Razza" value="{{$dog->razza}}" maxlength="30" style="text-transform: capitalize;"> 
             @endif
             @error('razza')
                 <div class="alert alert-danger" role="alert">{{$message}}</div>
@@ -66,9 +66,9 @@ style.css
             <div class="form-group">
             <label for="colore"> Colore</label>
             @if(!isset($dog->id))
-            <input  class="form-control" type="text" id="colore" name="colore" placeholder="Colore"> 
+            <input  class="form-control" type="text" id="colore" name="colore" placeholder="Colore" maxlength="30" style="text-transform: capitalize;"> 
             @else
-            <input  class="form-control" type="text" id="colore" name="colore" placeholder="Colore" value="{{$dog->colore}}"> 
+            <input  class="form-control" type="text" id="colore" name="colore" placeholder="Colore" value="{{$dog->colore}}" maxlength="30" style="text-transform: capitalize;"> 
             @endif
             @error('colore')
                 <div class="alert alert-danger" role="alert">{{$message}}</div>
@@ -77,32 +77,22 @@ style.css
             </div>
 
             <div class="form-group">
-            <label for="lunghezzapelo">Lunghezza pelo</label>
-            @if(!isset($dog->id))
-            <select class="form-control" id="lunghezzapelo" name="lunghezzapelo" placeholder="Lunghezza pelo">
-            @else
-            <select class="form-control" id="lunghezzapelo" name="lunghezzapelo" placeholder="Lunghezza pelo" value="{{$dog['lunghezza pelo']}}">
-            @endif
-            <option>Corto</option>
-            <option>Medio</option>
-            <option>Lungo</option>
-            </select>
-            </div>
-
-            
-
+    <label for="lunghezzapelo">Lunghezza pelo</label>
+    <select class="form-control" id="lunghezzapelo" name="lunghezzapelo" placeholder="Lunghezza pelo">
+        <option {{ isset($dog->id) && $dog['lunghezza pelo'] == 'Corto' ? 'selected' : '' }}>Corto</option>
+        <option {{ isset($dog->id) && $dog['lunghezza pelo'] == 'Medio' ? 'selected' : '' }}>Medio</option>
+        <option {{ isset($dog->id) && $dog['lunghezza pelo'] == 'Lungo' ? 'selected' : '' }}>Lungo</option>
+    </select>
+</div>
             <div class="form-group">
-            <label for="taglia">Taglia</label>
-            @if(!isset($dog->id))
-            <select class="form-control" id="taglia" name="taglia" placeholder="Taglia">
-            @else
-            <select class="form-control" id="taglia" name="taglia" placeholder="Taglia" value="{{$dog->taglia}}">
-            @endif
-            <option>Piccola</option>
-            <option>Media</option>
-            <option>Grande</option>
-            </select>
-            </div>
+    <label for="taglia">Taglia</label>
+    <select class="form-control" id="taglia" name="taglia" placeholder="Taglia">
+        <option {{ isset($dog->id) && $dog->taglia == 'Piccola' ? 'selected' : '' }}>Piccola</option>
+        <option {{ isset($dog->id) && $dog->taglia == 'Media' ? 'selected' : '' }}>Media</option>
+        <option {{ isset($dog->id) && $dog->taglia == 'Grande' ? 'selected' : '' }}>Grande</option>
+    </select>
+</div>
+
 
            
             Sesso
@@ -136,9 +126,6 @@ style.css
             </div>
             @endif
             </div>
-
-
-            
 
         <div class="form-group"> <!-- Date input -->
         <label class="control-label" for="datanascita">Data di nascita</label>

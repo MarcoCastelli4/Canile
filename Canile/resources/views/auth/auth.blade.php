@@ -23,28 +23,28 @@
         <h1>Crea un account</h1>
 			<span>Inserisci i dati richiesti</span>
                                 <div class="form-group">
-                                <input  type="text" name="name" class="form-control" placeholder="Nome" value=""/>
+                                <input  type="text" name="name" class="form-control" placeholder="Nome" value="" maxlength="30"/>
                                  @error('name')
                                         <div id="registration_error"  class="alert alert-danger" role="alert">{{$message}}</div>
                                         @enderror
                                  </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="email" class="form-control" placeholder="Email" value=""/>
+                                    <input type="text" name="email" class="form-control" placeholder="Email" value="" maxlength="30"/>
                                     @error('email')
                                      <div id="registration_error"  class="alert alert-danger" role="alert">{{$message}}</div>
                                      @enderror
                                 </div>
 
                                 <div class="form-group text-center">
-                                    <input type="password" name="password" class="form-control" placeholder="Password" value=""/>
+                                    <input type="password" name="password" class="form-control" placeholder="Password" value="" maxlength="30"/>
                                     @error('password')
                                       <div id="registration_error"  class="alert alert-danger" role="alert">{{$message}}</div>
                                       @enderror
                                 </div>
 
                                 <div class="form-group text-center">
-                                    <input type="password" name="confirm-password" class="form-control" placeholder="Conferma password" value=""/>
+                                    <input type="password" name="confirm-password" class="form-control" placeholder="Conferma password" value="" maxlength="30"/>
                                     @error('confirm-password')
                                       <div id="registration_error"  class="alert alert-danger" role="alert">{{$message}}</div>
                                       @enderror
@@ -63,14 +63,14 @@
 			<span>Inserisci la tua email e la password con i quali ti sei registrato</span>   
             @csrf
                                 <div class="form-group">
-                                    <input type="text" name="l_email" class="form-control" placeholder="Email"/>
+                                    <input type="text" name="l_email" class="form-control" placeholder="Email" maxlength="30"/>
                                     @error('l_email')
                                     <div class="alert alert-danger" role="alert">{{$message}}</div>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="password" name="l_password" class="form-control" placeholder="Password"/>
+                                    <input type="password" name="l_password" class="form-control" placeholder="Password" maxlength="30"/>
                                     @error('l_password')
                                   <div class="alert alert-danger" role="alert">{{$message}}</div>
                                  @enderror

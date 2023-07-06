@@ -24,7 +24,7 @@ Inserisci nuova vaccinazione
             @csrf
             <div class="form-group">
                 <label for="nome"> Malattia</label>
-                <input class="form-control" type="text" id="malattia" name="malattia" placeholder="Malattia">
+                <input class="form-control" type="text" id="malattia" name="malattia" placeholder="Malattia" maxlength="30" style="text-transform: capitalize;">
                 @error('malattia')
                 <div id="modal_error" class="alert alert-danger" role="alert">{{$message}}</div>
                 @enderror

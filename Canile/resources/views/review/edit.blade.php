@@ -24,7 +24,7 @@ Inserisci recensione
             @csrf
             <div class="form-group">
                 <label for="nome"> Titolo</label>
-                <input class="form-control" type="text" id="titolo" name="titolo" placeholder="Titolo">
+                <input class="form-control" type="text" id="titolo" name="titolo" placeholder="Titolo" maxlength="50" style="text-transform: capitalize;">
                 @error('titolo')
                 <div class="alert alert-danger" role="alert">{{$message}}</div>
                 @enderror
@@ -32,7 +32,7 @@ Inserisci recensione
 
             <div class="form-group">
                 <label for="nome"> Contenuto</label>
-                <input class="form-control" type="text" id="contenuto" name="contenuto" placeholder="Contenuto">
+                <input class="form-control" type="text" id="contenuto" name="contenuto" placeholder="Contenuto" maxlength="500" style="text-transform: capitalize;">
                 @error('contenuto')
                 <div class="alert alert-danger" role="alert">{{$message}}</div>
                 @enderror

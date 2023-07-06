@@ -35,6 +35,7 @@ style.css
 @endif
 
 </div>
+@if (count($review_list)>0)
 <div class="row text-center">
   <div class="col-md-12">
     <!-- Carousel wrapper -->
@@ -81,6 +82,12 @@ style.css
     </div>
     </div>
   </div>
+
+@else
+<div class="alert alert-warning" role="alert">
+  <strong>Nessuna recensione presente! </strong>
+</div>
+@endif
 
 @endsection
 

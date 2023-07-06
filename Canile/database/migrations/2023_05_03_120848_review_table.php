@@ -17,7 +17,7 @@ return new class extends Migration
         {
             $table->increments('id');   //intero autoincrementale
             $table->string('titolo');
-            $table->string('contenuto');
+            $table->text('contenuto');
             $table->date('data');
             $table->integer('valutazione');
             $table->bigInteger('user_id')->unsigned()->default(1);
