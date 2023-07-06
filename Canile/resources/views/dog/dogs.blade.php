@@ -254,78 +254,75 @@ I cani
 @endif
 
     @if (count($dog_list)>0)
-    <div id="dog_list_container" data-dog-list="{{ $dog_list }}">
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-hover table-responsive" id="dog_list_table" style="width:100%">
-                        <col width='10%'>
-                        <col width='10%'>
-                        <col width='10%'>
-                        <col width='10%'>
-                        <col width='10%'>
-                        <col width='10%'>
-                        <col width='10%'>
-                        <col width='10%'>
-                        <col width='10%'>
-                        <col width='10%'>
-                        
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Razza</th>
-                                <th>Taglia</th>
-                                <th>Colore</th>
-                                <th>Pelo</th>
-                                <th>Età</th>
-                                <th>Sesso</th>
-                            </tr>
-                        </thead>
-                       
-                        <tbody>
-                        @foreach($dog_list as $dog)
-                            <tr id="{{$dog->id}}">
-                                <td>{{$dog->nome}}</td>
-                                <td>{{$dog->razza}}</td>
-                                <td>{{$dog->taglia}}</td>
-                                <td>{{$dog->colore}}</td>
-                                <td>{{$dog['lunghezza pelo']}}</td>
-                                <td>{{$dog['data nascita']}}</td>
-                                <td>{{$dog->sesso}}</td>
-                               
-                                @if($logged==true)
-                                @if($isAdmin==true)
-                                <td>
-                                    <a class="btn btn-primary"  href="{{ route('dog.edit', ['dog' => $dog->id]) }}">
-                                    <i class="bi-pencil-square"></i> Edit</a>
-                                </td>
-                                <td>
-                            <a class="btn btn-danger" 
-                                href="{{ route('dog.destroy.confirm', ['id' => $dog->id]) }}"><i class="bi-trash3"></i> Delete</a>
-                            </td>
-                            
-                              
-                                <td>
-                            <a class="btn btn-success" href="{{ route('dog.vaccination', ['id' => $dog->id]) }}"><i class="bi bi-virus"></i> Vaccination</a>
-                                </td>
-                                @else
-                              <td>
-                      
-                             <a class="btn adoptionBtn" href="{{ route('user.adoption', ['id' => $dog->id]) }}"><span><img src="../img/adopt.png" width="48" height="48" /></span></a>
-                              </td>
-                              @endif
-                              @endif
-                              <td>
-                            <a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> Altro</a>
-                                </td>
-                            </tr>
-                            @endforeach
-                          @endif
-                        </tbody>
-                    </table>
-                    
-                </div>
-            </div>
-            </div>
+   <section class="articles">
+    @foreach($dog_list as $dog)
+    <article>
+    <div class="article-wrapper">
+    <figure style="display: flex; justify-content: center; align-items: center;">
+        @if ($dog->image->count() > 0)
+                <img src="{{asset('storage'.$dog->image->first()->path)}}" alt="" />
+            @else
+                <img src="https://www.stickersmurali.com/it/img/emoji42-jpg/folder/products-listado-merchanthover/adesivi-murali-faccia-di-cane.jpg" width="200px" height="200px" alt="" />
+            @endif
+        </figure>
+        <div class="article-body">
+            <h2>{{$dog->nome}}</h2>
+            <p>
+                Razza: {{$dog->razza}} <br>
+                Taglia: {{$dog->taglia}} <br>
+                Colore: {{$dog->colore}} <br>
+                Lunghezza pelo: {{$dog['lunghezza pelo']}} <br>
+                Data di nascita: {{$dog['data nascita']}} <br>
+                Sesso: {{$dog->sesso}} <br>
+            </p>
+        </div>
+    </div>
+    @if($isAdmin==true)
+      <div class="container">
+        <table class="table">
+          <tr>
+            <td><a class="btn btn-primary" href="{{ route('dog.edit', ['dog' => $dog->id]) }}"><i class="bi-pencil-square"></i> Modifica</a></td>
+            <td><a class="btn btn-danger" href="{{ route('dog.destroy.confirm', ['id' => $dog->id]) }}"><i class="bi-trash3"></i> Elimina</a></td>
+            <td><a class="btn btn-success" href="{{ route('dog.vaccination', ['id' => $dog->id]) }}"><i class="bi bi-virus"></i> Vaccina</a></td>
+          </tr>
+        </table>
+      </div>
+      <div class="container">
+    <table class="table">
+      <tr>
+        <td><a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> Altro</a></td>
+      </tr>
+    </table>
+  </div>
+  @endif
+
+  @if($logged==true  && $isAdmin==false)
+  <div class="container">
+        <table class="table">
+          <tr>
+           <td><a class="btn adoptionBtn" href="{{ route('user.adoption', ['id' => $dog->id]) }}"><span><img src="../img/adopt.png" width="48" height="48" /></span></a></td>
+           <td><a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> Altro</a></td>
+          </tr>
+        </table>
+      </div>
+  @elseif ($logged==false)
+  <div class="container">
+        <table class="table">
+          <tr>
+           <td><a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> Altro</a></td>
+          </tr>
+        </table>
+      </div>
+  @endif
+  
+
+  
+</article>
+
+  @endforeach
+  @endif
+  </section>
+
 </div>
 
 <script>

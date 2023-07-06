@@ -67,7 +67,7 @@ Informazioni cane
                                 </td>
                                 <td>
                                 @foreach ($documents as $d)
-                                <a href="{{asset('storage'.$d->path)}}" download="{{ $d->titolo }}">{{ $d->titolo }}</a>
+                                <a>{{ $d->titolo }}</a> &nbsp&nbsp<i class="bi bi-download"><a href="{{asset('storage'.$d->path)}}" download="{{ $d->titolo }}">&nbsp&nbspDownload</a></i>
                                  <br/>
                                  @endforeach
                                 </td>
