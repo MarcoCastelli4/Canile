@@ -268,12 +268,12 @@ I cani
         <div class="article-body">
             <h2>{{$dog->nome}}</h2>
             <p>
-                Razza: {{$dog->razza}} <br>
-                Taglia: {{$dog->taglia}} <br>
-                Colore: {{$dog->colore}} <br>
-                Lunghezza pelo: {{$dog['lunghezza pelo']}} <br>
-                Data di nascita: {{$dog['data nascita']}} <br>
-                Sesso: {{$dog->sesso}} <br>
+                <strong>Razza:</strong> {{$dog->razza}} <br>
+                <strong>Taglia:</strong>  {{$dog->taglia}} <br>
+                <strong>Colore:</strong>  {{$dog->colore}} <br>
+                <strong>Lunghezza pelo:</strong>  {{$dog['lunghezza pelo']}} <br>
+                <strong>Data di nascita: </strong> {{$dog['data nascita']}} <br>
+                <strong>Sesso:</strong>  {{$dog->sesso}} <br>
             </p>
         </div>
     </div>

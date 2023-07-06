@@ -659,3 +659,25 @@ body {
   }
 }
 
+.bg-cover {
+  background-size: cover !important;
+  width: auto;
+  height: auto;
+  
+}
+.cover{ 
+  text-align: center; padding:10px; margin:0px; min-height:800px; width:100%; 
+  display:flex; flex-direction:column; justify-content:center; 
+  background-position: center center; background-size:cover;
+}
+.cover * {color:#fff}
+
+.full-screen-width {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  max-width: 100vw;
+  width: 100vw;
+}

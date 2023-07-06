@@ -26,8 +26,7 @@
 
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    </head>
-    <body>
+    
     
           <div id="mainNavigation">
 	      <nav role="navigation">
@@ -60,7 +59,7 @@
 	            </li>
 	            <li class="nav-item dropdown">
 	              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-	                Compagnia
+	                Il canile
 	              </a>
 	              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 	                <li><a class="dropdown-item" href="{{route('aboutus')}}"> Chi siamo</a></li>
@@ -82,6 +81,8 @@
 	      </div>
 	    </div>
 		
+      </head>
+    <body>
         <div class='container'>
           @yield('breadcrumb')
         </div>
