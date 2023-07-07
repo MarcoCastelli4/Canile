@@ -26,37 +26,45 @@ I miei cani
   <strong>Nessun cane adottato! </strong> Rendi felice qualche amico a quattro zampe!<i class="bi bi-emoji-smile"></i>
 </div>
 @else
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-hover table-responsive" style="width:100%">
-                        <col width='30%'>
-                        <col width='30%'>
-                        
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Razza</th>
-                            </tr>
-                        </thead>
-                       
-                        <tbody>
+<section class="articles">
                         @foreach($dog_list as $dog)
-                            <tr>
-                                <td>{{$dog->nome}}</td>
-                                <td>{{$dog->razza}}</td>
+                        <article>
+    <div class="article-wrapper">
+    <figure style="display: flex; justify-content: center; align-items: center;">
+        @if ($dog->image->count() > 0)
+                <img src="{{asset('storage'.$dog->image->first()->path)}}" alt="" />
+            @else
+                <img src="https://www.stickersmurali.com/it/img/emoji42-jpg/folder/products-listado-merchanthover/adesivi-murali-faccia-di-cane.jpg" width="200px" height="200px" alt="" />
+            @endif
+        </figure>
+        <div class="article-body">
+            <h2>{{$dog->nome}}</h2>
+            <p>
+                <strong>Razza:</strong> {{$dog->razza}} <br>
+                <strong>Taglia:</strong>  {{$dog->taglia}} <br>
+                <strong>Colore:</strong>  {{$dog->colore}} <br>
+                <strong>Lunghezza pelo:</strong>  {{$dog['lunghezza pelo']}} <br>
+                <strong>Data di nascita: </strong> {{$dog['data nascita']}} <br>
+                <strong>Sesso:</strong>  {{$dog->sesso}} <br>
+            </p>
+        </div>
+    </div>
                                 @if($logged==true)
-                              <td>
-                            <a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> More</a>
-                                </td>
-                                @endif
-                            </tr>
-                        @endforeach
+                                <div class="container">
+        <table class="table">
+          <tr>
+           <td><a class="btn btn-info" href="{{ route('dog.info', ['id' => $dog->id]) }}"><i class="bi bi-info-circle"></i> Altro</a></td>
+          </tr>
+        </table>
+      </div>
+</article>
+ @endif
+@endforeach
+</section>
                           
-                        </tbody>
-                    </table>
+                        
                     
-                </div>
-            </div>
+              
             @endif
             @endsection
 
