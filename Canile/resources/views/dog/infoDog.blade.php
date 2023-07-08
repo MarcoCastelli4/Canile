@@ -43,39 +43,80 @@ Informazioni cane
     </div>
   </div>
 </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-hover table-responsive" style="width:100%">
-                        <col width='10%'>
+
+<div style="display: flex;">
+                    <table class="table table-striped table-hover table-responsive" style="width:100%; display: inline-block;">
                         <col width='10%'>
                         
                         <thead>
                             <tr>
-                                <th>Vaccinazioni</th>
-                                <th>Documentazione</th>
+                                <th>Vaccinazioni <br><a style="font-weight: normal !important;"> Legenda:</a> &nbsp<a style="color:red;">Scaduta </a>&nbsp<a style="color:orange;"> In scadenza </a>&nbsp<a style="color:green;"> Valida</a></th>
                             </tr>
                         </thead>
                        
                         <tbody>
                             <tr>
                                 <td>
-                                @foreach ($dog->vaccination as $v)
-                                {{ $v->malattia }}
-                                 {{$v->pivot->data}}
-                                 <br/>
-                                 @endforeach
+                                @foreach ($dog->vaccination->sortByDesc(function ($v) {
+    return \Carbon\Carbon::parse($v->pivot->data);
+}) as $v)
+     @php
+     $existingDate = $v->pivot->data;
+        $numberOfMonths = $v->validità;
+        $carbonDate = \Carbon\Carbon::parse($existingDate);
+        $newDate = $carbonDate->addMonths($numberOfMonths);
+        $isBeforeCurrentDate = $newDate->isBefore(\Carbon\Carbon::now());
+        $isBetweenDates = $newDate->isBetween(\Carbon\Carbon::now()->addDays(10), \Carbon\Carbon::now(), true);
+        $scaduta = $isBeforeCurrentDate;
+        $inScadenza = $isBetweenDates;
+    @endphp
+
+    @if ($scaduta)
+    <div style="color:red;">&#9632;
+    @elseif($inScadenza)
+    <div style="color:orange;">&#9632;
+    @elseif (!$inScadenza)
+    <div style="color:green;">&#9632;
+    @endif
+
+    <a style="color:black">
+    {{ $v->malattia }}
+    {{ $v->pivot->data }}
+    </a>
+    </div>
+    <br/>
+    
+
+
+@endforeach
+
+                                 
+                                
                                 </td>
-                                <td>
+                        </tbody>
+                    </table>
+
+                    <table class="table table-striped table-hover table-responsive" style="width:100%; display: inline-block;">
+                        <col width='10%'>
+                        
+                        <thead>
+                            <tr>
+                                <th>Documentazione <br><a style="font-weight: normal !important;">Qui è presente tutta la documentazione relativa al cane</a></th>                                
+                            </tr>
+                        </thead>
+                       
+                        <tbody>
+                            <tr>
+                            <td>
                                 @foreach ($documents as $d)
                                 <a>{{ $d->titolo }}</a> &nbsp&nbsp<i class="bi bi-download"><a href="{{asset('storage'.$d->path)}}" download="{{ $d->titolo }}">&nbsp&nbspDownload</a></i>
                                  <br/>
                                  @endforeach
                                 </td>
-                            </tr>    
+</tr>
                         </tbody>
                     </table>
-                    
                 </div>
-            </div>
+           
             
 @endsection
