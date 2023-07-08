@@ -34,7 +34,7 @@ class ConfirmAdoption extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Sign Up',
+            subject: 'Conferma adozione',
         );
     }
 
