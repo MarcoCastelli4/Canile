@@ -44,6 +44,7 @@ Informazioni cane
   </div>
 </div>
 
+
 <div style="display: flex;">
                     <table class="table table-striped table-hover table-responsive" style="width:100%; display: inline-block;">
                         <col width='10%'>
@@ -57,6 +58,11 @@ Informazioni cane
                         <tbody>
                             <tr>
                                 <td>
+                                @if (count($dog->vaccination)==0)
+<div class="alert alert-warning" role="alert">
+  <strong>Cane mai vaccinato! </strong>
+</div>
+@else
                                 @foreach ($dog->vaccination->sortByDesc(function ($v) {
     return \Carbon\Carbon::parse($v->pivot->data);
 }) as $v)
@@ -86,15 +92,17 @@ Informazioni cane
     </div>
     <br/>
     
-
-
 @endforeach
 
+
                                  
-                                
+@endif
+
                                 </td>
+</tr>
                         </tbody>
                     </table>
+
 
                     <table class="table table-striped table-hover table-responsive" style="width:100%; display: inline-block;">
                         <col width='10%'>
@@ -108,15 +116,20 @@ Informazioni cane
                         <tbody>
                             <tr>
                             <td>
+                              @if (count($documents)==0)
+                              <div class="alert alert-warning" role="alert">
+                                <strong>Documentazione non disponibile! </strong> 
+                              </div>
+                              @else
                                 @foreach ($documents as $d)
                                 <a>{{ $d->titolo }}</a> &nbsp&nbsp<i class="bi bi-download"><a href="{{asset('storage'.$d->path)}}" download="{{ $d->titolo }}">&nbsp&nbspDownload</a></i>
                                  <br/>
                                  @endforeach
                                 </td>
 </tr>
+@endif
                         </tbody>
                     </table>
-                </div>
-           
+                </div>        
             
 @endsection

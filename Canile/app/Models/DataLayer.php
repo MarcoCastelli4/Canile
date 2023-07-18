@@ -265,7 +265,7 @@ class DataLayer {
         $review->contenuto=$contenuto;
         $review->valutazione=$valutazione;
         $review->data= now()->format('Y-m-d');
-
+        $review->user_id=$user_id;
         $review->save();
     }
 

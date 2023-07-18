@@ -32,7 +32,7 @@ class UserController extends Controller
         
         $dog=$dl->findDogById($id);
         $dog=$dl->findDogById($id);
-        if(is_null($dog)){
+        if(is_null($dog) or !$dl->getDogAvailable()->contains('id', $id)){
             Session::flash('id_dog_fail'); 
             return Redirect::to(route('dog.index'));
         }
@@ -56,8 +56,6 @@ class UserController extends Controller
             Session::flash('dog_adopted');
         }
 
-        //$dogs=$dl->getDogAvailable();
-      //  return Redirect::to(route('dog.index'));
       return Redirect::to(route('mail.confirm',[$dog_id,$_SESSION["user_id"]]));
         
     }

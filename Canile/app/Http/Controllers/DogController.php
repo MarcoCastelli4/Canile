@@ -37,11 +37,12 @@ class DogController extends Controller
         $dl = new DataLayer();
         $dog = $dl->findDogById($id);
         if ($dog !== null) {
-            if($dl->deleteDog($id)==false){
+            if(!$dl->getDogAvailable()->contains('id', $id)){
                 Session::flash('dog_not_deleted');
                 return Redirect::to(route('dog.index'));
             }
             else{
+                $dl->deleteDog($id);
                 Session::flash('dog_deleted');
                 return Redirect::to(route('dog.index'));
             }
@@ -150,7 +151,7 @@ class DogController extends Controller
         $vaccinations=$dl->getAllVaccinations();
         $dog=$dl->findDogById($id);
         
-        if(is_null($dog)){
+        if(is_null($dog) or !$dl->getDogAvailable()->contains('id', $id)){
           Session::flash('id_dog_fail');
           return Redirect::to(route('dog.index'));
         }
@@ -180,7 +181,7 @@ class DogController extends Controller
         $dl=new DataLayer();
         $vaccinations=$dl->getAllVaccinations();
         $dog=$dl->findDogById($id);
-        if(is_null($dog)){
+        if(is_null($dog) or !$dl->getDogAvailable()->contains('id', $id)){
             Session::flash('id_dog_fail'); 
             return Redirect::to(route('dog.index'));
         }
@@ -197,7 +198,7 @@ class DogController extends Controller
         ],[ 'dataVaccinazione.required' => 'Il campo data vaccinazione è richiesto.',]);
 
         $dog=$dl->findDogById($dog_id);
-        if(is_null($dog)){
+        if(is_null($dog) or !$dl->getDogAvailable()->contains('id', $dog_id)){
             Session::flash('id_dog_fail'); 
             return Redirect::to(route('dog.index'));
         }

@@ -46,6 +46,7 @@ style.css
         <!-- Single item -->
         <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
         <p class="text-muted mb-2"><strong>{{$review->data}}</strong></p>
+        <h3>{{$review->user->name}}</h3>
           <h5 class="mb-4">{{$review->titolo}}</h5>
           <p class="lead font-italic mx-4 mx-md-5">
             {{$review->contenuto}}
