@@ -24,7 +24,7 @@ class MailController extends Controller
         $name=$dl->getUserName($emailto);
         $dog=$dl->findDogById($dog_id);
        
-        if(is_null($dog) or !$dl->getDogAvailable()->contains('id', $dog_id)){
+        if(is_null($dog)){
             Session::flash('id_dog_fail'); 
             return Redirect::to(route('dog.index'));
         }
