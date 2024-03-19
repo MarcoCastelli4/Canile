@@ -1,10 +1,7 @@
 
 # Path finding for entry agent
 
-### This project was developed for the Algorithms and Data Structures course.
+### This project was developed for the Web Development course
 
 
-The objective is to simulate the movement of a set of agents within a grid.
-The problem is not to make the agents collide in the movement from the initial position to the final position.
-
-We development this project using IntelliJ
+An application was developed for a kennel, giving different functionalities to the manager and the possibility for users to register in order to adopt dogs
